@@ -1,0 +1,20 @@
+{
+  "typography": {
+    "useNextVariants": true
+  },
+  "chessColor": {
+    "black": "#A64717",
+    "white": "#F4D3A6"
+  },
+  "square": {
+    "hovered": "orange",
+    "active": "gold",
+    "selected": "red"
+  },
+  "piece": {
+    "color": "black",
+    "hintColor": "grey",
+    "hovered": "orange",
+    "active": "gold"
+  }
+}

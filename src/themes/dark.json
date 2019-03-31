@@ -1,0 +1,21 @@
+{
+  "palette": {
+    "type": "dark"
+  },
+  "typography": {
+    "useNextVariants": true
+  },
+  "chessColor": {
+    "black": "#769656",
+    "white": "#EEEEd2"
+  },
+  "square": {
+    "selected": "red"
+  },
+  "piece": {
+    "color": "black",
+    "hintColor": "grey",
+    "hovered": "orange",
+    "active": "gold"
+  }
+}
