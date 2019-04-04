@@ -10,7 +10,7 @@ const pieceSource = {
   endDrag: ({ rowId, columnId, onDrop }, monitor) => {
     const dropResult = monitor.getDropResult();
     const startPosition = PositionHelper.getPositionName(rowId, columnId);
-    const endPosition = PositionHelper.getPositionName(dropResult.rowId, dropResult.columnId);
+    const endPosition = dropResult ? PositionHelper.getPositionName(dropResult.rowId, dropResult.columnId) : null;
 
     onDrop(startPosition, endPosition);
   },
