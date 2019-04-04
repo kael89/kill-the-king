@@ -10,8 +10,9 @@ const getTree = async ({ type, board, startingColor, depth }) => {
     startingColor,
     depth,
   });
+  const url = `${process.env.REACT_APP_API_URL}/${ApiResource.GET_TREE}?${params}`;
 
-  return fetch(`${process.env.REACT_APP_API_URL}/${ApiResource.GET_TREE}?${params}`);
+  return fetch(url);
 };
 
 export const getGameTree = async params => getTree({ ...params, type: ChessTree.GAME });

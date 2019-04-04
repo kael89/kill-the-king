@@ -1,3 +1,10 @@
 {
-  "cSpell.words": ["compose", "devtools", "extension", "redux"]
+  "cSpell.words": [
+    "backend",
+    "compose",
+    "devtools",
+    "droppable",
+    "extension",
+    "redux"
+  ]
 }

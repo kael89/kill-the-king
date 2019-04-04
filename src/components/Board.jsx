@@ -7,8 +7,9 @@ import { PieceCodes } from '../constants';
 import { PositionHelper } from '../helpers';
 import propTypes from '../propTypes';
 import { withThemeAndStyles } from '../utils';
+import DroppableSquare from './DroppableSquare';
 import PieceSelector from './PieceSelector';
-import Square, { SQUARE_SIZE } from './Square';
+import { SQUARE_SIZE } from './Square';
 
 const DEFAULT_SELECTED_POSITION = '';
 const BOARD_DIMENSION = 8;
@@ -149,7 +150,7 @@ class Board extends React.Component {
               const pieceColor = showHint && pieceCode ? theme.piece.hintColor : '';
 
               return (
-                <Square
+                <DroppableSquare
                   key={position}
                   rowId={rowId}
                   columnId={columnId}

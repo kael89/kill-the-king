@@ -6,7 +6,9 @@ import React from 'react';
 import { Color } from '../enums';
 import propTypes from '../propTypes';
 import { withThemeAndStyles } from '../utils';
-import Piece from './Piece';
+import DraggablePiece from './DraggablePiece';
+import { DropTarget } from 'react-dnd';
+import Draggable from '../enums/Draggable';
 
 export const SQUARE_SIZE = 70;
 
@@ -49,7 +51,7 @@ class Square extends React.Component {
 
     return (
       <Grid {...otherProps} className={classnames(classes.container, classes[colorClass], { selected })}>
-        <Piece color={pieceColor}>{pieceCode}</Piece>
+        <DraggablePiece color={pieceColor}>{pieceCode}</DraggablePiece>
       </Grid>
     );
   }

@@ -1,5 +1,7 @@
 import { CssBaseline, Grid } from '@material-ui/core';
 import React from 'react';
+import { DragDropContextProvider } from 'react-dnd';
+import html5Backend from 'react-dnd-html5-backend';
 import { Provider } from 'react-redux';
 
 import ActionButtonContainer from '../containers/ActionButtonContainer';
@@ -29,29 +31,31 @@ const styles = theme => ({
 const App = ({ classes }) => (
   <Provider store={store}>
     <ThemeProviderContainer>
-      <CssBaseline />
+      <DragDropContextProvider backend={html5Backend}>
+        <CssBaseline />
 
-      <Grid container justify="center" className={classes.container}>
-        <Grid item xs={12}>
-          <Header />
-        </Grid>
-        <Grid item xs={8} lg={6} container alignItems="stretch" direction="column">
-          <Grid item container justify="center" className={classes.boardContainer}>
-            <BoardContainer />
+        <Grid container justify="center" className={classes.container}>
+          <Grid item xs={12}>
+            <Header />
           </Grid>
-          <Grid item>
-            <SettingsContainer />
+          <Grid item xs={8} lg={6} container alignItems="stretch" direction="column">
+            <Grid item container justify="center" className={classes.boardContainer}>
+              <BoardContainer />
+            </Grid>
+            <Grid item>
+              <SettingsContainer />
+            </Grid>
+            <Grid item container justify="center">
+              <ActionButtonContainer />
+            </Grid>
           </Grid>
-          <Grid item container justify="center">
-            <ActionButtonContainer />
+          <Grid item xs={4} lg={6} container direction="column">
+            <ResultsContainer />
+            <AvailableMovesContainer />
+            <MoveHistoryContainer />
           </Grid>
         </Grid>
-        <Grid item xs={4} lg={6} container direction="column">
-          <ResultsContainer />
-          <AvailableMovesContainer />
-          <MoveHistoryContainer />
-        </Grid>
-      </Grid>
+      </DragDropContextProvider>
     </ThemeProviderContainer>
   </Provider>
 );
