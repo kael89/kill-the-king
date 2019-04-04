@@ -5,10 +5,10 @@ import Draggable from '../enums/Draggable';
 import Square from './Square';
 
 const squareTarget = {
-  drop({ row, column }) {
-    console.log('dropped');
-    // movePiece(row, column);
-  },
+  drop: ({ rowId, columnId }) => ({
+    rowId,
+    columnId,
+  }),
 };
 
 function collect(connect, monitor) {

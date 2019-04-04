@@ -9,6 +9,17 @@ const parse = moveString => {
   return { source, target };
 };
 
+/**
+ *
+ * @param {string} startRowId
+ * @param {string} startColumnId
+ * @param {string} endRowId
+ * @param {string} endColumnId
+ * @returns {string}
+ */
+const toString = ({ source, target }) => `${source}${MOVE_DELIMITER}${target}`;
+
 export default {
   parse,
+  toString,
 };

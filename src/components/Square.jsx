@@ -3,12 +3,10 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import DraggablePieceContainer from '../containers/DraggablePieceContainer';
 import { Color } from '../enums';
 import propTypes from '../propTypes';
 import { withThemeAndStyles } from '../utils';
-import DraggablePiece from './DraggablePiece';
-import { DropTarget } from 'react-dnd';
-import Draggable from '../enums/Draggable';
 
 export const SQUARE_SIZE = 70;
 
@@ -51,7 +49,9 @@ class Square extends React.Component {
 
     return (
       <Grid {...otherProps} className={classnames(classes.container, classes[colorClass], { selected })}>
-        <DraggablePiece color={pieceColor}>{pieceCode}</DraggablePiece>
+        <DraggablePieceContainer rowId={rowId} columnId={columnId} color={pieceColor}>
+          {pieceCode}
+        </DraggablePieceContainer>
       </Grid>
     );
   }
