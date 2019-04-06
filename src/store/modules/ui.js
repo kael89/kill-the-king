@@ -5,8 +5,10 @@ import themes from '../../themes';
 /* Actions */
 const CHANGE_THEME = `${APP_NAME}/ui/CHANGE_THEME`;
 const TOGGLE_BOARD_HINT = `${APP_NAME}/ui/TOGGLE_BOARD_HINT`;
+const TOGGLE_DIALOG_OPEN = `${APP_NAME}/ui/TOGGLE_DIALOG_OPEN`;
 
 const defaultState = {
+  dialogOpen: false,
   isHintVisible: false,
   theme: themes[DefaultSettings[SettingKey.DEFAULT_THEME]],
 };
@@ -14,12 +16,12 @@ const defaultState = {
 /* Reducer */
 export default function reducer(ui = defaultState, action) {
   switch (action.type) {
-    case CHANGE_THEME: {
+    case CHANGE_THEME:
       return { ...ui, theme: action.theme };
-    }
-    case TOGGLE_BOARD_HINT: {
+    case TOGGLE_BOARD_HINT:
       return { ...ui, isHintVisible: action.visible };
-    }
+    case TOGGLE_DIALOG_OPEN:
+      return { ...ui, dialogOpen: action.open };
     default: {
       return ui;
     }
@@ -32,11 +34,6 @@ export const changeTheme = theme => ({
   type: CHANGE_THEME,
 });
 
-export const toggleBoardHint = visible => ({
-  visible,
-  type: TOGGLE_BOARD_HINT,
-});
-
 export const showBoardHint = () => ({
   visible: true,
   type: TOGGLE_BOARD_HINT,
@@ -45,4 +42,14 @@ export const showBoardHint = () => ({
 export const hideBoardHint = () => ({
   visible: false,
   type: TOGGLE_BOARD_HINT,
+});
+
+export const openDialog = () => ({
+  open: true,
+  type: TOGGLE_DIALOG_OPEN,
+});
+
+export const closeDialog = () => ({
+  open: false,
+  type: TOGGLE_DIALOG_OPEN,
 });
