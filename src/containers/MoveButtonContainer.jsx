@@ -11,6 +11,10 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
   onMouseOver: (board, move) => {
+    if (!board || !move) {
+      return;
+    }
+
     const hint = BoardHelper.movePiece(board, move);
     dispatch(setHint(hint));
     dispatch(showBoardHint());

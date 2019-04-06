@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import React from 'react';
 
 import propTypes from '../propTypes';
@@ -10,10 +11,10 @@ const styles = {
 };
 
 const Move = ({ classes, notation }) => (
-  <>
+  <Typography>
     <span className={classes.icon}>{notation.code}</span>
     {notation.text}
-  </>
+  </Typography>
 );
 
 Move.propTypes = {

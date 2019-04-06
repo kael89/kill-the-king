@@ -1,15 +1,14 @@
 import { connect } from 'react-redux';
 
 import Results from '../components/Results';
-
-const extractResults = data => (data !== null ? Object.keys(data) : data);
+import { MoveDataHelper } from '../helpers';
 
 const mapStateToProps = state => {
   const { history, resetBoardId } = state.board;
   const { data, loading, error } = state.results;
 
   return {
-    data: extractResults(data),
+    moveData: MoveDataHelper.get(data, state.moveHistory, history[resetBoardId], resetBoardId),
     initialBoard: history[resetBoardId],
     loading,
     error,
