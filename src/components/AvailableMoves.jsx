@@ -15,8 +15,7 @@ const AvailableMoves = ({ moveData, onMoveSelect }) => {
     contents = <Typography>Checkmate!</Typography>;
   } else {
     contents = moveData.map(moveDatum => {
-      const { boardId, move } = moveDatum;
-      return <MoveButtonContainer key={move} onClick={() => onMoveSelect(move, boardId)} {...moveDatum} />;
+      return <MoveButtonContainer key={moveDatum.move} onClick={() => onMoveSelect(moveDatum)} {...moveDatum} />;
     });
   }
 

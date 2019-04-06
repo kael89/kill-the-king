@@ -12,30 +12,22 @@ const mapStateToProps = state => {
     moveHistory,
     results: { data },
   } = state;
-  const chessTree = get(data, moveHistory.map(moveData => moveData.move), data);
+  const chessTree = get(data, moveHistory.map(moveDatum => moveDatum.move), data);
   const boardId = history.length - 1;
 
   return {
-    boardId,
     moveData: MoveDataHelper.get(chessTree, history[boardId], boardId),
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  onMoveSelect: (move, boardId) => {
-    dispatch(movePiece(move));
-    dispatch(addMove(move, boardId));
+  onMoveSelect: moveDatum => {
+    dispatch(movePiece(moveDatum.move));
+    dispatch(addMove(moveDatum));
   },
-});
-
-const mergeProps = (stateProps, dispatchProps) => ({
-  moveData: stateProps.moveData,
-  board: stateProps.board,
-  onMoveSelect: move => dispatchProps.onMoveSelect(move, stateProps.boardId),
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-  mergeProps,
 )(AvailableMoves);

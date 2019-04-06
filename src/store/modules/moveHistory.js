@@ -8,7 +8,7 @@ const RESTORE_MOVE = `${APP_NAME}/moveHistory/RESTORE_MOVE`;
 export default function reducer(moveHistory = [], action) {
   switch (action.type) {
     case ADD_MOVE:
-      return [...moveHistory, { move: action.move, boardId: action.boardId }];
+      return [...moveHistory, action.moveDatum];
     case RESTORE_MOVE:
       return moveHistory.slice(0, action.index + 1);
     default:
@@ -17,9 +17,8 @@ export default function reducer(moveHistory = [], action) {
 }
 
 /* Action Creators */
-export const addMove = (move, boardId) => ({
-  move,
-  boardId,
+export const addMove = moveDatum => ({
+  moveDatum,
   type: ADD_MOVE,
 });
 
