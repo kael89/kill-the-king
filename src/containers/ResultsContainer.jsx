@@ -8,8 +8,7 @@ const mapStateToProps = state => {
   const { data, loading, error } = state.results;
 
   return {
-    moveData: MoveDataHelper.get(data, state.moveHistory, history[resetBoardId], resetBoardId),
-    initialBoard: history[resetBoardId],
+    moveData: MoveDataHelper.get(data, history[resetBoardId], resetBoardId),
     loading,
     error,
   };

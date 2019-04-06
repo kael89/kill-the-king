@@ -1,3 +1,4 @@
+import { get } from 'lodash';
 import { connect } from 'react-redux';
 
 import AvailableMoves from '../components/AvailableMoves';
@@ -6,13 +7,17 @@ import { movePiece } from '../store/modules/board';
 import { addMove } from '../store/modules/moveHistory';
 
 const mapStateToProps = state => {
-  const boardId = state.board.history.length - 1;
-  const board = state.board.history[boardId];
+  const {
+    board: { history },
+    moveHistory,
+    results: { data },
+  } = state;
+  const chessTree = get(data, moveHistory.map(moveData => moveData.move), data);
+  const boardId = history.length - 1;
 
   return {
-    moveData: MoveDataHelper.get(state.results.data, state.moveHistory, board, boardId),
-    board,
     boardId,
+    moveData: MoveDataHelper.get(chessTree, history[boardId], boardId),
   };
 };
 
