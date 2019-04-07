@@ -16,7 +16,7 @@ const styles = theme => ({
     background: theme.piece.active,
   },
   hinted: {
-    color: theme.piece.hintColor,
+    color: theme.piece.hinted,
   },
   hovered: {
     background: theme.piece.hovered,
@@ -24,7 +24,14 @@ const styles = theme => ({
 });
 
 const Piece = ({ children, active, classes, hinted, hovered, theme, ...otherProps }) => (
-  <Grid {...otherProps} className={classnames(classes.container, { active }, { hinted }, { hovered })}>
+  <Grid
+    {...otherProps}
+    className={classnames(classes.container, {
+      [classes.active]: active,
+      [classes.hinted]: hinted,
+      [classes.hovered]: hovered,
+    })}
+  >
     {children}
   </Grid>
 );
