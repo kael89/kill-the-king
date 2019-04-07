@@ -15,17 +15,16 @@ const styles = theme => ({
   active: {
     background: theme.piece.active,
   },
+  hinted: {
+    color: theme.piece.hintColor,
+  },
   hovered: {
     background: theme.piece.hovered,
   },
 });
 
-const Piece = ({ children, active, classes, color, hovered, theme, ...otherProps }) => (
-  <Grid
-    className={classnames(classes.container, { [classes.active]: active }, { [classes.hovered]: hovered })}
-    style={{ color: color.length > 0 ? color : theme.piece.color }}
-    {...otherProps}
-  >
+const Piece = ({ children, active, classes, hinted, hovered, theme, ...otherProps }) => (
+  <Grid {...otherProps} className={classnames(classes.container, { active }, { hinted }, { hovered })}>
     {children}
   </Grid>
 );
@@ -35,6 +34,7 @@ Piece.propTypes = {
   children: propTypes.children,
   classes: propTypes.classes.isRequired,
   color: PropTypes.string,
+  hinted: PropTypes.bool,
   hovered: PropTypes.bool,
   theme: propTypes.theme.isRequired,
 };
@@ -43,6 +43,7 @@ Piece.defaultProps = {
   active: false,
   children: null,
   color: '',
+  hinted: false,
   hovered: false,
 };
 

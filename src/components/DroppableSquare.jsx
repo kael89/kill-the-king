@@ -1,8 +1,8 @@
 import React from 'react';
 import { DropTarget } from 'react-dnd';
 
+import SquareContainer from '../containers/SquareContainer';
 import Draggable from '../enums/Draggable';
-import Square from './Square';
 
 const squareTarget = {
   drop: ({ rowId, columnId }) => ({
@@ -21,7 +21,7 @@ function collect(connect, monitor) {
 const DroppableSquare = ({ connectDropTarget, isOver, ...squareProps }) =>
   connectDropTarget(
     <div>
-      <Square {...squareProps} />
+      <SquareContainer {...squareProps} />
     </div>,
   );
 

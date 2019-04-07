@@ -43,14 +43,16 @@ class Square extends React.Component {
   }
 
   render() {
-    const { classes, rowId, columnId, pieceCode, pieceColor, selected, ...otherProps } = this.props;
-
+    const { classes, rowId, columnId, hinted, onClick, piece, position, selected } = this.props;
     const colorClass = getSquareColor(rowId, columnId) === Color.BLACK ? 'black' : 'white';
 
     return (
-      <Grid {...otherProps} className={classnames(classes.container, classes[colorClass], { selected })}>
-        <DraggablePieceContainer rowId={rowId} columnId={columnId} color={pieceColor}>
-          {pieceCode}
+      <Grid
+        onClick={() => onClick(position)}
+        className={classnames(classes.container, classes[colorClass], { selected })}
+      >
+        <DraggablePieceContainer rowId={rowId} columnId={columnId} hinted={hinted}>
+          {piece ? piece.code : ''}
         </DraggablePieceContainer>
       </Grid>
     );
@@ -59,16 +61,16 @@ class Square extends React.Component {
 
 Square.propTypes = {
   classes: propTypes.classes.isRequired,
-  pieceCode: PropTypes.string.isRequired,
-  pieceColor: PropTypes.string,
-  rowId: PropTypes.number.isRequired,
   columnId: PropTypes.number.isRequired,
+  hinted: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+  piece: propTypes.piece.isRequired,
+  position: PropTypes.string.isRequired,
+  rowId: PropTypes.number.isRequired,
   selected: PropTypes.bool,
-  theme: propTypes.theme.isRequired,
 };
 
 Square.defaultProps = {
-  pieceColor: '',
   selected: false,
 };
 

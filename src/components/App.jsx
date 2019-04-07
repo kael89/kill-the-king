@@ -8,6 +8,7 @@ import ActionButtonContainer from '../containers/ActionButtonContainer';
 import AvailableMovesContainer from '../containers/AvailableMovesContainer';
 import BoardContainer from '../containers/BoardContainer';
 import MoveHistoryContainer from '../containers/MoveHistoryContainer';
+import PieceSelectorContainer from '../containers/PieceSelectorContainer';
 import ResultsContainer from '../containers/ResultsContainer';
 import SettingsContainer from '../containers/SettingsContainer';
 import ThemeProviderContainer from '../containers/ThemeProviderContainer';
@@ -55,6 +56,7 @@ const App = ({ classes }) => (
             <MoveHistoryContainer />
           </Grid>
         </Grid>
+        <PieceSelectorContainer />
       </DragDropContextProvider>
     </ThemeProviderContainer>
   </Provider>

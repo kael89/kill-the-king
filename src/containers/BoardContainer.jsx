@@ -7,7 +7,7 @@ import { addPiece, removePiece } from '../store/modules/board';
 const mapStateToProps = state => ({
   board: last(state.board.history),
   hint: state.board.hint,
-  showHint: state.ui.isHintVisible,
+  showHint: state.ui.hintVisible,
 });
 
 const mapDispatchToProps = dispatch => ({

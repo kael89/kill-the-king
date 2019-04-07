@@ -6,10 +6,13 @@ import themes from '../../themes';
 const CHANGE_THEME = `${APP_NAME}/ui/CHANGE_THEME`;
 const TOGGLE_BOARD_HINT = `${APP_NAME}/ui/TOGGLE_BOARD_HINT`;
 const TOGGLE_DIALOG = `${APP_NAME}/ui/TOGGLE_DIALOG`;
+const TOGGLE_PIECE_SELECTOR = `${APP_NAME}/ui/TOGGLE_PIECE_SELECTOR`;
 
 const defaultState = {
   dialogOpen: false,
-  isHintVisible: false,
+  hintVisible: false,
+  pieceSelectorVisible: false,
+  selectedPosition: '',
   theme: themes[DefaultSettings[SettingKey.DEFAULT_THEME]],
 };
 
@@ -19,9 +22,11 @@ export default function reducer(ui = defaultState, action) {
     case CHANGE_THEME:
       return { ...ui, theme: action.theme };
     case TOGGLE_BOARD_HINT:
-      return { ...ui, isHintVisible: action.visible };
+      return { ...ui, hintVisible: action.visible };
     case TOGGLE_DIALOG:
       return { ...ui, dialogOpen: action.open };
+    case TOGGLE_PIECE_SELECTOR:
+      return { ...ui, pieceSelectorVisible: action.visible, selectedPosition: action.position };
     default: {
       return ui;
     }
@@ -52,4 +57,16 @@ export const openDialog = () => ({
 export const closeDialog = () => ({
   open: false,
   type: TOGGLE_DIALOG,
+});
+
+export const showPieceSelector = position => ({
+  position,
+  visible: true,
+  type: TOGGLE_PIECE_SELECTOR,
+});
+
+export const hidePieceSelector = () => ({
+  position: '',
+  visible: false,
+  type: TOGGLE_PIECE_SELECTOR,
 });

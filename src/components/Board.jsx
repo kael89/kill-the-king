@@ -3,15 +3,12 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { PieceCodes } from '../constants';
 import { PositionHelper } from '../helpers';
 import propTypes from '../propTypes';
 import { withThemeAndStyles } from '../utils';
 import DroppableSquare from './DroppableSquare';
-import PieceSelector from './PieceSelector';
 import { SQUARE_SIZE } from './Square';
 
-const DEFAULT_SELECTED_POSITION = '';
 const BOARD_DIMENSION = 8;
 const RULER_SIZE = 20;
 const BOARD_SIZE = SQUARE_SIZE * BOARD_DIMENSION;
@@ -77,114 +74,39 @@ BasicColumnRuler.propTypes = {
 
 const ColumnRuler = withThemeAndStyles(BasicColumnRuler, styles);
 
-class Board extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedPosition: DEFAULT_SELECTED_POSITION,
-      selectorOpen: false,
-    };
+const Board = ({ board, classes, hint, showHint }) => {
+  const finalBoard = showHint ? hint : board;
 
-    this.handleConfirm = this.handleConfirm.bind(this);
-    this.handleSelectorClose = this.handleSelectorClose.bind(this);
-    this.handleSquareClick = this.handleSquareClick.bind(this);
-  }
+  return (
+    <Grid container className={classes.board}>
+      <RowRuler />
+      {rowIds.map(rowId => (
+        <Grid key={rowId} item container>
+          {columnIds.map(columnId => {
+            const position = PositionHelper.getPositionName(rowId, columnId);
 
-  getBoard() {
-    const { board, hint, showHint } = this.props;
-    return showHint ? hint : board;
-  }
-
-  getPieceCodeAt(position) {
-    const board = this.getBoard();
-    if (!board[position]) {
-      return '';
-    }
-
-    const { type, color } = board[position];
-    return PieceCodes[color][type];
-  }
-
-  getPieceAt(position) {
-    const { board } = this.props;
-    return board[position] || null;
-  }
-
-  handleConfirm({ type, color }) {
-    const { addPiece, removePiece } = this.props;
-    const { selectedPosition } = this.state;
-
-    if (type && color) {
-      addPiece(type, color, selectedPosition);
-    } else {
-      removePiece(selectedPosition);
-    }
-  }
-
-  handleSelectorClose() {
-    this.setState({
-      selectedPosition: DEFAULT_SELECTED_POSITION,
-      selectorOpen: false,
-    });
-  }
-
-  handleSquareClick(square) {
-    this.setState({
-      selectedPosition: square,
-      selectorOpen: true,
-    });
-  }
-
-  render() {
-    const { selectedPosition, selectorOpen } = this.state;
-    const { classes, showHint, theme } = this.props;
-
-    return (
-      <Grid container className={classes.board}>
-        <RowRuler />
-        {rowIds.map(rowId => (
-          <Grid key={rowId} item container>
-            {columnIds.map(columnId => {
-              const position = PositionHelper.getPositionName(rowId, columnId);
-              const pieceCode = this.getPieceCodeAt(position);
-              const pieceColor = showHint && pieceCode ? theme.piece.hintColor : '';
-
-              return (
-                <DroppableSquare
-                  key={position}
-                  rowId={rowId}
-                  columnId={columnId}
-                  pieceCode={pieceCode}
-                  pieceColor={pieceColor}
-                  selected={selectedPosition === position}
-                  onClick={() => this.handleSquareClick(position)}
-                />
-              );
-            })}
-          </Grid>
-        ))}
-        <ColumnRuler />
-
-        <PieceSelector
-          key={selectedPosition}
-          open={selectorOpen}
-          selectedPiece={this.getPieceAt(selectedPosition)}
-          onClose={this.handleSelectorClose}
-          onConfirm={this.handleConfirm}
-        />
-      </Grid>
-    );
-  }
-}
+            return (
+              <DroppableSquare
+                key={`${rowId}-${columnId}`}
+                rowId={rowId}
+                columnId={columnId}
+                piece={finalBoard[position] || null}
+                position={position}
+              />
+            );
+          })}
+        </Grid>
+      ))}
+      <ColumnRuler />
+    </Grid>
+  );
+};
 
 Board.propTypes = {
-  addPiece: PropTypes.func.isRequired,
   board: propTypes.board.isRequired,
   classes: propTypes.classes.isRequired,
   hint: propTypes.board.isRequired,
-  removePiece: PropTypes.func.isRequired,
   showHint: PropTypes.bool.isRequired,
-  theme: propTypes.theme.isRequired,
 };
 
 export default withThemeAndStyles(Board, styles);
