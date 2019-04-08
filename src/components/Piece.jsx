@@ -11,6 +11,7 @@ const styles = theme => ({
     cursor: 'pointer',
     textAlign: 'center',
     fontSize: '3rem',
+    color: theme.piece.color,
   },
   active: {
     background: theme.piece.active,

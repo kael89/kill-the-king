@@ -1,23 +1,23 @@
 import { connect } from 'react-redux';
 
 import Square from '../components/Square';
-import { showPieceSelector } from '../store/modules/ui';
+import { showPieceSelector } from '../store/modules/pieceSelector';
 
 const mapStateToProps = (state, ownProps) => {
   const {
-    ui: { showHint, pieceSelector },
+    pieceSelector,
+    ui: { showHint },
   } = state;
 
   return {
     hinted: showHint,
-    open: pieceSelector.visible,
-    selected: pieceSelector.squarePosition === ownProps.position,
+    selected: pieceSelector.piece.position === ownProps.position,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  onClick: position => {
-    dispatch(showPieceSelector({ selectedPosition: position }));
+  onClick: piece => {
+    dispatch(showPieceSelector(piece));
   },
 });
 

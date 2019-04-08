@@ -4,47 +4,53 @@ import React from 'react';
 
 import { PieceCodes } from '../constants';
 import { Color } from '../enums';
+import propTypes from '../propTypes';
 import Piece from './Piece';
-
-const NO_PIECE = undefined;
-const NO_TYPE = undefined;
 
 export default class PieceSelector extends React.Component {
   constructor(props) {
     super(props);
 
-    const { selectedPiece } = props;
     this.state = {
-      hoveredPiece: NO_PIECE,
-      color: selectedPiece ? selectedPiece.color : Color.BLACK,
-      type: selectedPiece ? selectedPiece.type : NO_TYPE,
+      hoveredPiece: null,
     };
 
     this.handleConfirm = this.handleConfirm.bind(this);
-    this.handleSwitchChange = this.handleSwitchChange.bind(this);
-    this.handlePieceMouseOut = this.handlePieceMouseOut.bind(this);
+    this.resetHoveredPiece = this.resetHoveredPiece.bind(this);
   }
 
   isSwitchChecked() {
-    const { color } = this.state;
-    return color === Color.WHITE;
+    const { piece } = this.props;
+    return piece.color === Color.WHITE;
+  }
+
+  resetHoveredPiece() {
+    this.setState({
+      hoveredPiece: null,
+    });
   }
 
   handleConfirm() {
-    const { onConfirm } = this.props;
-    const { color, type } = this.state;
+    const { addPiece, onClose, piece, removePiece } = this.props;
 
-    onConfirm({ type, color });
-    this.handleClose();
+    if (piece.type) {
+      addPiece(piece);
+    } else {
+      removePiece(piece.position);
+    }
+
+    onClose();
   }
 
-  handlePieceClick(type) {
-    const { type: currentType } = this.state;
+  handlePieceClick(newType) {
+    const { deselectPieceType, piece, selectPieceType } = this.props;
 
-    this.setState({
-      type: type === currentType ? NO_TYPE : type,
-      hoveredPiece: NO_PIECE,
-    });
+    if (newType === piece.type) {
+      deselectPieceType();
+    } else {
+      selectPieceType(newType);
+    }
+    this.resetHoveredPiece();
   }
 
   handlePieceMouseOver(type) {
@@ -53,23 +59,9 @@ export default class PieceSelector extends React.Component {
     });
   }
 
-  handlePieceMouseOut() {
-    this.setState({
-      hoveredPiece: NO_PIECE,
-    });
-  }
-
-  handleSwitchChange() {
-    const { color } = this.state;
-
-    this.setState({
-      color: Color.opposite(color),
-    });
-  }
-
   render() {
-    const { color, hoveredPiece, type } = this.state;
-    const { onCancel, open } = this.props;
+    const { hoveredPiece } = this.state;
+    const { onClose, open, toggleColor, piece } = this.props;
 
     return (
       <Dialog open={open}>
@@ -79,19 +71,19 @@ export default class PieceSelector extends React.Component {
               <div>
                 <Typography>Color</Typography>
               </div>
-              <Switch checked={this.isSwitchChecked()} onChange={this.handleSwitchChange} />
+              <Switch checked={this.isSwitchChecked()} onChange={toggleColor} />
             </Grid>
             <Grid item xs={10} container direction="row">
-              {Object.entries(PieceCodes[color]).map(([currentType, code]) => (
+              {Object.entries(PieceCodes[piece.color]).map(([currentType, code]) => (
                 <Piece
                   key={code}
-                  active={type === currentType}
+                  active={piece.type === currentType}
                   hovered={hoveredPiece === currentType}
                   onMouseDown={() => this.handlePieceClick(currentType)}
                   onMouseOver={() => this.handlePieceMouseOver(currentType)}
-                  onMouseOut={this.handlePieceMouseOut}
+                  onMouseOut={this.resetHoveredPiece}
                   onFocus={() => this.handlePieceMouseOver(currentType)}
-                  onBlur={this.handlePieceMouseOut}
+                  onBlur={this.resetHoveredPiece}
                 >
                   {code}
                 </Piece>
@@ -100,7 +92,7 @@ export default class PieceSelector extends React.Component {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button color="primary" onClick={() => onCancel()}>
+          <Button color="primary" onClick={onClose}>
             Cancel
           </Button>
           <Button color="primary" onClick={this.handleConfirm}>
@@ -113,15 +105,12 @@ export default class PieceSelector extends React.Component {
 }
 
 PieceSelector.propTypes = {
-  onCancel: PropTypes.func.isRequired,
-  onConfirm: PropTypes.func.isRequired,
+  addPiece: PropTypes.func.isRequired,
+  deselectPieceType: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  selectedPiece: PropTypes.shape({
-    type: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
-  }),
-};
-
-PieceSelector.defaultProps = {
-  selectedPiece: NO_PIECE,
+  piece: propTypes.piece.isRequired,
+  removePiece: PropTypes.bool.isRequired,
+  selectPieceType: PropTypes.func.isRequired,
+  toggleColor: PropTypes.func.isRequired,
 };

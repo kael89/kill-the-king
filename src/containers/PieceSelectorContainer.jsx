@@ -1,41 +1,31 @@
-import last from 'lodash/last';
 import { connect } from 'react-redux';
 
 import PieceSelector from '../components/PieceSelector';
 import { addPiece, removePiece } from '../store/modules/board';
-import { hidePieceSelector } from '../store/modules/ui';
+import { deselectPieceType, hidePieceSelector, selectPieceType, toggleColor } from '../store/modules/pieceSelector';
 
 const mapStateToProps = state => {
   const {
-    ui: {
-      pieceSelector: { visible, selectedPosition },
-    },
-    board: { history },
+    pieceSelector: { visible, piece },
   } = state;
 
   return {
     open: visible,
-    selectedPiece: last(history)[selectedPosition] || null,
-    selectedPosition,
+    piece,
+    position: piece.position,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  addPiece: (type, color, position) => dispatch(addPiece(type, color, position)),
-  onCancel: () => dispatch(hidePieceSelector()),
-  removePiece: position => dispatch(removePiece(position)),
-});
-
-const mergeProps = (stateProps, dispatchProps) => ({
-  ...stateProps,
-  ...dispatchProps,
-  addPiece: ({ type, color }) => dispatchProps.addPiece(type, color, stateProps.selectedPosition),
-  removePiece: () => dispatchProps.removePiece(stateProps.selectedPosition),
-  onConfirm: ({ type, color }) => dispatchProps.onConfirm(type, color, stateProps.selectedPosition),
+  addPiece: piece => dispatch(addPiece(piece)),
+  deselectPieceType: () => dispatch(deselectPieceType()),
+  onClose: () => dispatch(hidePieceSelector()),
+  removePiece: piece => dispatch(removePiece(piece)),
+  toggleColor: () => dispatch(toggleColor()),
+  selectPieceType: type => dispatch(selectPieceType(type)),
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-  mergeProps,
 )(PieceSelector);

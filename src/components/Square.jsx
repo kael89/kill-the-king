@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { PieceCodes } from '../constants';
 import DraggablePieceContainer from '../containers/DraggablePieceContainer';
 import { Color } from '../enums';
 import propTypes from '../propTypes';
@@ -30,7 +31,7 @@ const styles = theme => ({
 
 class Square extends React.Component {
   shouldComponentUpdate(nextProps) {
-    const updatableProps = ['pieceCode', 'pieceColor', 'selected', 'theme'];
+    const updatableProps = ['piece', 'selected', 'theme'];
 
     for (let i = 0; i < updatableProps.length; i++) {
       const prop = updatableProps[i];
@@ -45,14 +46,15 @@ class Square extends React.Component {
   render() {
     const { classes, rowId, columnId, hinted, onClick, piece, position, selected } = this.props;
     const colorClass = getSquareColor(rowId, columnId) === Color.BLACK ? 'black' : 'white';
+    const pieceCode = piece ? PieceCodes[piece.color][piece.type] : '';
 
     return (
       <Grid
-        onClick={() => onClick(position)}
+        onClick={() => onClick({ ...piece, position })}
         className={classnames(classes.container, classes[colorClass], { [classes.selected]: selected })}
       >
         <DraggablePieceContainer rowId={rowId} columnId={columnId} hinted={hinted}>
-          {piece ? piece.code : ''}
+          {pieceCode}
         </DraggablePieceContainer>
       </Grid>
     );

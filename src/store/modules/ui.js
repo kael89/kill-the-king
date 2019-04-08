@@ -6,7 +6,6 @@ import themes from '../../themes';
 const CHANGE_THEME = `${APP_NAME}/ui/CHANGE_THEME`;
 const TOGGLE_BOARD_HINT = `${APP_NAME}/ui/TOGGLE_BOARD_HINT`;
 const TOGGLE_CONFIRMATION_DIALOG = `${APP_NAME}/ui/TOGGLE_CONFIRMATION_DIALOG`;
-const TOGGLE_PIECE_SELECTOR = `${APP_NAME}/ui/TOGGLE_PIECE_SELECTOR`;
 
 const defaultDialog = {
   visible: false,
@@ -14,15 +13,9 @@ const defaultDialog = {
   text: '',
 };
 
-const defaultPieceSelector = {
-  visible: false,
-  squarePosition: '',
-};
-
 const defaultState = {
   dialog: defaultDialog,
   hintVisible: false,
-  pieceSelector: defaultPieceSelector,
   theme: themes[DefaultSettings[SettingKey.DEFAULT_THEME]],
 };
 
@@ -35,8 +28,6 @@ export default function reducer(ui = defaultState, action) {
       return { ...ui, hintVisible: action.visible };
     case TOGGLE_CONFIRMATION_DIALOG:
       return { ...ui, dialog: action.dialog };
-    case TOGGLE_PIECE_SELECTOR:
-      return { ...ui, pieceSelector: action.pieceSelector };
     default: {
       return ui;
     }
@@ -67,14 +58,4 @@ export const showConfirmationDialog = dialog => ({
 export const hideConfirmationDialog = () => ({
   dialog: defaultDialog,
   type: TOGGLE_CONFIRMATION_DIALOG,
-});
-
-export const showPieceSelector = pieceSelector => ({
-  pieceSelector: { ...pieceSelector, visible: true },
-  type: TOGGLE_PIECE_SELECTOR,
-});
-
-export const hidePieceSelector = () => ({
-  pieceSelector: defaultPieceSelector,
-  type: TOGGLE_PIECE_SELECTOR,
 });
