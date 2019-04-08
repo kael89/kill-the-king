@@ -5,7 +5,7 @@ import ActionButton from '../components/ActionButton';
 import { ApiHelper } from '../helpers';
 import { setResetBoardId } from '../store/modules/board';
 import { fetchForcedMateTree } from '../store/modules/results';
-import { openDialog } from '../store/modules/ui';
+import { showConfirmationDialog } from '../store/modules/ui';
 
 const mapStateToProps = state => ({
   board: Object.values(last(state.board.history)),
@@ -16,7 +16,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onClick: () => {
-    dispatch(openDialog());
+    dispatch(showConfirmationDialog());
   },
   onDialogConfirm: (board, startingColor, depth) => {
     dispatch(setResetBoardId());

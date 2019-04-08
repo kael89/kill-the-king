@@ -20,7 +20,6 @@ export default class PieceSelector extends React.Component {
       type: selectedPiece ? selectedPiece.type : NO_TYPE,
     };
 
-    this.handleClose = this.handleClose.bind(this);
     this.handleConfirm = this.handleConfirm.bind(this);
     this.handleSwitchChange = this.handleSwitchChange.bind(this);
     this.handlePieceMouseOut = this.handlePieceMouseOut.bind(this);
@@ -35,13 +34,8 @@ export default class PieceSelector extends React.Component {
     const { onConfirm } = this.props;
     const { color, type } = this.state;
 
-    onConfirm({ color, type });
+    onConfirm({ type, color });
     this.handleClose();
-  }
-
-  handleClose() {
-    const { onClose } = this.props;
-    onClose();
   }
 
   handlePieceClick(type) {
@@ -74,8 +68,8 @@ export default class PieceSelector extends React.Component {
   }
 
   render() {
-    const { open } = this.props;
-    const { hoveredPiece, color, type } = this.state;
+    const { color, hoveredPiece, type } = this.state;
+    const { onCancel, open } = this.props;
 
     return (
       <Dialog open={open}>
@@ -106,7 +100,7 @@ export default class PieceSelector extends React.Component {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button color="primary" onClick={this.handleClose}>
+          <Button color="primary" onClick={() => onCancel()}>
             Cancel
           </Button>
           <Button color="primary" onClick={this.handleConfirm}>
@@ -119,7 +113,7 @@ export default class PieceSelector extends React.Component {
 }
 
 PieceSelector.propTypes = {
-  onClose: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
   onConfirm: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
   selectedPiece: PropTypes.shape({

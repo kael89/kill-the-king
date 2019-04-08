@@ -5,14 +5,24 @@ import themes from '../../themes';
 /* Actions */
 const CHANGE_THEME = `${APP_NAME}/ui/CHANGE_THEME`;
 const TOGGLE_BOARD_HINT = `${APP_NAME}/ui/TOGGLE_BOARD_HINT`;
-const TOGGLE_DIALOG = `${APP_NAME}/ui/TOGGLE_DIALOG`;
+const TOGGLE_CONFIRMATION_DIALOG = `${APP_NAME}/ui/TOGGLE_CONFIRMATION_DIALOG`;
 const TOGGLE_PIECE_SELECTOR = `${APP_NAME}/ui/TOGGLE_PIECE_SELECTOR`;
 
+const defaultDialog = {
+  visible: false,
+  title: '',
+  text: '',
+};
+
+const defaultPieceSelector = {
+  visible: false,
+  squarePosition: '',
+};
+
 const defaultState = {
-  dialogOpen: false,
+  dialog: defaultDialog,
   hintVisible: false,
-  pieceSelectorVisible: false,
-  selectedPosition: '',
+  pieceSelector: defaultPieceSelector,
   theme: themes[DefaultSettings[SettingKey.DEFAULT_THEME]],
 };
 
@@ -23,10 +33,10 @@ export default function reducer(ui = defaultState, action) {
       return { ...ui, theme: action.theme };
     case TOGGLE_BOARD_HINT:
       return { ...ui, hintVisible: action.visible };
-    case TOGGLE_DIALOG:
-      return { ...ui, dialogOpen: action.open };
+    case TOGGLE_CONFIRMATION_DIALOG:
+      return { ...ui, dialog: action.dialog };
     case TOGGLE_PIECE_SELECTOR:
-      return { ...ui, pieceSelectorVisible: action.visible, selectedPosition: action.position };
+      return { ...ui, pieceSelector: action.pieceSelector };
     default: {
       return ui;
     }
@@ -49,24 +59,22 @@ export const hideBoardHint = () => ({
   type: TOGGLE_BOARD_HINT,
 });
 
-export const openDialog = () => ({
-  open: true,
-  type: TOGGLE_DIALOG,
+export const showConfirmationDialog = dialog => ({
+  dialog: { ...dialog, visible: true },
+  type: TOGGLE_CONFIRMATION_DIALOG,
 });
 
-export const closeDialog = () => ({
-  open: false,
-  type: TOGGLE_DIALOG,
+export const hideConfirmationDialog = () => ({
+  dialog: defaultDialog,
+  type: TOGGLE_CONFIRMATION_DIALOG,
 });
 
-export const showPieceSelector = position => ({
-  position,
-  visible: true,
+export const showPieceSelector = pieceSelector => ({
+  pieceSelector: { ...pieceSelector, visible: true },
   type: TOGGLE_PIECE_SELECTOR,
 });
 
 export const hidePieceSelector = () => ({
-  position: '',
-  visible: false,
+  pieceSelector: defaultPieceSelector,
   type: TOGGLE_PIECE_SELECTOR,
 });
