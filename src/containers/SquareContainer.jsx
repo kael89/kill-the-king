@@ -6,11 +6,11 @@ import { showPieceSelector } from '../store/modules/pieceSelector';
 const mapStateToProps = (state, ownProps) => {
   const {
     pieceSelector,
-    ui: { showHint },
+    ui: { hintVisible },
   } = state;
 
   return {
-    hinted: showHint,
+    hinted: hintVisible,
     selected: pieceSelector.piece.position === ownProps.position,
   };
 };

@@ -31,7 +31,7 @@ const styles = theme => ({
 
 class Square extends React.Component {
   shouldComponentUpdate(nextProps) {
-    const updatableProps = ['piece', 'selected', 'theme'];
+    const updatableProps = ['hinted', 'piece', 'selected', 'theme'];
 
     for (let i = 0; i < updatableProps.length; i++) {
       const prop = updatableProps[i];

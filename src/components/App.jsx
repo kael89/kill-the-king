@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import ActionButtonContainer from '../containers/ActionButtonContainer';
 import AvailableMovesContainer from '../containers/AvailableMovesContainer';
 import BoardContainer from '../containers/BoardContainer';
+import ConfirmationDialogContainer from '../containers/ConfirmationDialogContainer';
 import MoveHistoryContainer from '../containers/MoveHistoryContainer';
 import PieceSelectorContainer from '../containers/PieceSelectorContainer';
 import ResultsContainer from '../containers/ResultsContainer';
@@ -58,6 +59,7 @@ const App = ({ classes }) => (
         </Grid>
         <PieceSelectorContainer />
       </DragDropContextProvider>
+      <ConfirmationDialogContainer />
     </ThemeProviderContainer>
   </Provider>
 );
