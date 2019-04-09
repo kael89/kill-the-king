@@ -1,4 +1,4 @@
-import { get } from 'lodash';
+import { get, isEmpty } from 'lodash';
 import { connect } from 'react-redux';
 
 import AvailableMoves from '../components/AvailableMoves';
@@ -15,7 +15,9 @@ const mapStateToProps = state => {
   const chessTree = get(data, moveHistory.map(moveDatum => moveDatum.move), data);
   const boardId = history.length - 1;
 
+  // console.info(data, data != {}, data !== {});
   return {
+    checkmateFound: !isEmpty(data),
     moveData: MoveDataHelper.get(chessTree, history[boardId], boardId),
   };
 };

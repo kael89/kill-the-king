@@ -2,7 +2,7 @@ import { NotationHelper } from '.';
 
 const get = (chessTree, board, boardId) => {
   if (chessTree === null) {
-    return null;
+    return [];
   }
 
   return Object.keys(chessTree).map(move => ({

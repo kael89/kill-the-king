@@ -14,16 +14,23 @@ const Results = ({ error, onMoveSelect, moveData, loading }) => {
     contents = <p>Error: {error}</p>;
   } else if (loading) {
     contents = <Spinner />;
+  } else if (moveData === null) {
+    contents = <Typography>Click &quot;Go&quot; to find forced checkmates</Typography>;
+  } else if (moveData.length === 0) {
+    contents = <Typography>No checkmates found. Try changing the board or settings</Typography>;
   } else {
-    contents =
-      moveData === null ? (
-        <Typography>Click &quot;Go&quot; to detect forced checkmates</Typography>
-      ) : (
-        moveData.map(moveDatum => {
+    contents = (
+      <div style={{ width: '100%' }}>
+        <Typography>
+          {moveData.length} checkmate{moveData.length > 1 ? 's' : ''} found:
+        </Typography>
+
+        {moveData.map(moveDatum => {
           const { boardId, move } = moveDatum;
           return <MoveButtonContainer key={move} onClick={() => onMoveSelect(move, boardId)} {...moveDatum} />;
-        })
-      );
+        })}
+      </div>
+    );
   }
 
   return <ExpansionPanel summary="Results">{contents}</ExpansionPanel>;

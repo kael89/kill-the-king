@@ -6,12 +6,12 @@ import MoveButtonContainer from '../containers/MoveButtonContainer';
 import propTypes from '../propTypes';
 import ExpansionPanel from './ExpansionPanel';
 
-const AvailableMoves = ({ moveData, onMoveSelect }) => {
+const AvailableMoves = ({ checkmateFound, moveData, onMoveSelect }) => {
   let contents;
 
   if (moveData === null) {
     contents = '';
-  } else if (moveData.length === 0) {
+  } else if (checkmateFound && moveData.length === 0) {
     contents = <Typography>Checkmate!</Typography>;
   } else {
     contents = moveData.map(moveDatum => {
@@ -23,6 +23,7 @@ const AvailableMoves = ({ moveData, onMoveSelect }) => {
 };
 
 AvailableMoves.propTypes = {
+  checkmateFound: PropTypes.bool.isRequired,
   moveData: propTypes.moveData,
   onMoveSelect: PropTypes.func.isRequired,
 };

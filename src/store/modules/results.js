@@ -1,4 +1,4 @@
-import { getGameTree } from '../../api';
+import { getForcedMateTree } from '../../api';
 import { APP_NAME } from '../../constants';
 import { showError } from '../../utils';
 import { setResetBoardId } from './board';
@@ -59,7 +59,7 @@ export const fetchForcedMateTree = (board, startingColor, depth) => async dispat
   dispatch(requestForcedMateTree());
 
   try {
-    const response = await getGameTree({ board, startingColor, depth });
+    const response = await getForcedMateTree({ board, startingColor, depth });
     const { data, error } = await response.json();
 
     if (error.length > 0) {
