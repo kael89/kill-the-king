@@ -2,8 +2,8 @@ import { get } from 'lodash';
 import { connect } from 'react-redux';
 
 import AvailableMoves from '../components/AvailableMoves';
-import { MoveDataHelper, MoveHelper } from '../helpers';
-import { movePiece } from '../store/modules/board';
+import { MoveDataHelper } from '../helpers';
+import { restoreMove } from '../store/modules/board';
 import { addMove } from '../store/modules/moveHistory';
 
 const mapStateToProps = state => {
@@ -21,10 +21,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onMoveSelect: (board, moveDatum) => {
-    const { source, target } = MoveHelper.parse(board, moveDatum.move);
-
-    dispatch(movePiece(source, target));
+  onMoveSelect: moveDatum => {
+    dispatch(restoreMove(moveDatum.move));
     dispatch(addMove(moveDatum));
   },
 });
@@ -32,7 +30,7 @@ const mapDispatchToProps = dispatch => ({
 const mergeProps = (stateProps, dispatchProps) => ({
   ...stateProps,
   ...dispatchProps,
-  onMoveSelect: moveDatum => dispatchProps.onMoveSelect(stateProps.board, moveDatum),
+  onMoveSelect: moveDatum => dispatchProps.onMoveSelect(moveDatum),
 });
 
 export default connect(

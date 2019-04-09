@@ -4,13 +4,22 @@ import { showError } from '../../utils';
 import { setResetBoardId } from './board';
 
 /* Actions */
+const CLEAR_RESULTS = `${APP_NAME}/board/CLEAR_RESULTS`;
 const REQUEST_FORCED_MATE_TREE = `${APP_NAME}/board/REQUEST_FORCED_MATE_TREE`;
 const RECEIVE_FORCED_MATE_TREE = `${APP_NAME}/board/RECEIVE_FORCED_MATE_TREE`;
 const INVALIDATE_FORCED_MATE_TREE = `${APP_NAME}/board/INVALIDATE_FORCED_MATE_TREE`;
 
+const defaultResults = {
+  data: null,
+  loading: false,
+  error: '',
+};
+
 /* Reducer */
-export default function reducer(results = { data: null, loading: false, error: '' }, action) {
+export default function reducer(results = defaultResults, action) {
   switch (action.type) {
+    case CLEAR_RESULTS:
+      return defaultResults;
     case REQUEST_FORCED_MATE_TREE:
       return { ...results, loading: true };
     case RECEIVE_FORCED_MATE_TREE:
@@ -23,6 +32,10 @@ export default function reducer(results = { data: null, loading: false, error: '
 }
 
 /* Action Creators */
+export const clearResults = () => ({
+  type: CLEAR_RESULTS,
+});
+
 export const requestForcedMateTree = () => ({
   type: REQUEST_FORCED_MATE_TREE,
 });

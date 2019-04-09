@@ -3,12 +3,14 @@ import nth from 'lodash/nth';
 
 import { APP_NAME } from '../../constants';
 import { BoardHelper } from '../../helpers';
+import { clearResults } from './results';
 import { showConfirmationDialog } from './ui';
 
 /* Actions */
 const ADD_PIECE = `${APP_NAME}/board/ADD_PIECE`;
 const MOVE_PIECE = `${APP_NAME}/board/MOVE_PIECE`;
 const REMOVE_PIECE = `${APP_NAME}/board/REMOVE_PIECE`;
+const RESTORE_MOVE = `${APP_NAME}/board/RESTORE_MOVE`;
 const REVERT_BOARD = `${APP_NAME}/board/REVERT_BOARD`;
 const SET_HINT = `${APP_NAME}/board/SET_HINT`;
 const SET_RESET_BOARD_ID = `${APP_NAME}/board/SET_RESET_BOARD_ID`;
@@ -28,7 +30,8 @@ export default function reducer(board = defaultState, action) {
       const history = [...board.history, BoardHelper.addPiece(currentBoard, action.piece)];
       return { ...board, history };
     }
-    case MOVE_PIECE: {
+    case MOVE_PIECE:
+    case RESTORE_MOVE: {
       const history = [...board.history, BoardHelper.movePiece(currentBoard, action.move)];
       return { ...board, history };
     }
@@ -65,6 +68,11 @@ export const removePiece = position => ({
   type: REMOVE_PIECE,
 });
 
+export const restoreMove = move => ({
+  move,
+  type: RESTORE_MOVE,
+});
+
 export const revertBoard = index => ({
   index,
   type: REVERT_BOARD,
@@ -89,7 +97,10 @@ export const pieceChangeMiddleware = store => next => action => {
     resultingAction = showConfirmationDialog({
       title: 'Warning',
       text: 'This will clear current results. Continue?',
-      onConfirm: () => next(action),
+      onConfirm: () => {
+        next(clearResults());
+        next(action);
+      },
     });
   }
 
