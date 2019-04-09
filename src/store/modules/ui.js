@@ -14,7 +14,7 @@ const defaultDialog = {
 };
 
 const defaultState = {
-  dialog: defaultDialog,
+  confirmationDialog: defaultDialog,
   hintVisible: false,
   theme: themes[DefaultSettings[SettingKey.DEFAULT_THEME]],
 };
@@ -27,7 +27,7 @@ export default function reducer(ui = defaultState, action) {
     case TOGGLE_BOARD_HINT:
       return { ...ui, hintVisible: action.visible };
     case TOGGLE_CONFIRMATION_DIALOG:
-      return { ...ui, dialog: action.dialog };
+      return { ...ui, confirmationDialog: action.dialog };
     default: {
       return ui;
     }

@@ -3,6 +3,7 @@ import nth from 'lodash/nth';
 
 import { APP_NAME } from '../../constants';
 import { BoardHelper } from '../../helpers';
+import { showConfirmationDialog } from './ui';
 
 /* Actions */
 const ADD_PIECE = `${APP_NAME}/board/ADD_PIECE`;
@@ -39,12 +40,10 @@ export default function reducer(board = defaultState, action) {
       const history = [...board.history, nth(board.history, action.index)];
       return { ...board, history };
     }
-    case SET_HINT: {
+    case SET_HINT:
       return { ...board, hint: action.hint };
-    }
-    case SET_RESET_BOARD_ID: {
+    case SET_RESET_BOARD_ID:
       return { ...board, resetBoardId: board.history.length - 1 };
-    }
     default:
       return board;
   }
@@ -79,3 +78,20 @@ export const setHint = hint => ({
 export const setResetBoardId = () => ({
   type: SET_RESET_BOARD_ID,
 });
+
+/**
+ * Middleware
+ */
+export const pieceChangeMiddleware = store => next => action => {
+  let resultingAction = action;
+
+  if ([ADD_PIECE, MOVE_PIECE, REMOVE_PIECE].includes(action.type) && store.getState().results.data !== null) {
+    resultingAction = showConfirmationDialog({
+      title: 'Warning',
+      text: 'This will clear current results. Continue?',
+      onConfirm: () => next(action),
+    });
+  }
+
+  return next(resultingAction);
+};
