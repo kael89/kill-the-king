@@ -2,6 +2,7 @@ import { getGameTree } from '../../api';
 import { APP_NAME } from '../../constants';
 import { showError } from '../../utils';
 import { setResetBoardId } from './board';
+import { clearMoveHistory } from './moveHistory';
 
 /* Actions */
 const CLEAR_RESULTS = `${APP_NAME}/board/CLEAR_RESULTS`;
@@ -32,9 +33,12 @@ export default function reducer(results = defaultResults, action) {
 }
 
 /* Action Creators */
-export const clearResults = () => ({
-  type: CLEAR_RESULTS,
-});
+export const clearResults = () => dispatch => {
+  dispatch(clearMoveHistory());
+  dispatch({
+    type: CLEAR_RESULTS,
+  });
+};
 
 export const requestForcedMateTree = () => ({
   type: REQUEST_FORCED_MATE_TREE,
