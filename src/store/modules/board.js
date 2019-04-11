@@ -1,8 +1,9 @@
-import last from 'lodash/last';
+import { isEqual, last } from 'lodash';
 import nth from 'lodash/nth';
 
 import { APP_NAME } from '../../constants';
 import { BoardHelper } from '../../helpers';
+import { addMove } from './moveHistory';
 import { clearResults } from './results';
 import { showConfirmationDialog } from './ui';
 
@@ -10,7 +11,7 @@ import { showConfirmationDialog } from './ui';
 const ADD_PIECE = `${APP_NAME}/board/ADD_PIECE`;
 const MOVE_PIECE = `${APP_NAME}/board/MOVE_PIECE`;
 const REMOVE_PIECE = `${APP_NAME}/board/REMOVE_PIECE`;
-const RESTORE_MOVE = `${APP_NAME}/board/RESTORE_MOVE`;
+const PLAY_MOVE = `${APP_NAME}/board/PLAY_MOVE`;
 const REVERT_BOARD = `${APP_NAME}/board/REVERT_BOARD`;
 const SET_HINT = `${APP_NAME}/board/SET_HINT`;
 const SET_RESET_BOARD_ID = `${APP_NAME}/board/SET_RESET_BOARD_ID`;
@@ -31,7 +32,7 @@ export default function reducer(board = defaultState, action) {
       return { ...board, history };
     }
     case MOVE_PIECE:
-    case RESTORE_MOVE: {
+    case PLAY_MOVE: {
       const history = [...board.history, BoardHelper.movePiece(currentBoard, action.move)];
       return { ...board, history };
     }
@@ -68,10 +69,13 @@ export const removePiece = position => ({
   type: REMOVE_PIECE,
 });
 
-export const restoreMove = move => ({
-  move,
-  type: RESTORE_MOVE,
-});
+export const playMove = moveDatum => dispatch => {
+  dispatch(addMove(moveDatum));
+  dispatch({
+    move: moveDatum.move,
+    type: PLAY_MOVE,
+  });
+};
 
 export const revertBoard = index => ({
   index,
@@ -93,7 +97,18 @@ export const setResetBoardId = () => ({
 export const pieceChangeMiddleware = store => next => action => {
   let resultingAction = action;
 
-  if ([ADD_PIECE, MOVE_PIECE, REMOVE_PIECE].includes(action.type) && store.getState().results.data !== null) {
+  const isRestrictedAction = actionIn => [ADD_PIECE, MOVE_PIECE, REMOVE_PIECE].includes(actionIn.type);
+  const shouldRestrictAction = state => {
+    const {
+      results: { data },
+      pieceSelector: { piece },
+      board: { history },
+    } = state;
+
+    return data !== null && piece && !isEqual(piece, last(history)[piece.position]);
+  };
+
+  if (isRestrictedAction(action) && shouldRestrictAction(store.getState())) {
     resultingAction = showConfirmationDialog({
       title: 'Warning',
       text: 'This will clear current results. Continue?',

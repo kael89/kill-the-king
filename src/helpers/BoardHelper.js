@@ -1,7 +1,3 @@
-/**
- *  Provides methods for immutably changing the board's state
- */
-
 import MoveHelper from './MoveHelper';
 
 /**

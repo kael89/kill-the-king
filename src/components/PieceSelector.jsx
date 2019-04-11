@@ -36,7 +36,7 @@ export default class PieceSelector extends React.Component {
     if (piece.type) {
       addPiece(piece);
     } else {
-      removePiece(piece);
+      removePiece(piece.position);
     }
 
     onClose();

@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 
 import AvailableMoves from '../components/AvailableMoves';
 import { MoveDataHelper } from '../helpers';
-import { restoreMove } from '../store/modules/board';
-import { addMove } from '../store/modules/moveHistory';
+import { playMove } from '../store/modules/board';
 
 const mapStateToProps = state => {
   const {
@@ -15,7 +14,6 @@ const mapStateToProps = state => {
   const chessTree = get(data, moveHistory.map(moveDatum => moveDatum.move), data);
   const boardId = history.length - 1;
 
-  // console.info(data, data != {}, data !== {});
   return {
     checkmateFound: !isEmpty(data),
     moveData: MoveDataHelper.get(chessTree, history[boardId], boardId),
@@ -23,10 +21,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onMoveSelect: moveDatum => {
-    dispatch(restoreMove(moveDatum.move));
-    dispatch(addMove(moveDatum));
-  },
+  onMoveSelect: moveDatum => dispatch(playMove(moveDatum)),
 });
 
 const mergeProps = (stateProps, dispatchProps) => ({

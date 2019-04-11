@@ -55,6 +55,7 @@ export const invalidateForcedMateTree = error => ({
 });
 
 export const fetchForcedMateTree = (board, startingColor, depth) => async dispatch => {
+  dispatch(clearResults());
   dispatch(setResetBoardId());
   dispatch(requestForcedMateTree());
 

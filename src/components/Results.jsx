@@ -27,7 +27,7 @@ const Results = ({ error, onMoveSelect, moveData, loading }) => {
 
         {moveData.map(moveDatum => {
           const { boardId, move } = moveDatum;
-          return <MoveButtonContainer key={move} onClick={() => onMoveSelect(move, boardId)} {...moveDatum} />;
+          return <MoveButtonContainer key={move} onClick={() => onMoveSelect(moveDatum, boardId)} {...moveDatum} />;
         })}
       </div>
     );
