@@ -49,7 +49,7 @@ class Square extends React.Component {
 
     return (
       <Grid className={classnames(classes.container, classes[colorClass], { [classes.selected]: selected })}>
-        {piece ? <DraggablePieceContainer columnId={columnId} hinted={hinted} piece={piece} rowId={rowId} /> : null}
+        {piece ? <DraggablePieceContainer hinted={hinted} piece={piece} /> : null}
       </Grid>
     );
   }
