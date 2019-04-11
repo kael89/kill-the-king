@@ -29,6 +29,9 @@ const styles = theme => ({
   boardContainer: {
     marginBottom: theme.spacing.unit * 4,
   },
+  pieceSelectorContainer: {
+    marginBottom: theme.spacing.unit * 2,
+  },
 });
 
 const App = ({ classes }) => (
@@ -42,13 +45,13 @@ const App = ({ classes }) => (
             <Header />
           </Grid>
           <Grid item xs={8} lg={6} container alignItems="stretch" direction="column">
-            <Grid item container justify="center">
+            <Grid item container justify="center" className={classes.pieceSelectorContainer}>
               <PieceSelector color={Color.BLACK} />
             </Grid>
             <Grid item container justify="center" className={classes.boardContainer}>
               <BoardContainer />
             </Grid>
-            <Grid item container justify="center">
+            <Grid item container justify="center" className={classes.pieceSelectorContainer}>
               <PieceSelector color={Color.WHITE} />
             </Grid>
             <Grid item>

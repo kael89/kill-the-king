@@ -1,4 +1,3 @@
-import { Grid } from '@material-ui/core';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -55,7 +54,7 @@ class Piece extends React.Component {
     const { children, classes, hinted, hoverColor, piece, theme, ...otherProps } = this.props;
 
     return (
-      <Grid
+      <div
         {...otherProps}
         onMouseOver={() => this.handleMouseOver()}
         onMouseOut={this.handleMouseOut}
@@ -65,7 +64,7 @@ class Piece extends React.Component {
         style={hovered && hoverColor ? { backgroundColor: hoverColor } : {}}
       >
         {PieceCodes[piece.color][piece.type]}
-      </Grid>
+      </div>
     );
   }
 }
