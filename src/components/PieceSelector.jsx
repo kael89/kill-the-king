@@ -1,11 +1,9 @@
-import { Button, Dialog, DialogActions, DialogContent, Grid, Switch, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { PieceCodes } from '../constants';
-import { Color } from '../enums';
-import propTypes from '../propTypes';
-import Piece from './Piece';
+import DraggablePieceContainer from '../containers/DraggablePieceContainer';
+import { PieceType } from '../enums';
 
 export default class PieceSelector extends React.Component {
   constructor(props) {
@@ -37,17 +35,16 @@ export default class PieceSelector extends React.Component {
     return (
       <Grid container>
         <Grid item xs={10} container direction="row">
-          {Object.entries(PieceCodes[color]).map(([currentType, code]) => (
-            <Piece
-              key={code}
-              hovered={hoveredPiece === currentType}
-              onMouseOver={() => this.handlePieceMouseOver(currentType)}
+          {PieceType.allByPower.map(type => (
+            <DraggablePieceContainer
+              key={type}
+              hovered={hoveredPiece === type}
+              onMouseOver={() => this.handlePieceMouseOver(type)}
               onMouseOut={this.resetHoveredPiece}
-              onFocus={() => this.handlePieceMouseOver(currentType)}
+              onFocus={() => this.handlePieceMouseOver(type)}
               onBlur={this.resetHoveredPiece}
-            >
-              {code}
-            </Piece>
+              piece={{ color, type, position: '' }}
+            />
           ))}
         </Grid>
       </Grid>

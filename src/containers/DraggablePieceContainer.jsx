@@ -2,17 +2,20 @@ import { connect } from 'react-redux';
 
 import DraggablePiece from '../components/DraggablePiece';
 import { MoveHelper } from '../helpers';
-import { movePiece, removePiece } from '../store/modules/board';
+import { addPiece, movePiece, removePiece } from '../store/modules/board';
 
 const mapDispatchToProps = dispatch => ({
-  onDrop: (startPosition, endPosition) => {
-    if (endPosition === null) {
-      return dispatch(removePiece(startPosition));
+  onDrop: (piece, target) => {
+    if (!target) {
+      return dispatch(removePiece(piece.position));
+    }
+    if (!piece.position) {
+      return dispatch(addPiece({ ...piece, position: target }));
     }
 
     const move = MoveHelper.toString({
-      source: startPosition,
-      target: endPosition,
+      source: piece.position,
+      target,
     });
     return dispatch(movePiece(move));
   },

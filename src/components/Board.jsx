@@ -91,6 +91,7 @@ const Board = ({ board, classes, hint, showHint }) => {
                 rowId={rowId}
                 columnId={columnId}
                 piece={finalBoard[position] || null}
+                position={position}
               />
             );
           })}

@@ -12,6 +12,7 @@ export default {
   PAWN,
   QUEEN,
   ROOK,
+  allByPower: [PAWN, KNIGHT, BISHOP, ROOK, QUEEN, KING],
   fromPromotion: promotion => {
     switch (promotion.toUpperCase()) {
       case 'B':

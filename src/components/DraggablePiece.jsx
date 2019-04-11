@@ -2,17 +2,15 @@ import React from 'react';
 import { DragSource } from 'react-dnd';
 
 import Draggable from '../enums/Draggable';
-import { PositionHelper } from '../helpers';
 import Piece from './Piece';
 
 const pieceSource = {
-  beginDrag: ({ rowId, columnId }) => ({ rowId, columnId }),
-  endDrag: ({ rowId, columnId, onDrop }, monitor) => {
+  beginDrag: ({ piece }) => piece,
+  endDrag: ({ piece, onDrop }, monitor) => {
     const dropResult = monitor.getDropResult();
-    const startPosition = PositionHelper.getPositionName(rowId, columnId);
-    const endPosition = dropResult ? PositionHelper.getPositionName(dropResult.rowId, dropResult.columnId) : null;
+    const target = dropResult ? dropResult.position : null;
 
-    onDrop(startPosition, endPosition);
+    onDrop(piece, target);
   },
 };
 
@@ -21,10 +19,10 @@ const collect = (connect, monitor) => ({
   isDragging: monitor.isDragging(),
 });
 
-const DraggablePiece = ({ connectDragSource, isDragging, rowId, columnId, ...pieceProps }) =>
+const DraggablePiece = ({ connectDragSource, isDragging, piece, ...otherProps }) =>
   connectDragSource(
     <div>
-      <Piece {...pieceProps} />
+      <Piece piece={piece} {...otherProps} />
     </div>,
   );
 

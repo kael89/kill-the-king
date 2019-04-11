@@ -5,10 +5,7 @@ import SquareContainer from '../containers/SquareContainer';
 import Draggable from '../enums/Draggable';
 
 const squareTarget = {
-  drop: ({ rowId, columnId }) => ({
-    rowId,
-    columnId,
-  }),
+  drop: position => position,
 };
 
 function collect(connect, monitor) {
@@ -18,7 +15,7 @@ function collect(connect, monitor) {
   };
 }
 
-const DroppableSquare = ({ connectDropTarget, isOver, ...squareProps }) =>
+const DroppableSquare = ({ connectDropTarget, isOver, position, ...squareProps }) =>
   connectDropTarget(
     <div>
       <SquareContainer {...squareProps} />
