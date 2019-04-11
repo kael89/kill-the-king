@@ -18,7 +18,7 @@ const styles = theme => ({
 
 const Header = ({ classes }) => (
   <div className={classes.container}>
-    <Typography align="center" variant="h3" gutterBottom>
+    <Typography align="center" variant="h4" gutterBottom>
       Checkmate
     </Typography>
     <div className={classes.themeSwitch}>

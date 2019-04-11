@@ -94,29 +94,38 @@ export const setResetBoardId = () => ({
 /**
  * Middleware
  */
+const confirmPieceChange = (next, action) =>
+  showConfirmationDialog({
+    title: 'Warning',
+    text: 'This will clear current results. Continue?',
+    onConfirm: () => {
+      next(clearResults());
+      next(action);
+    },
+  });
+
 export const pieceChangeMiddleware = store => next => action => {
   let resultingAction = action;
+  const state = store.getState();
 
-  const isRestrictedAction = actionIn => [ADD_PIECE, MOVE_PIECE, REMOVE_PIECE].includes(actionIn.type);
-  const shouldRestrictAction = state => {
-    const {
-      results: { data },
-      pieceSelector: { piece },
-      board: { history },
-    } = state;
+  switch (action.type) {
+    case ADD_PIECE: {
+      const { piece } = action;
 
-    return data !== null && piece && !isEqual(piece, last(history)[piece.position]);
-  };
-
-  if (isRestrictedAction(action) && shouldRestrictAction(store.getState())) {
-    resultingAction = showConfirmationDialog({
-      title: 'Warning',
-      text: 'This will clear current results. Continue?',
-      onConfirm: () => {
-        next(clearResults());
-        next(action);
-      },
-    });
+      if (state.results.data !== null && !isEqual(piece, last(state.board.history)[piece.position])) {
+        resultingAction = confirmPieceChange(next, action);
+      }
+      break;
+    }
+    case MOVE_PIECE:
+    case REMOVE_PIECE: {
+      if (state.results.data !== null) {
+        resultingAction = confirmPieceChange(next, action);
+      }
+      break;
+    }
+    default:
+      break;
   }
 
   return next(resultingAction);

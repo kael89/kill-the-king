@@ -9,14 +9,15 @@ import AvailableMovesContainer from '../containers/AvailableMovesContainer';
 import BoardContainer from '../containers/BoardContainer';
 import ConfirmationDialogContainer from '../containers/ConfirmationDialogContainer';
 import MoveHistoryContainer from '../containers/MoveHistoryContainer';
-import PieceSelectorContainer from '../containers/PieceSelectorContainer';
 import ResultsContainer from '../containers/ResultsContainer';
 import SettingsContainer from '../containers/SettingsContainer';
 import ThemeProviderContainer from '../containers/ThemeProviderContainer';
+import { Color } from '../enums';
 import propTypes from '../propTypes';
 import store from '../store';
 import { withThemeAndStyles } from '../utils';
 import Header from './Header';
+import PieceSelector from './PieceSelector';
 
 const styles = theme => ({
   container: {
@@ -42,7 +43,9 @@ const App = ({ classes }) => (
           </Grid>
           <Grid item xs={8} lg={6} container alignItems="stretch" direction="column">
             <Grid item container justify="center" className={classes.boardContainer}>
+              <PieceSelector color={Color.BLACK} />
               <BoardContainer />
+              <PieceSelector color={Color.WHITE} />
             </Grid>
             <Grid item>
               <SettingsContainer />
@@ -57,7 +60,6 @@ const App = ({ classes }) => (
             <MoveHistoryContainer />
           </Grid>
         </Grid>
-        <PieceSelectorContainer />
       </DragDropContextProvider>
       <ConfirmationDialogContainer />
     </ThemeProviderContainer>

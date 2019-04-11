@@ -44,15 +44,12 @@ class Square extends React.Component {
   }
 
   render() {
-    const { classes, rowId, columnId, hinted, onClick, piece, position, selected } = this.props;
+    const { classes, rowId, columnId, hinted, piece, selected } = this.props;
     const colorClass = getSquareColor(rowId, columnId) === Color.BLACK ? 'black' : 'white';
     const pieceCode = piece ? PieceCodes[piece.color][piece.type] : '';
 
     return (
-      <Grid
-        onClick={() => onClick({ ...piece, position })}
-        className={classnames(classes.container, classes[colorClass], { [classes.selected]: selected })}
-      >
+      <Grid className={classnames(classes.container, classes[colorClass], { [classes.selected]: selected })}>
         <DraggablePieceContainer rowId={rowId} columnId={columnId} hinted={hinted}>
           {pieceCode}
         </DraggablePieceContainer>
@@ -65,9 +62,7 @@ Square.propTypes = {
   classes: propTypes.classes.isRequired,
   columnId: PropTypes.number.isRequired,
   hinted: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
   piece: propTypes.piece.isRequired,
-  position: PropTypes.string.isRequired,
   rowId: PropTypes.number.isRequired,
   selected: PropTypes.bool,
 };

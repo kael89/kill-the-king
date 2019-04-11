@@ -15,7 +15,6 @@
   "piece": {
     "color": "black",
     "hinted": "grey",
-    "hovered": "orange",
-    "active": "gold"
+    "hovered": "orange"
   }
 }
