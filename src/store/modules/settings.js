@@ -1,5 +1,4 @@
 import { APP_NAME, DefaultSettings } from '../../constants';
-import { SettingKey } from '../../enums';
 
 /* Actions */
 const SET_SETTING = `${APP_NAME}/settings/SET_SETTING`;

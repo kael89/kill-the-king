@@ -3,7 +3,6 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { PieceCodes } from '../constants';
 import DraggablePieceContainer from '../containers/DraggablePieceContainer';
 import { Color } from '../enums';
 import propTypes from '../propTypes';

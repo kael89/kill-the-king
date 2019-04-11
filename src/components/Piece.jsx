@@ -22,23 +22,59 @@ const styles = theme => ({
   },
 });
 
-const Piece = ({ children, classes, hinted, hovered, piece, theme, ...otherProps }) => (
-  <Grid
-    {...otherProps}
-    className={classnames(classes.container, {
-      [classes.hinted]: hinted,
-      [classes.hovered]: hovered,
-    })}
-  >
-    {PieceCodes[piece.color][piece.type]}
-  </Grid>
-);
+class Piece extends React.Component {
+  state = {
+    hovered: false,
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      hovered: false,
+    };
+
+    this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleMouseOut = this.handleMouseOut.bind(this);
+  }
+
+  handleMouseOver() {
+    this.setState({
+      hovered: true,
+    });
+  }
+
+  handleMouseOut() {
+    this.setState({
+      hovered: false,
+    });
+  }
+
+  render() {
+    const { hovered } = this.state;
+    const { children, classes, hinted, hoverColor, piece, theme, ...otherProps } = this.props;
+
+    return (
+      <Grid
+        {...otherProps}
+        onMouseOver={() => this.handleMouseOver()}
+        onMouseOut={this.handleMouseOut}
+        onFocus={() => this.handleMouseOut()}
+        onBlur={this.resetHoveredPiece}
+        className={classnames(classes.container, { [classes.hinted]: hinted })}
+        style={hovered && hoverColor ? { backgroundColor: hoverColor } : {}}
+      >
+        {PieceCodes[piece.color][piece.type]}
+      </Grid>
+    );
+  }
+}
 
 Piece.propTypes = {
   children: propTypes.children,
   classes: propTypes.classes.isRequired,
   hinted: PropTypes.bool,
-  hovered: PropTypes.bool,
+  hoverColor: PropTypes.string,
   piece: propTypes.piece.isRequired,
   theme: propTypes.theme.isRequired,
 };
@@ -46,7 +82,7 @@ Piece.propTypes = {
 Piece.defaultProps = {
   children: null,
   hinted: false,
-  hovered: false,
+  hoverColor: '',
 };
 
 export default withThemeAndStyles(Piece, styles);
