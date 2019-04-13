@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 
-import ConfirmationDialog from '../components/ConfirmationDialog';
-import { hideDialog } from '../store/modules/ui';
+import ConfirmationDialog from '../../components/ConfirmationDialog';
+import { hideDialog } from '../../store/modules/ui';
 import Dialog from './Dialog';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   onConfirm: state.confirmationDialog.onConfirm,
 });
 
