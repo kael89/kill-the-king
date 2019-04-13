@@ -7,12 +7,12 @@ import { Provider } from 'react-redux';
 import ActionButtonContainer from '../containers/ActionButtonContainer';
 import AvailableMovesContainer from '../containers/AvailableMovesContainer';
 import BoardContainer from '../containers/BoardContainer';
-import ConfirmationDialogContainer from '../containers/ConfirmationDialogContainer';
 import MoveHistoryContainer from '../containers/MoveHistoryContainer';
+import PieceChangeConfirmationDialog from '../containers/PieceChangeConfirmationDialog';
 import ResultsContainer from '../containers/ResultsContainer';
 import SettingsContainer from '../containers/SettingsContainer';
 import ThemeProviderContainer from '../containers/ThemeProviderContainer';
-import { Color } from '../enums';
+import { Color, Dialog } from '../enums';
 import propTypes from '../propTypes';
 import store from '../store';
 import { withThemeAndStyles } from '../utils';
@@ -74,7 +74,9 @@ const App = ({ classes }) => (
           </Grid>
         </Grid>
       </DragDropContextProvider>
-      <ConfirmationDialogContainer />
+      <PieceChangeConfirmationDialog id={Dialog.PIECE_CHANGE_CONFIRMATION} title="Warning">
+        This will clear current results. Continue?
+      </PieceChangeConfirmationDialog>
     </ThemeProviderContainer>
   </Provider>
 );

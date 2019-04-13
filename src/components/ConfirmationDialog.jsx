@@ -2,11 +2,11 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const ConfirmationDialog = ({ onConfirm, onCancel, open, text, title }) => (
+const ConfirmationDialog = ({ children, onCancel, onConfirm, open, title }) => (
   <Dialog open={open}>
     <DialogTitle>{title}</DialogTitle>
     <DialogContent>
-      <DialogContentText>{text}</DialogContentText>
+      <DialogContentText>{children}</DialogContentText>
     </DialogContent>
     <DialogActions>
       <Button onClick={onCancel} color="primary">
@@ -20,14 +20,15 @@ const ConfirmationDialog = ({ onConfirm, onCancel, open, text, title }) => (
 );
 
 ConfirmationDialog.propTypes = {
-  onConfirm: PropTypes.func.isRequired,
+  children: PropTypes.node,
   onCancel: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
   title: PropTypes.string,
-  text: PropTypes.string.isRequired,
 };
 
 ConfirmationDialog.defaultProps = {
+  children: null,
   title: '',
 };
 

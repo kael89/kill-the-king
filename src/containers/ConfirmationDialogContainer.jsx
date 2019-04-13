@@ -1,43 +1,28 @@
 import { connect } from 'react-redux';
 
 import ConfirmationDialog from '../components/ConfirmationDialog';
-import { hideConfirmationDialog } from '../store/modules/ui';
+import { hideDialog } from '../store/modules/ui';
 
-const mapStateToProps = state => {
-  const { onCancel, onConfirm, text, title, visible } = state.ui.confirmationDialog;
-
-  return {
-    onConfirm,
-    onCancel,
-    open: visible,
-    title,
-    text,
-  };
-};
-
-const mapDispatchToProps = dispatch => ({
-  onCancel: callback => {
-    if (callback) {
-      callback();
-    }
-    dispatch(hideConfirmationDialog());
-  },
-  onConfirm: callback => {
-    if (callback) {
-      callback();
-    }
-    dispatch(hideConfirmationDialog());
-  },
+const mapStateToProps = (state, ownProps) => ({
+  open: state.ui.visibleDialog === ownProps.id,
 });
 
-const mergeProps = (stateProps, dispatchProps) => ({
-  ...stateProps,
-  onCancel: () => dispatchProps.onCancel(stateProps.onCancel),
-  onConfirm: () => dispatchProps.onConfirm(stateProps.onConfirm),
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onCancel: () => {
+    if (ownProps.onCancel) {
+      ownProps.onCancel();
+    }
+    dispatch(hideDialog());
+  },
+  onConfirm: () => {
+    if (ownProps.onConfirm) {
+      ownProps.onConfirm();
+    }
+    dispatch(hideDialog());
+  },
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-  mergeProps,
 )(ConfirmationDialog);

@@ -2,14 +2,15 @@ import { isEqual, last } from 'lodash';
 import nth from 'lodash/nth';
 
 import { APP_NAME } from '../../constants';
+import { Dialog } from '../../enums';
 import { BoardHelper } from '../../helpers';
 import { addMove } from './moveHistory';
-import { clearResults } from './results';
-import { showConfirmationDialog } from './ui';
+import { showDialog } from './ui';
 
 /* Actions */
 const ADD_PIECE = `${APP_NAME}/board/ADD_PIECE`;
 const CLEAR_BOARD = `${APP_NAME}/board/CLEAR_BOARD`;
+const IMPORT_BOARD = `${APP_NAME}/board/IMPORT_BOARD`;
 const MOVE_PIECE = `${APP_NAME}/board/MOVE_PIECE`;
 const REMOVE_PIECE = `${APP_NAME}/board/REMOVE_PIECE`;
 const PLAY_MOVE = `${APP_NAME}/board/PLAY_MOVE`;
@@ -35,6 +36,10 @@ export default function reducer(board = defaultState, action) {
     }
     case CLEAR_BOARD: {
       const history = [...board.history, {}];
+      return { ...board, history };
+    }
+    case IMPORT_BOARD: {
+      const history = [...board.history, action.board];
       return { ...board, history };
     }
     case MOVE_PIECE:
@@ -71,6 +76,11 @@ export const addPiece = piece => ({
 
 export const clearBoard = () => ({
   type: CLEAR_BOARD,
+});
+
+export const importBoard = board => ({
+  board,
+  type: IMPORT_BOARD,
 });
 
 export const setupDefaultBoard = () => ({
@@ -135,17 +145,9 @@ const shouldConfirmChange = (state, action) => {
   }
 };
 
-const confirmPieceChange = (next, action) =>
-  showConfirmationDialog({
-    title: 'Warning',
-    text: 'This will clear current results. Continue?',
-    onConfirm: () => {
-      next(clearResults());
-      next(action);
-    },
-  });
-
 export const pieceChangeMiddleware = store => next => action => {
-  const resultingAction = shouldConfirmChange(store.getState(), action) ? confirmPieceChange(next, action) : action;
+  const resultingAction = shouldConfirmChange(store.getState(), action)
+    ? showDialog(Dialog.PIECE_CHANGE_CONFIRMATION, action)
+    : action;
   return next(resultingAction);
 };
