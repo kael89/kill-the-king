@@ -1,3 +1,13 @@
 {
-  "cSpell.words": ["backend", "compose", "devtools", "droppable", "extension", "inbox", "redux", "toolbar"]
+  "cSpell.words": [
+    "backend",
+    "compose",
+    "confirmable",
+    "devtools",
+    "droppable",
+    "extension",
+    "inbox",
+    "redux",
+    "toolbar"
+  ]
 }

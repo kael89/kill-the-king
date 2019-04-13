@@ -4,8 +4,9 @@ import nth from 'lodash/nth';
 import { APP_NAME } from '../../constants';
 import { Dialog } from '../../enums';
 import { BoardHelper } from '../../helpers';
+import { showConfirmationDialog } from './confirmationDialog';
 import { addMove } from './moveHistory';
-import { showDialog } from './ui';
+import { clearResults } from './results';
 
 /* Actions */
 const ADD_PIECE = `${APP_NAME}/board/ADD_PIECE`;
@@ -147,7 +148,10 @@ const shouldConfirmChange = (state, action) => {
 
 export const pieceChangeMiddleware = store => next => action => {
   const resultingAction = shouldConfirmChange(store.getState(), action)
-    ? showDialog(Dialog.PIECE_CHANGE_CONFIRMATION, action)
+    ? showConfirmationDialog(Dialog.PIECE_CHANGE_CONFIRMATION, () => {
+        next(clearResults());
+        next(action);
+      })
     : action;
   return next(resultingAction);
 };

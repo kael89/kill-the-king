@@ -7,8 +7,8 @@ import { Provider } from 'react-redux';
 import ActionButtonContainer from '../containers/ActionButtonContainer';
 import AvailableMovesContainer from '../containers/AvailableMovesContainer';
 import BoardContainer from '../containers/BoardContainer';
+import ConfirmationDialogContainer from '../containers/ConfirmationDialogContainer';
 import MoveHistoryContainer from '../containers/MoveHistoryContainer';
-import PieceChangeConfirmationDialog from '../containers/PieceChangeConfirmationDialog';
 import ResultsContainer from '../containers/ResultsContainer';
 import SettingsContainer from '../containers/SettingsContainer';
 import ThemeProviderContainer from '../containers/ThemeProviderContainer';
@@ -74,9 +74,9 @@ const App = ({ classes }) => (
           </Grid>
         </Grid>
       </DragDropContextProvider>
-      <PieceChangeConfirmationDialog id={Dialog.PIECE_CHANGE_CONFIRMATION} title="Warning">
+      <ConfirmationDialogContainer id={Dialog.PIECE_CHANGE_CONFIRMATION} title="Warning">
         This will clear current results. Continue?
-      </PieceChangeConfirmationDialog>
+      </ConfirmationDialogContainer>
     </ThemeProviderContainer>
   </Provider>
 );

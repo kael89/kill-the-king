@@ -40,16 +40,16 @@ export const clearResults = () => dispatch => {
   });
 };
 
-export const requestForcedMateTree = () => ({
+const requestForcedMateTree = () => ({
   type: REQUEST_FORCED_MATE_TREE,
 });
 
-export const receiveForcedMateTree = data => ({
+const receiveForcedMateTree = data => ({
   data,
   type: RECEIVE_FORCED_MATE_TREE,
 });
 
-export const invalidateForcedMateTree = error => ({
+const invalidateForcedMateTree = error => ({
   error,
   type: INVALIDATE_FORCED_MATE_TREE,
 });
