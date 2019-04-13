@@ -1,4 +1,4 @@
-import { Grid, Paper } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -9,11 +9,9 @@ import { withThemeAndStyles } from '../utils';
 
 const PieceSelector = ({ color, theme }) => (
   <Paper elevation={1}>
-    <Grid container direction="row">
-      {PieceType.allByPower.map(type => (
-        <DraggablePieceContainer key={type} hoverColor={theme.piece.hovered} piece={{ color, type, position: '' }} />
-      ))}
-    </Grid>
+    {PieceType.allByPower.map(type => (
+      <DraggablePieceContainer key={type} hoverColor={theme.piece.hovered} piece={{ color, type, position: '' }} />
+    ))}
   </Paper>
 );
 

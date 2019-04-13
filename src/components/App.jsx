@@ -18,11 +18,12 @@ import store from '../store';
 import { withThemeAndStyles } from '../utils';
 import Header from './Header';
 import PieceSelector from './PieceSelector';
+import Toolbar from './Toolbar';
 
 const styles = theme => ({
   container: {
-    maxWidth: theme.breakpoints.values.lg * 1,
-    minWidth: theme.breakpoints.values.md,
+    maxWidth: theme.breakpoints.values.lg,
+    minWidth: theme.breakpoints.values.lg,
     margin: 'auto',
     padding: theme.spacing.unit * 2,
   },
@@ -44,27 +45,32 @@ const App = ({ classes }) => (
           <Grid item xs={12}>
             <Header />
           </Grid>
-          <Grid item xs={8} lg={6} container alignItems="stretch" direction="column">
-            <Grid item container justify="center" className={classes.pieceSelectorContainer}>
-              <PieceSelector color={Color.BLACK} />
+          <Grid item className={classes.pieceSelectorContainer}>
+            <PieceSelector color={Color.BLACK} />
+          </Grid>
+          <Grid item xs={12} container>
+            <Grid item xs={3}>
+              <Toolbar />
             </Grid>
-            <Grid item container justify="center" className={classes.boardContainer}>
-              <BoardContainer />
+            <Grid item xs={6} container alignItems="stretch" direction="column">
+              <Grid item container justify="center" className={classes.boardContainer}>
+                <BoardContainer />
+              </Grid>
             </Grid>
-            <Grid item container justify="center" className={classes.pieceSelectorContainer}>
-              <PieceSelector color={Color.WHITE} />
-            </Grid>
-            <Grid item>
-              <SettingsContainer />
-            </Grid>
-            <Grid item container justify="center">
-              <ActionButtonContainer />
+            <Grid item xs={3} container direction="column">
+              <ResultsContainer />
+              <AvailableMovesContainer />
+              <MoveHistoryContainer />
             </Grid>
           </Grid>
-          <Grid item xs={4} lg={6} container direction="column">
-            <ResultsContainer />
-            <AvailableMovesContainer />
-            <MoveHistoryContainer />
+          <Grid item className={classes.pieceSelectorContainer}>
+            <PieceSelector color={Color.WHITE} />
+          </Grid>
+          <Grid item xs={12}>
+            <SettingsContainer />
+          </Grid>
+          <Grid item xs={12} align="center">
+            <ActionButtonContainer />
           </Grid>
         </Grid>
       </DragDropContextProvider>

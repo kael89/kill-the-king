@@ -2,6 +2,7 @@ import React from 'react';
 import { DragSource } from 'react-dnd';
 
 import Draggable from '../enums/Draggable';
+import { withThemeAndStyles } from '../utils';
 import Piece from './Piece';
 
 const pieceSource = {
@@ -19,11 +20,17 @@ const collect = (connect, monitor) => ({
   isDragging: monitor.isDragging(),
 });
 
-const DraggablePiece = ({ connectDragSource, isDragging, piece, ...otherProps }) =>
+const styles = {
+  pieceContainer: {
+    display: 'inline-block',
+  },
+};
+
+const DraggablePiece = ({ classes, connectDragSource, isDragging, piece, ...otherProps }) =>
   connectDragSource(
-    <div>
+    <div className={classes.pieceContainer}>
       <Piece piece={piece} {...otherProps} />
     </div>,
   );
 
-export default DragSource(Draggable.PIECE, pieceSource, collect)(DraggablePiece);
+export default DragSource(Draggable.PIECE, pieceSource, collect)(withThemeAndStyles(DraggablePiece, styles));

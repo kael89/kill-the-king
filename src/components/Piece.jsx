@@ -12,6 +12,7 @@ const styles = theme => ({
     textAlign: 'center',
     fontSize: '3rem',
     color: theme.piece.color,
+    display: 'inlineBlock',
   },
   hinted: {
     color: theme.piece.hinted,
