@@ -9,6 +9,7 @@ import { showConfirmationDialog } from './ui';
 
 /* Actions */
 const ADD_PIECE = `${APP_NAME}/board/ADD_PIECE`;
+const CLEAR_BOARD = `${APP_NAME}/board/CLEAR_BOARD`;
 const MOVE_PIECE = `${APP_NAME}/board/MOVE_PIECE`;
 const REMOVE_PIECE = `${APP_NAME}/board/REMOVE_PIECE`;
 const PLAY_MOVE = `${APP_NAME}/board/PLAY_MOVE`;
@@ -29,6 +30,10 @@ export default function reducer(board = defaultState, action) {
   switch (action.type) {
     case ADD_PIECE: {
       const history = [...board.history, BoardHelper.addPiece(currentBoard, action.piece)];
+      return { ...board, history };
+    }
+    case CLEAR_BOARD: {
+      const history = [...board.history, {}];
       return { ...board, history };
     }
     case MOVE_PIECE:
@@ -59,14 +64,13 @@ export const addPiece = piece => ({
   type: ADD_PIECE,
 });
 
+export const clearBoard = () => ({
+  type: CLEAR_BOARD,
+});
+
 export const movePiece = move => ({
   move,
   type: MOVE_PIECE,
-});
-
-export const removePiece = position => ({
-  position,
-  type: REMOVE_PIECE,
 });
 
 export const playMove = moveDatum => dispatch => {
@@ -76,6 +80,11 @@ export const playMove = moveDatum => dispatch => {
     type: PLAY_MOVE,
   });
 };
+
+export const removePiece = position => ({
+  position,
+  type: REMOVE_PIECE,
+});
 
 export const revertBoard = index => ({
   index,
@@ -117,6 +126,7 @@ export const pieceChangeMiddleware = store => next => action => {
       }
       break;
     }
+    case CLEAR_BOARD:
     case MOVE_PIECE:
     case REMOVE_PIECE: {
       if (state.results.data !== null) {
