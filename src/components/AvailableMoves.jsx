@@ -2,7 +2,7 @@ import { Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import MoveButtonContainer from '../containers/MoveButtonContainer';
+import MoveButton from '../containers/MoveButton';
 import propTypes from '../propTypes';
 import ExpansionPanel from './ExpansionPanel';
 
@@ -15,7 +15,7 @@ const AvailableMoves = ({ checkmateFound, moveData, onMoveSelect }) => {
     contents = <Typography>Checkmate!</Typography>;
   } else {
     contents = moveData.map(moveDatum => {
-      return <MoveButtonContainer key={moveDatum.move} onClick={() => onMoveSelect(moveDatum)} {...moveDatum} />;
+      return <MoveButton key={moveDatum.move} onClick={() => onMoveSelect(moveDatum)} {...moveDatum} />;
     });
   }
 

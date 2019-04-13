@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
 
-import ThemeSwitch from '../containers/ThemeSwitchContainer';
+import ThemeSwitch from '../containers/ThemeSwitch';
 import propTypes from '../propTypes';
 import { withThemeAndStyles } from '../utils';
 

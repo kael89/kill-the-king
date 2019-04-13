@@ -3,7 +3,7 @@ import chunk from 'lodash/chunk';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import MoveButtonContainer from '../containers/MoveButtonContainer';
+import MoveButton from '../containers/MoveButton';
 import { Color } from '../enums';
 import propTypes from '../propTypes';
 import { withThemeAndStyles } from '../utils';
@@ -44,7 +44,7 @@ const BaseMoveRow = ({ classes, id, moveData, onMoveSelect }) => (
 
       return (
         <TableCell key={boardId} className={classes.move}>
-          {boardId === -1 ? '' : <MoveButtonContainer onClick={() => onMoveSelect(moveId, boardId)} {...moveDatum} />}
+          {boardId === -1 ? '' : <MoveButton onClick={() => onMoveSelect(moveId, boardId)} {...moveDatum} />}
         </TableCell>
       );
     })}

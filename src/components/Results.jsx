@@ -2,7 +2,7 @@ import { Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import MoveButtonContainer from '../containers/MoveButtonContainer';
+import MoveButton from '../containers/MoveButton';
 import propTypes from '../propTypes';
 import ExpansionPanel from './ExpansionPanel';
 import Spinner from './Spinner';
@@ -27,7 +27,7 @@ const Results = ({ error, onMoveSelect, moveData, loading }) => {
 
         {moveData.map(moveDatum => {
           const { boardId, move } = moveDatum;
-          return <MoveButtonContainer key={move} onClick={() => onMoveSelect(moveDatum, boardId)} {...moveDatum} />;
+          return <MoveButton key={move} onClick={() => onMoveSelect(moveDatum, boardId)} {...moveDatum} />;
         })}
       </div>
     );

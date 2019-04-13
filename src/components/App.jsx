@@ -4,14 +4,14 @@ import { DragDropContextProvider } from 'react-dnd';
 import html5Backend from 'react-dnd-html5-backend';
 import { Provider } from 'react-redux';
 
-import ActionButtonContainer from '../containers/ActionButtonContainer';
-import AvailableMovesContainer from '../containers/AvailableMovesContainer';
-import BoardContainer from '../containers/BoardContainer';
-import ConfirmationDialogContainer from '../containers/ConfirmationDialogContainer';
-import MoveHistoryContainer from '../containers/MoveHistoryContainer';
-import ResultsContainer from '../containers/ResultsContainer';
-import SettingsContainer from '../containers/SettingsContainer';
-import ThemeProviderContainer from '../containers/ThemeProviderContainer';
+import ActionButton from '../containers/ActionButton';
+import AvailableMoves from '../containers/AvailableMoves';
+import Board from '../containers/Board';
+import ConfirmationDialog from '../containers/ConfirmationDialog';
+import MoveHistory from '../containers/MoveHistory';
+import Results from '../containers/Results';
+import Settings from '../containers/Settings';
+import ThemeProvider from '../containers/ThemeProvider';
 import { Color, Dialog } from '../enums';
 import propTypes from '../propTypes';
 import store from '../store';
@@ -37,7 +37,7 @@ const styles = theme => ({
 
 const App = ({ classes }) => (
   <Provider store={store}>
-    <ThemeProviderContainer>
+    <ThemeProvider>
       <DragDropContextProvider backend={html5Backend}>
         <CssBaseline />
 
@@ -54,30 +54,30 @@ const App = ({ classes }) => (
             </Grid>
             <Grid item xs={6} container alignItems="stretch" direction="column">
               <Grid item container justify="center" className={classes.boardContainer}>
-                <BoardContainer />
+                <Board />
               </Grid>
             </Grid>
             <Grid item xs={3} container direction="column">
-              <ResultsContainer />
-              <AvailableMovesContainer />
-              <MoveHistoryContainer />
+              <Results />
+              <AvailableMoves />
+              <MoveHistory />
             </Grid>
           </Grid>
           <Grid item xs={12} align="center" className={classes.pieceSelectorContainer}>
             <PieceSelector color={Color.WHITE} />
           </Grid>
           <Grid item xs={12}>
-            <SettingsContainer />
+            <Settings />
           </Grid>
           <Grid item xs={12} align="center">
-            <ActionButtonContainer />
+            <ActionButton />
           </Grid>
         </Grid>
       </DragDropContextProvider>
-      <ConfirmationDialogContainer id={Dialog.PIECE_CHANGE_CONFIRMATION} title="Warning">
+      <ConfirmationDialog id={Dialog.PIECE_CHANGE_CONFIRMATION} title="Warning">
         This will clear current results. Continue?
-      </ConfirmationDialogContainer>
-    </ThemeProviderContainer>
+      </ConfirmationDialog>
+    </ThemeProvider>
   </Provider>
 );
 

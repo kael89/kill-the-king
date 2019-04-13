@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import DraggablePieceContainer from '../containers/DraggablePieceContainer';
+import DraggablePiece from '../containers/DraggablePiece';
 import { Color } from '../enums';
 import propTypes from '../propTypes';
 import { withThemeAndStyles } from '../utils';
@@ -34,6 +34,7 @@ class Square extends React.Component {
 
     for (let i = 0; i < updatableProps.length; i++) {
       const prop = updatableProps[i];
+      // eslint-disable-next-line react/destructuring-assignment
       if (this.props[prop] !== nextProps[prop]) {
         return true;
       }
@@ -48,7 +49,7 @@ class Square extends React.Component {
 
     return (
       <Grid className={classnames(classes.container, classes[colorClass], { [classes.selected]: selected })}>
-        {piece ? <DraggablePieceContainer hinted={hinted} piece={piece} /> : null}
+        {piece ? <DraggablePiece hinted={hinted} piece={piece} /> : null}
       </Grid>
     );
   }
