@@ -7,13 +7,13 @@ import {
 } from '@material-ui/icons';
 import React from 'react';
 
-import ClearButtonContainer from '../containers/ToolbarButton/ClearButtonContainer';
+import { ClearButtonContainer, DefaultBoardButtonContainer } from '../containers/ToolbarButton';
 import ToolbarButton from './ToolbarButton';
 
 const Toolbar = () => (
   <List>
     <ClearButtonContainer text="Clear" icon={<ClearIcon />} />
-    <ToolbarButton text="Initial setup" icon={<RefreshIcon />} />
+    <DefaultBoardButtonContainer text="Default board" icon={<RefreshIcon />} />
     <ToolbarButton text="Import" icon={<VerticalAlignTopIcon />} />
     <ToolbarButton text="Export" icon={<VerticalAlignBottomIcon />} />
   </List>

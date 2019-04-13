@@ -16,6 +16,7 @@ const PLAY_MOVE = `${APP_NAME}/board/PLAY_MOVE`;
 const REVERT_BOARD = `${APP_NAME}/board/REVERT_BOARD`;
 const SET_HINT = `${APP_NAME}/board/SET_HINT`;
 const SET_RESET_BOARD_ID = `${APP_NAME}/board/SET_RESET_BOARD_ID`;
+const SETUP_DEFAULT_BOARD = `${APP_NAME}/board/SETUP_DEFAULT_BOARD`;
 
 const defaultState = {
   hint: {},
@@ -53,6 +54,10 @@ export default function reducer(board = defaultState, action) {
       return { ...board, hint: action.hint };
     case SET_RESET_BOARD_ID:
       return { ...board, resetBoardId: board.history.length - 1 };
+    case SETUP_DEFAULT_BOARD: {
+      const history = [...board.history, BoardHelper.getDefaultSetup()];
+      return { ...board, history };
+    }
     default:
       return board;
   }
@@ -66,6 +71,10 @@ export const addPiece = piece => ({
 
 export const clearBoard = () => ({
   type: CLEAR_BOARD,
+});
+
+export const setupDefaultBoard = () => ({
+  type: SETUP_DEFAULT_BOARD,
 });
 
 export const movePiece = move => ({
@@ -103,6 +112,29 @@ export const setResetBoardId = () => ({
 /**
  * Middleware
  */
+const shouldConfirmChange = (state, action) => {
+  const restrictedActionsTypes = [ADD_PIECE, CLEAR_BOARD, MOVE_PIECE, REMOVE_PIECE, SETUP_DEFAULT_BOARD];
+
+  if (!restrictedActionsTypes.includes(action.type)) {
+    return false;
+  }
+
+  const fetchedDataExist = state.results.data !== null;
+  const currentBoard = last(state.board.history);
+
+  switch (action.type) {
+    case ADD_PIECE: {
+      const { piece } = action;
+      return fetchedDataExist && !isEqual(piece, currentBoard[piece.position]);
+    }
+    case SETUP_DEFAULT_BOARD: {
+      return fetchedDataExist && !isEqual(BoardHelper.getDefaultSetup(), currentBoard);
+    }
+    default:
+      return fetchedDataExist;
+  }
+};
+
 const confirmPieceChange = (next, action) =>
   showConfirmationDialog({
     title: 'Warning',
@@ -114,29 +146,6 @@ const confirmPieceChange = (next, action) =>
   });
 
 export const pieceChangeMiddleware = store => next => action => {
-  let resultingAction = action;
-  const state = store.getState();
-
-  switch (action.type) {
-    case ADD_PIECE: {
-      const { piece } = action;
-
-      if (state.results.data !== null && !isEqual(piece, last(state.board.history)[piece.position])) {
-        resultingAction = confirmPieceChange(next, action);
-      }
-      break;
-    }
-    case CLEAR_BOARD:
-    case MOVE_PIECE:
-    case REMOVE_PIECE: {
-      if (state.results.data !== null) {
-        resultingAction = confirmPieceChange(next, action);
-      }
-      break;
-    }
-    default:
-      break;
-  }
-
+  const resultingAction = shouldConfirmChange(store.getState(), action) ? confirmPieceChange(next, action) : action;
   return next(resultingAction);
 };
