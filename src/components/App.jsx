@@ -45,7 +45,7 @@ const App = ({ classes }) => (
           <Grid item xs={12}>
             <Header />
           </Grid>
-          <Grid item className={classes.pieceSelectorContainer}>
+          <Grid item xs={12} align="center" className={classes.pieceSelectorContainer}>
             <PieceSelector color={Color.BLACK} />
           </Grid>
           <Grid item xs={12} container>
@@ -63,7 +63,7 @@ const App = ({ classes }) => (
               <MoveHistoryContainer />
             </Grid>
           </Grid>
-          <Grid item className={classes.pieceSelectorContainer}>
+          <Grid item xs={12} align="center" className={classes.pieceSelectorContainer}>
             <PieceSelector color={Color.WHITE} />
           </Grid>
           <Grid item xs={12}>
