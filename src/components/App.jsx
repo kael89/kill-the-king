@@ -31,8 +31,8 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 4,
   },
   exportDialog: {
-    width: '400px',
-    height: '400px',
+    width: 400,
+    maxHeight: 500,
   },
   pieceSelectorContainer: {
     marginBottom: theme.spacing.unit * 2,
