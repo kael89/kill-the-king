@@ -9,7 +9,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onCancel: () => dispatch(hideDialog()),
   onConfirm: callback => {
     if (callback) {
       callback();

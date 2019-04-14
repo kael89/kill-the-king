@@ -1,7 +1,22 @@
 import { connect } from 'react-redux';
 
+import { hideDialog } from '../../store/modules/ui';
+
 const mapStateToProps = (state, ownProps) => ({
   open: state.ui.visibleDialog === ownProps.id,
 });
 
-export default DialogComponent => connect(mapStateToProps)(DialogComponent);
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onClose: () => {
+    if (ownProps.onClose) {
+      ownProps.onClose();
+    }
+    dispatch(hideDialog());
+  },
+});
+
+export default DialogComponent =>
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(DialogComponent);

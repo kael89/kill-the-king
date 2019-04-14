@@ -1,13 +1,23 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const ImportDialog = ({ onCancel, onImport, open }) => (
+const ImportDialog = ({ onClose, onImport, open }) => (
   <Dialog open={open}>
     <DialogTitle>Import</DialogTitle>
-    <DialogContent />
+    <DialogContent>
+      <TextField id="import" label="Paste your board data here" variant="filled" />
+    </DialogContent>
     <DialogActions>
-      <Button onClick={onCancel} color="primary">
+      <Button onClick={onClose} color="primary">
         Cancel
       </Button>
       <Button onClick={onImport} color="primary">
@@ -18,7 +28,7 @@ const ImportDialog = ({ onCancel, onImport, open }) => (
 );
 
 ImportDialog.propTypes = {
-  onCancel: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
   onImport: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
 };
