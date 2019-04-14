@@ -2,10 +2,10 @@ import React from 'react';
 import { DropTarget } from 'react-dnd';
 
 import Square from '../containers/Square';
-import Draggable from '../enums/Draggable';
+import { Draggable } from '../enums';
 
 const squareTarget = {
-  drop: position => position,
+  drop: ({ position }) => ({ position }),
 };
 
 function collect(connect, monitor) {

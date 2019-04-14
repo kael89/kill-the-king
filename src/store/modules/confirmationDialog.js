@@ -2,7 +2,7 @@ import { APP_NAME } from '../../constants';
 import { showDialog } from './ui';
 
 /* Actions */
-const SET_ON_CONFIRM = `${APP_NAME}/confirmationDialog/SET_CONFIRMABLE_ACTION`;
+const SET_ON_CONFIRM = `${APP_NAME}/confirmationDialog/SET_ON_CONFIRM`;
 
 const defaultState = {
   onConfirm: null,

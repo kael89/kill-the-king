@@ -7,12 +7,7 @@ import Piece from './Piece';
 
 const pieceSource = {
   beginDrag: ({ piece }) => piece,
-  endDrag: ({ piece, onDrop }, monitor) => {
-    const dropResult = monitor.getDropResult();
-    const target = dropResult ? dropResult.position : null;
-
-    onDrop(piece, target);
-  },
+  endDrag: ({ piece, onDrop }, monitor) => onDrop(piece, monitor.getDropResult()),
 };
 
 const collect = (connect, monitor) => ({

@@ -1,4 +1,3 @@
-import { Grid } from '@material-ui/core';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -48,9 +47,9 @@ class Square extends React.Component {
     const colorClass = getSquareColor(rowId, columnId) === Color.BLACK ? 'black' : 'white';
 
     return (
-      <Grid className={classnames(classes.container, classes[colorClass], { [classes.selected]: selected })}>
+      <div className={classnames(classes.container, classes[colorClass], { [classes.selected]: selected })}>
         {piece ? <DraggablePiece hinted={hinted} piece={piece} /> : null}
-      </Grid>
+      </div>
     );
   }
 }
