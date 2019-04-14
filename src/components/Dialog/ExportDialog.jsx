@@ -1,14 +1,15 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import propTypes from '../../propTypes';
+import { printJson } from '../../utils';
 
-const ExportDialog = ({ board, onClose, open }) => (
-  <Dialog open={open}>
+const ExportDialog = ({ board, onClose, open, ...dialogProps }) => (
+  <Dialog onClose={onClose} open={open} {...dialogProps}>
     <DialogTitle>Export</DialogTitle>
     <DialogContent>
-      <DialogContentText>{JSON.stringify(board)}</DialogContentText>
+      <pre>{printJson(board)}</pre>
     </DialogContent>
     <DialogActions>
       <Button onClick={onClose} color="primary">

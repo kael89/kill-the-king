@@ -1,5 +1,13 @@
 import { withStyles, withTheme } from '@material-ui/core';
 
+const JSON_INDENTATION = 2;
+
+/**
+ * @param {string} json
+ * @returns {string}
+ */
+export const printJson = json => JSON.stringify(json, null, JSON_INDENTATION);
+
 /**
  * @param {string} error
  */

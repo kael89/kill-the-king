@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import ActionButton from '../containers/ActionButton';
 import AvailableMoves from '../containers/AvailableMoves';
 import Board from '../containers/Board';
-import { ConfirmationDialog } from '../containers/Dialog';
+import { ConfirmationDialog, ExportDialog, ImportDialog } from '../containers/Dialog';
 import MoveHistory from '../containers/MoveHistory';
 import Results from '../containers/Results';
 import Settings from '../containers/Settings';
@@ -29,6 +29,10 @@ const styles = theme => ({
   },
   boardContainer: {
     marginBottom: theme.spacing.unit * 4,
+  },
+  exportDialog: {
+    width: '400px',
+    height: '400px',
   },
   pieceSelectorContainer: {
     marginBottom: theme.spacing.unit * 2,
@@ -77,6 +81,8 @@ const App = ({ classes }) => (
       <ConfirmationDialog id={Dialog.PIECE_CHANGE_CONFIRMATION} title="Warning">
         This will clear current results. Continue?
       </ConfirmationDialog>
+      <ExportDialog id={Dialog.EXPORT} PaperProps={{ className: classes.exportDialog }} />
+      <ImportDialog id={Dialog.IMPORT} />
     </ThemeProvider>
   </Provider>
 );

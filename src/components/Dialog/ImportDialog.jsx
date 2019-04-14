@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const ImportDialog = ({ onClose, onImport, open }) => (
-  <Dialog open={open}>
+  <Dialog onClose={onClose} open={open}>
     <DialogTitle>Import</DialogTitle>
     <DialogContent>
       <TextField id="import" label="Paste your board data here" variant="filled" />

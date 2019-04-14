@@ -7,9 +7,7 @@ import {
 } from '@material-ui/icons';
 import React from 'react';
 
-import { ExportDialog, ImportDialog } from '../containers/Dialog';
 import { ClearButton, DefaultBoardButton, ExportButton, ImportButton } from '../containers/ToolbarButton';
-import { Dialog } from '../enums';
 
 const Toolbar = () => (
   <>
@@ -19,8 +17,6 @@ const Toolbar = () => (
       <ImportButton text="Import" icon={<VerticalAlignTopIcon />} />
       <ExportButton text="Export" icon={<VerticalAlignBottomIcon />} />
     </List>
-    <ExportDialog id={Dialog.EXPORT} />
-    <ImportDialog id={Dialog.IMPORT} />
   </>
 );
 
