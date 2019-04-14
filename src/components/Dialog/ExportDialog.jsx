@@ -22,11 +22,11 @@ const styles = theme => ({
   },
 });
 
-const ExportDialog = ({ board, classes, onClose, open, ...dialogProps }) => {
+const ExportDialog = ({ board, classes, onClose, open, PaperProps }) => {
   const exportData = printJson(board);
 
   return (
-    <Dialog onClose={onClose} open={open} {...dialogProps}>
+    <Dialog onClose={onClose} open={open} PaperProps={PaperProps}>
       <DialogTitle>Export</DialogTitle>
       <DialogContent className={classes.content}>
         <CopyToClipboardButton text={exportData} className={classes.copyIcon} />
@@ -46,6 +46,11 @@ ExportDialog.propTypes = {
   classes: propTypes.classes.isRequired,
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
+  PaperProps: PropTypes.objectOf(PropTypes.any),
+};
+
+ExportDialog.defaultProps = {
+  PaperProps: {},
 };
 
 export default withThemeAndStyles(ExportDialog, styles);
