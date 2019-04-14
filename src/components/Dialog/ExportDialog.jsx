@@ -1,11 +1,10 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
-import { FileCopy as CopyIcon } from '@material-ui/icons';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import propTypes from '../../propTypes';
 import { printJson, withThemeAndStyles } from '../../utils';
-import IconButton from '../IconButton';
+import CopyToClipboardButton from '../CopyToClipboardButton';
 
 const styles = theme => ({
   content: {
@@ -23,20 +22,24 @@ const styles = theme => ({
   },
 });
 
-const ExportDialog = ({ board, classes, onClose, open, ...dialogProps }) => (
-  <Dialog onClose={onClose} open={open} {...dialogProps}>
-    <DialogTitle>Export</DialogTitle>
-    <DialogContent className={classes.content}>
-      <IconButton className={classes.copyIcon} icon={<CopyIcon />} title="Copy to clipboard" />
-      <pre className={classes.exportData}>{printJson(board)}</pre>
-    </DialogContent>
-    <DialogActions>
-      <Button onClick={onClose} color="primary">
-        OK
-      </Button>
-    </DialogActions>
-  </Dialog>
-);
+const ExportDialog = ({ board, classes, onClose, open, ...dialogProps }) => {
+  const exportData = printJson(board);
+
+  return (
+    <Dialog onClose={onClose} open={open} {...dialogProps}>
+      <DialogTitle>Export</DialogTitle>
+      <DialogContent className={classes.content}>
+        <CopyToClipboardButton text={exportData} className={classes.copyIcon} />
+        <pre className={classes.exportData}>{exportData}</pre>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="primary">
+          OK
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
 
 ExportDialog.propTypes = {
   board: propTypes.board.isRequired,
