@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import ActionButton from '../containers/ActionButton';
 import AvailableMoves from '../containers/AvailableMoves';
 import Board from '../containers/Board';
-import ConfirmationDialog from '../containers/Dialog/ConfirmationDialog';
+import { ConfirmationDialog } from '../containers/Dialog';
 import MoveHistory from '../containers/MoveHistory';
 import Results from '../containers/Results';
 import Settings from '../containers/Settings';
