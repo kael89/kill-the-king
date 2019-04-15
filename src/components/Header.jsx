@@ -19,7 +19,7 @@ const styles = theme => ({
 const Header = ({ classes }) => (
   <div className={classes.container}>
     <Typography align="center" variant="h4" gutterBottom>
-      Checkmate
+      Chasemate
     </Typography>
     <div className={classes.themeSwitch}>
       <ThemeSwitch />

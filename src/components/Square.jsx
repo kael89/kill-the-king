@@ -15,6 +15,7 @@ const styles = theme => ({
   container: {
     width: `${SQUARE_SIZE}px`,
     height: `${SQUARE_SIZE}px`,
+    textAlign: 'center',
   },
   black: {
     background: theme.chessColor.black,

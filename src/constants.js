@@ -1,6 +1,6 @@
 import { Color, PieceType, SettingKey, Theme } from './enums';
 
-export const APP_NAME = 'checkmate';
+export const APP_NAME = 'chasemate';
 
 export const PieceCodes = {
   [Color.BLACK]: {
