@@ -25,7 +25,8 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const mergeprops = (stateProps, dispatchProps) => ({
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...ownProps,
   ...stateProps,
   onMoveSelect: moveDatum => dispatchProps.onMoveSelect(stateProps.resetBoardId, moveDatum),
 });
@@ -33,5 +34,5 @@ const mergeprops = (stateProps, dispatchProps) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-  mergeprops,
+  mergeProps,
 )(Results);

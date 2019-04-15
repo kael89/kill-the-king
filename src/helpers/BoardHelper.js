@@ -1,4 +1,5 @@
 import { Color, PieceType } from '../enums';
+import { isValidJson } from '../utils';
 import MoveHelper from './MoveHelper';
 
 const DEFAULT_BOARD_DATA = {
@@ -79,10 +80,17 @@ const movePiece = (board, moveString) => {
   return addPiece(newBoard, piece);
 };
 
+/**
+ * @param {string} json
+ * @returns {string} The error message, or empty string if no errors were detected
+ */
+const validateJson = json => (isValidJson(json) ? '' : 'Invalid data');
+
 export default {
   addPiece,
   getDefaultSetup,
   getPiece,
   movePiece,
   removePiece,
+  validateJson,
 };

@@ -4,6 +4,7 @@ import React from 'react';
 
 import propTypes from '../../propTypes';
 import { printJson, withThemeAndStyles } from '../../utils';
+import CodeBlock from '../CodeBlock';
 import CopyToClipboardButton from '../CopyToClipboardButton';
 
 const styles = theme => ({
@@ -15,22 +16,18 @@ const styles = theme => ({
     right: theme.spacing.unit * 2.5,
     top: theme.spacing.unit,
   },
-  exportData: {
-    background: theme.palette.grey[50],
-    border: '1px solid black',
-    padding: theme.spacing.unit * 2,
-  },
 });
 
-const ExportDialog = ({ board, classes, onClose, open, PaperProps }) => {
+const ExportDialog = ({ board, classes, onClose, ...otherProps }) => {
   const exportData = printJson(board);
+  const { dispatch, ...dialogProps } = otherProps;
 
   return (
-    <Dialog onClose={onClose} open={open} PaperProps={PaperProps}>
+    <Dialog onClose={onClose} {...dialogProps}>
       <DialogTitle>Export</DialogTitle>
       <DialogContent className={classes.content}>
         <CopyToClipboardButton text={exportData} className={classes.copyIcon} />
-        <pre className={classes.exportData}>{exportData}</pre>
+        <CodeBlock code={exportData} language="json" />
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="primary">

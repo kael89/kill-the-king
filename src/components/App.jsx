@@ -1,4 +1,5 @@
 import { CssBaseline, Grid } from '@material-ui/core';
+import classnames from 'classnames';
 import React from 'react';
 import { DragDropContextProvider } from 'react-dnd';
 import html5Backend from 'react-dnd-html5-backend';
@@ -30,9 +31,12 @@ const styles = theme => ({
   boardContainer: {
     marginBottom: theme.spacing.unit * 4,
   },
-  exportDialog: {
+  dialog: {
     width: 400,
     maxHeight: 500,
+  },
+  importDialog: {
+    height: 500,
   },
   pieceSelectorContainer: {
     marginBottom: theme.spacing.unit * 2,
@@ -81,8 +85,8 @@ const App = ({ classes }) => (
       <ConfirmationDialog id={Dialog.PIECE_CHANGE_CONFIRMATION} title="Warning">
         This will clear current results. Continue?
       </ConfirmationDialog>
-      <ExportDialog id={Dialog.EXPORT} PaperProps={{ className: classes.exportDialog }} />
-      <ImportDialog id={Dialog.IMPORT} />
+      <ExportDialog id={Dialog.EXPORT} PaperProps={{ className: classes.dialog }} />
+      <ImportDialog id={Dialog.IMPORT} PaperProps={{ className: classnames(classes.dialog, classes.importDialog) }} />
     </ThemeProvider>
   </Provider>
 );

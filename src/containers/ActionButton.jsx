@@ -17,7 +17,8 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const mergeProps = (stateProps, dispatchProps) => ({
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...ownProps,
   dialogOpen: stateProps.dialogOpen,
   onClick: () => dispatchProps.onClick(stateProps.board, stateProps.startingColor, stateProps.depth),
 });

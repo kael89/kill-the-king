@@ -24,7 +24,8 @@ const mapDispatchToProps = dispatch => ({
   onMoveSelect: moveDatum => dispatch(playMove(moveDatum)),
 });
 
-const mergeProps = (stateProps, dispatchProps) => ({
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...ownProps,
   ...stateProps,
   ...dispatchProps,
   onMoveSelect: moveDatum => dispatchProps.onMoveSelect(moveDatum),

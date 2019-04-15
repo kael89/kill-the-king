@@ -1,31 +1,79 @@
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  TextField,
-} from '@material-ui/core';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const ImportDialog = ({ onClose, onImport, open }) => (
-  <Dialog onClose={onClose} open={open}>
-    <DialogTitle>Import</DialogTitle>
-    <DialogContent>
-      <TextField id="import" label="Paste your board data here" variant="filled" />
-    </DialogContent>
-    <DialogActions>
-      <Button onClick={onClose} color="primary">
-        Cancel
-      </Button>
-      <Button onClick={onImport} color="primary">
-        Import
-      </Button>
-    </DialogActions>
-  </Dialog>
-);
+import { BoardHelper } from '../../helpers';
+import CodeInput from '../CodeInput';
+
+class ImportDialog extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      error: '',
+      input: '',
+    };
+
+    this.handleClose = this.handleClose.bind(this);
+    this.handleImport = this.handleImport.bind(this);
+  }
+
+  handleInputChange(input) {
+    this.setState({
+      error: input.trim() ? BoardHelper.validateJson(input) : '',
+      input,
+    });
+  }
+
+  handleClose() {
+    const { onClose } = this.props;
+
+    this.setState({
+      error: '',
+      input: '',
+    });
+    onClose();
+  }
+
+  handleImport() {
+    const { input } = this.state;
+    const { onImport } = this.props;
+
+    onImport(input);
+    this.handleClose();
+  }
+
+  render() {
+    const { error, input } = this.state;
+    const { onImport, ...otherProps } = this.props;
+    const hasError = !!error;
+    const hasInput = !!input.trim();
+
+    return (
+      <Dialog {...otherProps} onClose={this.handleClose}>
+        <DialogTitle>Import</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Paste your data here:</DialogContentText>
+          <CodeInput
+            code={input}
+            error={hasError}
+            label={error}
+            onChange={e => this.handleInputChange(e.target.value)}
+            rows={16}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button disabled={hasError || !hasInput} onClick={this.handleImport} color="primary">
+            Import
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
+  }
+}
 
 ImportDialog.propTypes = {
   onClose: PropTypes.func.isRequired,

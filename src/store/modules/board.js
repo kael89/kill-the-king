@@ -79,8 +79,8 @@ export const clearBoard = () => ({
   type: CLEAR_BOARD,
 });
 
-export const importBoard = board => ({
-  board,
+export const importBoard = boardJson => ({
+  board: JSON.parse(boardJson),
   type: IMPORT_BOARD,
 });
 

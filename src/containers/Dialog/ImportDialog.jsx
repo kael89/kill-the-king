@@ -6,8 +6,8 @@ import { hideDialog } from '../../store/modules/ui';
 import Dialog from './Dialog';
 
 const mapDispatchToProps = dispatch => ({
-  onImport: board => {
-    dispatch(importBoard(board));
+  onImport: boardJson => {
+    dispatch(importBoard(boardJson));
     dispatch(hideDialog());
   },
 });
