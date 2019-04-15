@@ -1,49 +1,45 @@
-import {
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Grid,
-  Input,
-  InputLabel,
-  Radio,
-  RadioGroup,
-} from '@material-ui/core';
+import { FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, Switch } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { SettingKey } from '../enums';
+import { Color, SettingKey } from '../enums';
 import propTypes from '../propTypes';
 import { withThemeAndStyles } from '../utils';
-
-// const MAX_MOVE_LIMIT = 2; // TODO enforce
 
 const styles = theme => ({
   container: {
     padding: theme.spacing.unit,
+  },
+  moveDepthInput: {
+    minWidth: 100,
   },
 });
 
 const Settings = ({ classes, settings, setSetting }) => (
   <Grid container justify="space-around" className={classes.container}>
     <Grid item>
-      <FormLabel>Who plays first?</FormLabel>
-      <RadioGroup
-        row
+      <FormControlLabel
+        checked={settings[SettingKey.STARTING_COLOR] === Color.WHITE}
+        control={<Switch />}
+        label={settings[SettingKey.STARTING_COLOR] === Color.WHITE ? 'White plays first' : 'Black plays first'}
+        onChange={e => setSetting(SettingKey.STARTING_COLOR, e.target.checked ? Color.WHITE : Color.BLACK)}
         value={settings[SettingKey.STARTING_COLOR]}
-        onChange={e => setSetting(SettingKey.STARTING_COLOR, e.target.value, 10)}
-      >
-        <FormControlLabel value="black" control={<Radio />} label="Black" />
-        <FormControlLabel value="white" control={<Radio />} label="White" />
-      </RadioGroup>
+      />
     </Grid>
     <Grid item>
-      <FormControl>
-        <InputLabel>Move depth</InputLabel>
-        <Input
-          type="number"
+      <FormControl className={classes.moveDepthInput}>
+        <InputLabel htmlFor="settings-moveDepth">Move depth</InputLabel>
+        <Select
+          inputProps={{
+            id: 'settings-moveDepth',
+            name: 'moveDepth',
+          }}
           value={settings[SettingKey.MAX_MOVES]}
           onChange={e => setSetting(SettingKey.MAX_MOVES, parseInt(e.target.value, 10))}
-        />
+        >
+          <MenuItem value={1}>1</MenuItem>
+          <MenuItem value={2}>2</MenuItem>
+        </Select>
       </FormControl>
     </Grid>
   </Grid>
