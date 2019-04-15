@@ -49,7 +49,7 @@ const App = ({ classes }) => (
       <DragDropContextProvider backend={html5Backend}>
         <CssBaseline />
 
-        <Grid container justify="center" className={classes.container}>
+        <Grid container className={classes.container}>
           <Grid item xs={12}>
             <Header />
           </Grid>
@@ -60,8 +60,8 @@ const App = ({ classes }) => (
             <Grid item xs={3}>
               <Toolbar />
             </Grid>
-            <Grid item xs={6} container alignItems="stretch" direction="column">
-              <Grid item container justify="center" className={classes.boardContainer}>
+            <Grid item xs={6} container alignItems="center" direction="column">
+              <Grid item className={classes.boardContainer}>
                 <Board />
               </Grid>
             </Grid>
@@ -74,8 +74,12 @@ const App = ({ classes }) => (
           <Grid item xs={12} align="center" className={classes.pieceSelectorContainer}>
             <PieceSelector color={Color.WHITE} />
           </Grid>
-          <Grid item xs={12}>
-            <Settings />
+          <Grid item xs={12} container>
+            <Grid item xs={3} />
+            <Grid item xs={6}>
+              <Settings />
+            </Grid>
+            <Grid item xs={3} />
           </Grid>
           <Grid item xs={12} align="center">
             <ActionButton />
