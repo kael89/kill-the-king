@@ -1,68 +1,80 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Chasemate UI
 
-## Available Scripts
+Front-end of https://chasemate.app/
 
-In the project directory, you can run:
+Back-end repository: [chasemate](https://github.com/kael89/chasemate)
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Available Moves viewer
+- Move History
+- Board import/export
+- Light/Dark themes
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Installation
 
-### `npm test`
+### Run the app locally
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Add a `.env` file under the project's directory (see `.env.example`). `REACT_APP_API_URL` should be the base url under which our back-end APIs are served
+2.
 
-### `npm run build`
+```
+npm install
+npm run start
+```
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The application should now be running at http://localhost:3000
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## Project structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+chasemate
+├── public
+├── src
+│   ├── components          Presentational React components
+│   ├── containers          React components connected to the Redux state
+│   ├── enums               Enumerable values
+│   ├── helpers             Entity-specific helper methods, one file per entity
+│   ├── images
+│   ├── store               Redux store
+│   │   └── modules         Store ducks, see https://github.com/erikras/ducks-modular-redux
+│   ├── styles              Global stylesheets
+│   ├── themes
+│   ├── api.js              Back-end API
+│   ├── constants.js        Shared constants
+│   ├── index.js
+│   ├── propTypes.js        Shared propTypes
+│   ├── typedef.js          Type definitions for jsDocs
+│   └── utils.js            Generic utilities
+├── .env.example
+├── .eslintignore
+├── .eslintrc
+├── .gitignore
+├── .prettierc
+├── LICENSE
+├── README.md
+├── package-lock.json
+└── package.json
+```
 
-### `npm run eject`
+## Built with
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [ES6](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [React.js](https://reactjs.org/)
+- [Redux.js](https://redux.js.org/)
+- [Create React App](https://github.com/facebook/create-react-app)
+- [Material UI](https://material-ui.com/)
+- [ESLint](https://eslint.org/)
+- [Prettier](https://github.com/prettier/prettier)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Acknowledgments
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Kudos to [Sam Herbert](https://github.com/SamHerbert/SVG-Loaders) for creating the loading spinner used in this project!
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Authors
 
-## Learn More
+**Kostas Karvounis** - [kael89](https://github.com/kael89)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This project is licensed under the GNU General Public License v3.0
