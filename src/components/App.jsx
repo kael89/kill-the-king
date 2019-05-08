@@ -19,6 +19,7 @@ import store from '../store';
 import { withThemeAndStyles } from '../utils';
 import Header from './Header';
 import PieceSelector from './PieceSelector';
+import SocialLinks from './SocialLinks';
 import Toolbar from './Toolbar';
 
 const styles = theme => ({
@@ -81,8 +82,14 @@ const App = ({ classes }) => (
             </Grid>
             <Grid item xs={3} />
           </Grid>
-          <Grid item xs={12} align="center">
-            <ActionButton />
+          <Grid item xs={12} container align="center">
+            <Grid item xs={3} />
+            <Grid item xs={6}>
+              <ActionButton />
+            </Grid>
+            <Grid item xs={3} align="right">
+              <SocialLinks />
+            </Grid>
           </Grid>
         </Grid>
       </DragDropContextProvider>
