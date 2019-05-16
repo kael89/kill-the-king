@@ -10,7 +10,6 @@ import Spinner from './Spinner';
 const Results = ({ error, onMoveSelect, moveData, loading }) => {
   let contents;
   if (error.length > 0) {
-    // TODO format here
     contents = <p>Error: {error}</p>;
   } else if (loading) {
     contents = <Spinner />;
