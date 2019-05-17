@@ -1,13 +1,13 @@
 import { PieceCodes } from '../constants';
 import { PieceType } from '../enums';
-import MoveHelper from '../helpers/MoveHelper';
+import { parseMove } from './move';
 
 /**
  * @param {string} move
  * @returns {Notation}
  */
 export const getNotation = (board, move) => {
-  const { source, target, promotion } = MoveHelper.parse(move);
+  const { source, target, promotion } = parseMove(move);
   const piece = board[source];
   const { type, color } = piece;
 

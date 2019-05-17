@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import DraggablePiece from '../components/DraggablePiece';
-import { MoveHelper } from '../helpers';
+import { moveToString } from '../modules/move';
 import { addPiece, movePiece, removePiece } from '../store/modules/board';
 
 const mapDispatchToProps = dispatch => ({
@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => ({
       return dispatch(addPiece({ ...piece, position: dropData.position }));
     }
 
-    const move = MoveHelper.toString({
+    const move = moveToString({
       source: piece.position,
       target: dropData.position,
     });
