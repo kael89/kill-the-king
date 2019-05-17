@@ -1,4 +1,4 @@
-import { getNotation } from './notation';
+import { getMoveNotation } from './notation';
 
 export const getMoveData = (chessTree, board, boardId) => {
   if (chessTree === null) {
@@ -8,6 +8,6 @@ export const getMoveData = (chessTree, board, boardId) => {
   return Object.keys(chessTree).map(move => ({
     boardId,
     move,
-    notation: getNotation(board, move),
+    notation: getMoveNotation(board, move),
   }));
 };
