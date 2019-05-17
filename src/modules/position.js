@@ -11,16 +11,15 @@ export const columnIdToString = columnId => String.fromCharCode('A'.charCodeAt(0
 export const rowIdToString = rowId => rowId + 1;
 
 /**
- * @param {number} rowId
- * @param {number} columnId
+ * @param {Coordinates}
  * @returns {string}
  */
-export const getPositionName = (rowId, columnId) => `${columnIdToString(columnId)}${rowIdToString(rowId)}`;
+export const coordinatesToPosition = ({ rowId, columnId }) => `${columnIdToString(columnId)}${rowIdToString(rowId)}`;
 
 /**
  *
  * @param {string} position
- * @returns {Position}
+ * @returns {Coordinates}
  */
 export const positionToCoordinates = position => {
   const rowId = position.substr(-1) - 1;

@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { columnIdToString, getPositionName, rowIdToString } from '../modules/position';
+import { columnIdToString, coordinatesToPosition, rowIdToString } from '../modules/position';
 import propTypes from '../propTypes';
 import { withThemeAndStyles } from '../utils';
 import DroppableSquare from './DroppableSquare';
@@ -83,7 +83,7 @@ const Board = ({ board, classes, hint, showHint }) => {
       {rowIds.map(rowId => (
         <Grid key={rowId} item container>
           {columnIds.map(columnId => {
-            const position = getPositionName(rowId, columnId);
+            const position = coordinatesToPosition({ rowId, columnId });
 
             return (
               <DroppableSquare

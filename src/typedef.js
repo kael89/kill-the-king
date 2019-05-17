@@ -6,7 +6,7 @@
  */
 
 /**
- * @typedef {Object} Position
+ * @typedef {Object} Coordinates
  * @property {number} rowId
  * @property {number} columnId
  */
