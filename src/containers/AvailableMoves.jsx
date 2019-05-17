@@ -2,7 +2,7 @@ import { get, isEmpty } from 'lodash';
 import { connect } from 'react-redux';
 
 import AvailableMoves from '../components/AvailableMoves';
-import { MoveDataHelper } from '../helpers';
+import { getMoveData } from '../modules/moveData';
 import { playMove } from '../store/modules/board';
 
 const mapStateToProps = state => {
@@ -16,7 +16,7 @@ const mapStateToProps = state => {
 
   return {
     checkmateFound: !isEmpty(data),
-    moveData: MoveDataHelper.get(chessTree, history[boardId], boardId),
+    moveData: getMoveData(chessTree, history[boardId], boardId),
   };
 };
 

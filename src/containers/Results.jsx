@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import Results from '../components/Results';
-import { MoveDataHelper } from '../helpers';
+import { getMoveData } from '../modules/moveData';
 import { playMove, revertBoard } from '../store/modules/board';
 import { clearMoveHistory } from '../store/modules/moveHistory';
 
@@ -12,7 +12,7 @@ const mapStateToProps = state => {
   return {
     error,
     loading,
-    moveData: data !== null ? MoveDataHelper.get(data, history[resetBoardId], resetBoardId) : null,
+    moveData: data !== null ? getMoveData(data, history[resetBoardId], resetBoardId) : null,
     resetBoardId,
   };
 };

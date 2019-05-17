@@ -1,6 +1,6 @@
-import { getNotation } from '../modules/notation';
+import { getNotation } from './notation';
 
-const get = (chessTree, board, boardId) => {
+export const getMoveData = (chessTree, board, boardId) => {
   if (chessTree === null) {
     return [];
   }
@@ -10,8 +10,4 @@ const get = (chessTree, board, boardId) => {
     move,
     notation: getNotation(board, move),
   }));
-};
-
-export default {
-  get,
 };

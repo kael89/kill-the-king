@@ -34,8 +34,8 @@ chasemate
 │   ├── components          Presentational React components
 │   ├── containers          React components connected to the Redux state
 │   ├── enums               Enumerable values
-│   ├── helpers             Entity-specific helper methods, one file per entity
 │   ├── images
+│   ├── modules             Entity-specific methods
 │   ├── store               Redux store
 │   │   └── modules         Store ducks, see https://github.com/erikras/ducks-modular-redux
 │   ├── styles              Global stylesheets
