@@ -33,17 +33,8 @@ Object.entries(DEFAULT_BOARD_DATA).forEach(([color, pieceData]) => {
 /**
  * @returns {Board}
  */
-export const getDefaultSetup = () => {
+export const getInitialBoardSetup = () => {
   return defaultBoard;
-};
-
-/**
- * @param {Board} board
- * @param {string} position
- * @returns {Piece}
- */
-export const getPiece = (board, position) => {
-  return { ...board[position] };
 };
 
 /**
@@ -73,7 +64,7 @@ export const removePiece = (board, position) => {
  */
 export const movePiece = (board, moveString) => {
   const { source, target } = stringToMove(moveString);
-  const piece = getPiece(board, source);
+  const piece = { ...board[source] };
   piece.position = target;
 
   const newBoard = removePiece(board, source);
@@ -84,4 +75,4 @@ export const movePiece = (board, moveString) => {
  * @param {string} json
  * @returns {string} The error message, or empty string if no errors were detected
  */
-export const validateJson = json => (isValidJson(json) ? '' : 'Invalid data');
+export const validateBoardJson = json => (isValidJson(json) ? '' : 'Invalid data');

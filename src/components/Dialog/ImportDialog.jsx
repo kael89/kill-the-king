@@ -2,7 +2,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { validateJson } from '../../modules/board';
+import { validateBoardJson } from '../../modules/board';
 import CodeInput from '../CodeInput';
 
 class ImportDialog extends React.Component {
@@ -20,7 +20,7 @@ class ImportDialog extends React.Component {
 
   handleInputChange(input) {
     this.setState({
-      error: input.trim() ? validateJson(input) : '',
+      error: input.trim() ? validateBoardJson(input) : '',
       input,
     });
   }

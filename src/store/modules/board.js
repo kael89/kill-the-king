@@ -5,7 +5,7 @@ import { APP_NAME } from '../../constants';
 import { Dialog } from '../../enums';
 import {
   addPiece as addPieceHelper,
-  getDefaultSetup,
+  getInitialBoardSetup,
   movePiece as movePieceHelper,
   removePiece as removePieceHelper,
 } from '../../modules/board';
@@ -66,7 +66,7 @@ export default function reducer(board = defaultState, action) {
     case SET_RESET_BOARD_ID:
       return { ...board, resetBoardId: board.history.length - 1 };
     case SETUP_DEFAULT_BOARD: {
-      const history = [...board.history, getDefaultSetup()];
+      const history = [...board.history, getInitialBoardSetup()];
       return { ...board, history };
     }
     default:
@@ -144,7 +144,7 @@ const shouldConfirmChange = (state, action) => {
       return fetchedDataExist && !isEqual(piece, currentBoard[piece.position]);
     }
     case SETUP_DEFAULT_BOARD: {
-      return fetchedDataExist && !isEqual(getDefaultSetup(), currentBoard);
+      return fetchedDataExist && !isEqual(getInitialBoardSetup(), currentBoard);
     }
     default:
       return fetchedDataExist;
