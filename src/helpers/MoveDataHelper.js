@@ -1,4 +1,4 @@
-import { NotationHelper } from '.';
+import { getNotation } from '../modules/notation';
 
 const get = (chessTree, board, boardId) => {
   if (chessTree === null) {
@@ -8,7 +8,7 @@ const get = (chessTree, board, boardId) => {
   return Object.keys(chessTree).map(move => ({
     boardId,
     move,
-    notation: NotationHelper.getNotation(board, move),
+    notation: getNotation(board, move),
   }));
 };
 

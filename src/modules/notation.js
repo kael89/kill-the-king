@@ -1,12 +1,12 @@
 import { PieceCodes } from '../constants';
 import { PieceType } from '../enums';
-import MoveHelper from './MoveHelper';
+import MoveHelper from '../helpers/MoveHelper';
 
 /**
  * @param {string} move
  * @returns {Notation}
  */
-const getNotation = (board, move) => {
+export const getNotation = (board, move) => {
   const { source, target, promotion } = MoveHelper.parse(move);
   const piece = board[source];
   const { type, color } = piece;
@@ -16,8 +16,4 @@ const getNotation = (board, move) => {
     text: target.toLowerCase() + (promotion ? '=' : ''),
     promotionCode: PieceCodes[color][PieceType.fromPromotion(promotion)],
   };
-};
-
-export default {
-  getNotation,
 };
