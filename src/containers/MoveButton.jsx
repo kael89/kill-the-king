@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import MoveButton from '../components/MoveButton';
-import { BoardHelper } from '../helpers';
+import { movePiece } from '../modules/board';
 import { setHint } from '../store/modules/board';
 import { hideBoardHint, showBoardHint } from '../store/modules/ui';
 
@@ -15,7 +15,7 @@ const mapDispatchToProps = dispatch => ({
       return;
     }
 
-    const hint = BoardHelper.movePiece(board, move);
+    const hint = movePiece(board, move);
     dispatch(setHint(hint));
     dispatch(showBoardHint());
   },

@@ -3,7 +3,12 @@ import nth from 'lodash/nth';
 
 import { APP_NAME } from '../../constants';
 import { Dialog } from '../../enums';
-import { BoardHelper } from '../../helpers';
+import {
+  addPiece as addPieceHelper,
+  getDefaultSetup,
+  movePiece as movePieceHelper,
+  removePiece as removePieceHelper,
+} from '../../modules/board';
 import { showConfirmationDialog } from './confirmationDialog';
 import { addMove } from './moveHistory';
 import { clearResults } from './results';
@@ -32,7 +37,7 @@ export default function reducer(board = defaultState, action) {
 
   switch (action.type) {
     case ADD_PIECE: {
-      const history = [...board.history, BoardHelper.addPiece(currentBoard, action.piece)];
+      const history = [...board.history, addPieceHelper(currentBoard, action.piece)];
       return { ...board, history };
     }
     case CLEAR_BOARD: {
@@ -45,11 +50,11 @@ export default function reducer(board = defaultState, action) {
     }
     case MOVE_PIECE:
     case PLAY_MOVE: {
-      const history = [...board.history, BoardHelper.movePiece(currentBoard, action.move)];
+      const history = [...board.history, movePieceHelper(currentBoard, action.move)];
       return { ...board, history };
     }
     case REMOVE_PIECE: {
-      const history = [...board.history, BoardHelper.removePiece(currentBoard, action.position)];
+      const history = [...board.history, removePieceHelper(currentBoard, action.position)];
       return { ...board, history };
     }
     case REVERT_BOARD: {
@@ -61,7 +66,7 @@ export default function reducer(board = defaultState, action) {
     case SET_RESET_BOARD_ID:
       return { ...board, resetBoardId: board.history.length - 1 };
     case SETUP_DEFAULT_BOARD: {
-      const history = [...board.history, BoardHelper.getDefaultSetup()];
+      const history = [...board.history, getDefaultSetup()];
       return { ...board, history };
     }
     default:
@@ -139,7 +144,7 @@ const shouldConfirmChange = (state, action) => {
       return fetchedDataExist && !isEqual(piece, currentBoard[piece.position]);
     }
     case SETUP_DEFAULT_BOARD: {
-      return fetchedDataExist && !isEqual(BoardHelper.getDefaultSetup(), currentBoard);
+      return fetchedDataExist && !isEqual(getDefaultSetup(), currentBoard);
     }
     default:
       return fetchedDataExist;

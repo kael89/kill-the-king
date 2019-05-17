@@ -1,6 +1,6 @@
 import { Color, PieceType } from '../enums';
+import MoveHelper from '../helpers/MoveHelper';
 import { isValidJson } from '../utils';
-import MoveHelper from './MoveHelper';
 
 const DEFAULT_BOARD_DATA = {
   [Color.WHITE]: {
@@ -33,7 +33,7 @@ Object.entries(DEFAULT_BOARD_DATA).forEach(([color, pieceData]) => {
 /**
  * @returns {Board}
  */
-const getDefaultSetup = () => {
+export const getDefaultSetup = () => {
   return defaultBoard;
 };
 
@@ -42,7 +42,7 @@ const getDefaultSetup = () => {
  * @param {string} position
  * @returns {Piece}
  */
-const getPiece = (board, position) => {
+export const getPiece = (board, position) => {
   return { ...board[position] };
 };
 
@@ -51,7 +51,7 @@ const getPiece = (board, position) => {
  * @param {Piece} piece
  * @returns {Board}
  */
-const addPiece = (board, piece) => {
+export const addPiece = (board, piece) => {
   return { ...board, [piece.position]: piece };
 };
 
@@ -60,7 +60,7 @@ const addPiece = (board, piece) => {
  * @param {string} position
  * @returns {Board}
  */
-const removePiece = (board, position) => {
+export const removePiece = (board, position) => {
   const newBoard = { ...board };
   delete newBoard[position];
   return newBoard;
@@ -71,7 +71,7 @@ const removePiece = (board, position) => {
  * @param {string} moveString
  * @returns {Board}
  */
-const movePiece = (board, moveString) => {
+export const movePiece = (board, moveString) => {
   const { source, target } = MoveHelper.parse(moveString);
   const piece = getPiece(board, source);
   piece.position = target;
@@ -84,13 +84,4 @@ const movePiece = (board, moveString) => {
  * @param {string} json
  * @returns {string} The error message, or empty string if no errors were detected
  */
-const validateJson = json => (isValidJson(json) ? '' : 'Invalid data');
-
-export default {
-  addPiece,
-  getDefaultSetup,
-  getPiece,
-  movePiece,
-  removePiece,
-  validateJson,
-};
+export const validateJson = json => (isValidJson(json) ? '' : 'Invalid data');
