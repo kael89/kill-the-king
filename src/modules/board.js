@@ -1,6 +1,6 @@
 import { Color, PieceType } from '../enums';
 import { isValidJson } from '../utils';
-import { parseMove } from './move';
+import { stringToMove } from './move';
 
 const DEFAULT_BOARD_DATA = {
   [Color.WHITE]: {
@@ -72,7 +72,7 @@ export const removePiece = (board, position) => {
  * @returns {Board}
  */
 export const movePiece = (board, moveString) => {
-  const { source, target } = parseMove(moveString);
+  const { source, target } = stringToMove(moveString);
   const piece = getPiece(board, source);
   piece.position = target;
 

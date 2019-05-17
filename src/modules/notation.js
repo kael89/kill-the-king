@@ -1,6 +1,6 @@
 import { PieceCodes } from '../constants';
 import { PieceType } from '../enums';
-import { parseMove } from './move';
+import { stringToMove } from './move';
 
 /**
  * @param {Board} board
@@ -8,7 +8,7 @@ import { parseMove } from './move';
  * @returns {Notation}
  */
 export const getMoveNotation = (board, move) => {
-  const { source, target, promotion } = parseMove(move);
+  const { source, target, promotion } = stringToMove(move);
   const piece = board[source];
   const { type, color } = piece;
 
