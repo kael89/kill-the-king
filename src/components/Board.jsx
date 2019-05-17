@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { PositionHelper } from '../helpers';
+import { columnIdToString, getPositionName, rowIdToString } from '../modules/position';
 import propTypes from '../propTypes';
 import { withThemeAndStyles } from '../utils';
 import DroppableSquare from './DroppableSquare';
@@ -46,7 +46,7 @@ const BasicRowRuler = ({ classes }) => (
   <Grid container direction="column" className={classes.rowRuler}>
     {rowIds.map(rowId => (
       <Grid key={rowId} className={classes.rowRulerItem}>
-        {PositionHelper.rowIdToString(rowId)}
+        {rowIdToString(rowId)}
       </Grid>
     ))}
   </Grid>
@@ -62,7 +62,7 @@ const BasicColumnRuler = ({ classes }) => (
   <Grid container>
     {columnIds.map(columnId => (
       <Grid key={columnId} className={classnames(classes.ruler, classes.columnRuler)}>
-        {PositionHelper.columnIdToString(columnId)}
+        {columnIdToString(columnId)}
       </Grid>
     ))}
   </Grid>
@@ -83,7 +83,7 @@ const Board = ({ board, classes, hint, showHint }) => {
       {rowIds.map(rowId => (
         <Grid key={rowId} item container>
           {columnIds.map(columnId => {
-            const position = PositionHelper.getPositionName(rowId, columnId);
+            const position = getPositionName(rowId, columnId);
 
             return (
               <DroppableSquare
