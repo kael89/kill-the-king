@@ -9,8 +9,9 @@
     "jest": true
   },
   "rules": {
-    "no-continue": 0,
-    "no-plusplus": 0,
+    "no-continue": "off",
+    "no-plusplus": "off",
+    "import/prefer-default-export": "off",
     "prettier/prettier": "error",
     "simple-import-sort/sort": "error"
   }

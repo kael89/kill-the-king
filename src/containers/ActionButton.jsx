@@ -2,13 +2,13 @@ import last from 'lodash/last';
 import { connect } from 'react-redux';
 
 import ActionButton from '../components/ActionButton';
-import { ApiHelper } from '../helpers';
+import { maxMovesToDepth } from '../modules/api';
 import { fetchForcedMateTree } from '../store/modules/results';
 
 const mapStateToProps = state => ({
   board: Object.values(last(state.board.history)),
   startingColor: state.settings.startingColor,
-  depth: ApiHelper.maxMovesToDepth(state.settings.maxMoves),
+  depth: maxMovesToDepth(state.settings.maxMoves),
 });
 
 const mapDispatchToProps = dispatch => ({
