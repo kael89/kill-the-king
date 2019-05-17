@@ -17,8 +17,24 @@ const rowIdToString = rowId => rowId + 1;
  */
 const getPositionName = (rowId, columnId) => `${columnIdToString(columnId)}${rowIdToString(rowId)}`;
 
+/**
+ *
+ * @param {string} position
+ * @returns {Position}
+ */
+const positionToCoordinates = position => {
+  const rowId = position.substr(-1) - 1;
+  const columnId = position.charCodeAt(0) - 'A'.charCodeAt(0);
+
+  return {
+    rowId,
+    columnId,
+  };
+};
+
 export default {
   columnIdToString,
-  rowIdToString,
   getPositionName,
+  positionToCoordinates,
+  rowIdToString,
 };

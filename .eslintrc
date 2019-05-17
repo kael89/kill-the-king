@@ -5,9 +5,11 @@
   "env": {
     "node": true,
     "es6": true,
-    "browser": true
+    "browser": true,
+    "jest": true
   },
   "rules": {
+    "no-continue": 0,
     "no-plusplus": 0,
     "prettier/prettier": "error",
     "simple-import-sort/sort": "error"

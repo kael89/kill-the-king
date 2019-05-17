@@ -2,6 +2,8 @@ import { Color, PieceType, SettingKey, Theme } from './enums';
 
 export const APP_NAME = 'chasemate';
 
+export const BOARD_SIZE = 8;
+
 export const PieceCodes = {
   [Color.BLACK]: {
     [PieceType.BISHOP]: '\u265D',

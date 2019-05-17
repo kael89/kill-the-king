@@ -6,6 +6,12 @@
  */
 
 /**
+ * @typedef {Object} Position
+ * @property {number} rowId
+ * @property {number} columnId
+ */
+
+/**
  * @typedef {Object.<string, Piece>} Board
  */
 
