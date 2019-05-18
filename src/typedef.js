@@ -41,3 +41,10 @@
  * @property {string} position
  * @property {string} color
  */
+
+/**
+ * @typedef {Object} Settings
+ * @property {string} defaultTheme
+ * @property {number} maxMoves
+ * @property {startingColor} string
+ */
