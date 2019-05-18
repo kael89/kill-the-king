@@ -42,7 +42,7 @@ chasemate
 │   ├── constants.js        Shared constants
 │   ├── index.js
 │   ├── propTypes.js        Shared propTypes
-│   ├── typedef.js          Type definitions for jsDocs
+│   ├── typedef.js          jsDoc type definitions
 │   └── utils.js            Generic utilities
 ├── .env.example
 ├── .eslintignore
