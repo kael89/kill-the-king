@@ -50,5 +50,9 @@
  */
 
 /**
+ * @typedef {('dark'|'light')} ThemeName
+ */
+
+/**
  * @typedef {('game'|'forcedMate')} TreeType
  */
