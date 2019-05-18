@@ -2,7 +2,7 @@ const BLACK = 'black';
 const WHITE = 'white';
 
 /**
- * @enum {string}
+ * @enum {Color}
  */
 export const COLOR = {
   BLACK,

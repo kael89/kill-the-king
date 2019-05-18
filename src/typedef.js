@@ -3,6 +3,10 @@
  */
 
 /**
+ * @typedef {('black'|'white')} Color
+ */
+
+/**
  * @typedef {Object} Coordinates
  * @property {number} rowId
  * @property {number} columnId
@@ -12,7 +16,7 @@
  * @typedef {Object} GetTreeInput
  * @property {string} type
  * @property {Board} board
- * @property {string} startingColor
+ * @property {Color} startingColor
  * @property {number} depth
  */
 
@@ -37,14 +41,18 @@
 
 /**
  * @typedef {Object} Piece
- * @property {string} type
+ * @property {PieceType} type
  * @property {string} position
- * @property {string} color
+ * @property {Color} color
+ */
+
+/**
+ * @typedef {('bishop'|'king'|'knight'|'pawn'|'queen'|'rook')} PieceType
  */
 
 /**
  * @typedef {Object} Settings
  * @property {string} defaultTheme
  * @property {number} maxMoves
- * @property {startingColor} string
+ * @property {Color} startingColor
  */

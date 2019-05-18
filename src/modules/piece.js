@@ -8,7 +8,7 @@ const ROOK = 'rook';
 /**
  * Piece types sorted by their power (ascending)
  *
- * @enum {string}
+ * @enum {PieceType}
  */
 export const PIECE_TYPE = {
   PAWN,
