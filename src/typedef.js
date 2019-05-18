@@ -33,3 +33,11 @@
  * @property {string} code
  * @property {string} text
  */
+
+/**
+ * @typedef {Object} GetTreeInput
+ * @property {string} type
+ * @property {Board} board
+ * @property {string} startingColor
+ * @property {number} depth
+ */

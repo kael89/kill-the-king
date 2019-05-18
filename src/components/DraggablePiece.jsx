@@ -1,9 +1,11 @@
 import React from 'react';
 import { DragSource } from 'react-dnd';
 
-import Draggable from '../enums/Draggable';
+import { DRAGGABLE } from '../modules/ui';
 import { withThemeAndStyles } from '../utils';
 import Piece from './Piece';
+
+const { PIECE } = DRAGGABLE;
 
 const pieceSource = {
   beginDrag: ({ piece }) => piece,
@@ -28,4 +30,4 @@ const DraggablePiece = ({ classes, connectDragSource, isDragging, piece, ...othe
     </div>,
   );
 
-export default DragSource(Draggable.PIECE, pieceSource, collect)(withThemeAndStyles(DraggablePiece, styles));
+export default DragSource(PIECE, pieceSource, collect)(withThemeAndStyles(DraggablePiece, styles));

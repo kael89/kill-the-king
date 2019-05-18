@@ -1,6 +1,6 @@
 import { PieceCodes } from '../constants';
-import { PieceType } from '../enums';
 import { stringToMove } from './move';
+import { parsePromotion } from './piece';
 
 /**
  * @param {Board} board
@@ -15,6 +15,6 @@ export const getMoveNotation = (board, move) => {
   return {
     code: PieceCodes[color][type],
     text: target.toLowerCase() + (promotion ? '=' : ''),
-    promotionCode: PieceCodes[color][PieceType.fromPromotion(promotion)],
+    promotionCode: PieceCodes[color][parsePromotion(promotion)],
   };
 };

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import DraggablePiece from '../containers/DraggablePiece';
-import { PieceType } from '../enums';
+import { PIECE_TYPE } from '../modules/piece';
 import propTypes from '../propTypes';
 import { withThemeAndStyles } from '../utils';
 
@@ -15,7 +15,7 @@ const styles = {
 
 const PieceSelector = ({ classes, color, theme }) => (
   <Paper elevation={1} className={classes.container}>
-    {PieceType.allByPower.map(type => (
+    {Object.values(PIECE_TYPE).map(type => (
       <DraggablePiece key={type} hoverColor={theme.piece.hovered} piece={{ color, type, position: '' }} />
     ))}
   </Paper>

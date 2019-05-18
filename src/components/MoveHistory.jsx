@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import MoveButton from '../containers/MoveButton';
-import { Color } from '../enums';
+import { COLOR } from '../modules/chess';
 import propTypes from '../propTypes';
 import { withThemeAndStyles } from '../utils';
 import ExpansionPanel from './ExpansionPanel';
+
+const { BLACK } = COLOR;
 
 const sharedPropTypes = {
   moveData: PropTypes.arrayOf(
@@ -64,7 +66,7 @@ const sanitizeMoveData = (moveData, startingColor) => {
   const movePlaceholder = { boardId: -1, move: '', notation: { code: '', text: '' } };
 
   const result = [...moveData];
-  if (moveData.length > 0 && startingColor === Color.BLACK) {
+  if (moveData.length > 0 && startingColor === BLACK) {
     result.unshift(movePlaceholder);
   }
   if (moveData.length % 2 === 1) {

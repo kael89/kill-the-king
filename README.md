@@ -33,14 +33,12 @@ chasemate
 ├── src
 │   ├── components          Presentational React components
 │   ├── containers          React components connected to the Redux state
-│   ├── enums               Enumerable values
 │   ├── images
 │   ├── modules             Entity-specific methods
 │   ├── store               Redux store
 │   │   └── modules         Store ducks, see https://github.com/erikras/ducks-modular-redux
 │   ├── styles              Global stylesheets
 │   ├── themes
-│   ├── api.js              Back-end API
 │   ├── constants.js        Shared constants
 │   ├── index.js
 │   ├── propTypes.js        Shared propTypes

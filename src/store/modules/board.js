@@ -2,13 +2,13 @@ import { isEqual, last } from 'lodash';
 import nth from 'lodash/nth';
 
 import { APP_NAME } from '../../constants';
-import { Dialog } from '../../enums';
 import {
   addPiece as addPieceHelper,
   getInitialBoardSetup,
   movePiece as movePieceHelper,
   removePiece as removePieceHelper,
 } from '../../modules/board';
+import { DIALOG } from '../../modules/ui';
 import { showConfirmationDialog } from './confirmationDialog';
 import { addMove } from './moveHistory';
 import { clearResults } from './results';
@@ -153,7 +153,7 @@ const shouldConfirmChange = (state, action) => {
 
 export const pieceChangeMiddleware = store => next => action => {
   const resultingAction = shouldConfirmChange(store.getState(), action)
-    ? showConfirmationDialog(Dialog.PIECE_CHANGE_CONFIRMATION, () => {
+    ? showConfirmationDialog(DIALOG.PIECE_CHANGE_CONFIRMATION, () => {
         next(clearResults());
         next(action);
       })

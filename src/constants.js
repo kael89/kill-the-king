@@ -1,30 +1,28 @@
-import { Color, PieceType, SettingKey, Theme } from './enums';
+import { COLOR } from './modules/chess';
+import { PIECE_TYPE } from './modules/piece';
+
+const { BLACK, WHITE } = COLOR;
+const { PAWN, KNIGHT, BISHOP, ROOK, KING, QUEEN } = PIECE_TYPE;
 
 export const APP_NAME = 'chasemate';
 
 export const BOARD_SIZE = 8;
 
 export const PieceCodes = {
-  [Color.BLACK]: {
-    [PieceType.BISHOP]: '\u265D',
-    [PieceType.KING]: '\u265A',
-    [PieceType.KNIGHT]: '\u265E',
-    [PieceType.PAWN]: '\u265F',
-    [PieceType.QUEEN]: '\u265B',
-    [PieceType.ROOK]: '\u265C',
+  [BLACK]: {
+    [BISHOP]: '\u265D',
+    [KING]: '\u265A',
+    [KNIGHT]: '\u265E',
+    [PAWN]: '\u265F',
+    [QUEEN]: '\u265B',
+    [ROOK]: '\u265C',
   },
-  [Color.WHITE]: {
-    [PieceType.BISHOP]: '\u2657',
-    [PieceType.KING]: '\u2654',
-    [PieceType.KNIGHT]: '\u2658',
-    [PieceType.PAWN]: '\u2659',
-    [PieceType.QUEEN]: '\u2655',
-    [PieceType.ROOK]: '\u2656',
+  [WHITE]: {
+    [BISHOP]: '\u2657',
+    [KING]: '\u2654',
+    [KNIGHT]: '\u2658',
+    [PAWN]: '\u2659',
+    [QUEEN]: '\u2655',
+    [ROOK]: '\u2656',
   },
-};
-
-export const DefaultSettings = {
-  [SettingKey.DEFAULT_THEME]: Theme.LIGHT,
-  [SettingKey.MAX_MOVES]: 2,
-  [SettingKey.STARTING_COLOR]: Color.WHITE,
 };

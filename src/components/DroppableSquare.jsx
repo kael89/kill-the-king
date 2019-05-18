@@ -2,7 +2,9 @@ import React from 'react';
 import { DropTarget } from 'react-dnd';
 
 import Square from '../containers/Square';
-import { Draggable } from '../enums';
+import { DRAGGABLE } from '../modules/ui';
+
+const { PIECE } = DRAGGABLE;
 
 const squareTarget = {
   drop: ({ position }) => ({ position }),
@@ -22,4 +24,4 @@ const DroppableSquare = ({ connectDropTarget, isOver, position, ...squareProps }
     </div>,
   );
 
-export default DropTarget(Draggable.PIECE, squareTarget, collect)(DroppableSquare);
+export default DropTarget(PIECE, squareTarget, collect)(DroppableSquare);

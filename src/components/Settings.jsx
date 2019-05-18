@@ -2,9 +2,12 @@ import { FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, Swit
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Color, SettingKey } from '../enums';
+import { COLOR } from '../modules/chess';
+import { SETTING_KEY } from '../modules/settings';
 import propTypes from '../propTypes';
 import { withThemeAndStyles } from '../utils';
+
+const { BLACK, WHITE } = COLOR;
 
 const styles = theme => ({
   container: {
@@ -19,11 +22,11 @@ const Settings = ({ classes, settings, setSetting }) => (
   <Grid container justify="space-around" className={classes.container}>
     <Grid item>
       <FormControlLabel
-        checked={settings[SettingKey.STARTING_COLOR] === Color.WHITE}
+        checked={settings[SETTING_KEY.STARTING_COLOR] === WHITE}
         control={<Switch />}
-        label={settings[SettingKey.STARTING_COLOR] === Color.WHITE ? 'White plays first' : 'Black plays first'}
-        onChange={e => setSetting(SettingKey.STARTING_COLOR, e.target.checked ? Color.WHITE : Color.BLACK)}
-        value={settings[SettingKey.STARTING_COLOR]}
+        label={settings[SETTING_KEY.STARTING_COLOR] === WHITE ? 'White plays first' : 'Black plays first'}
+        onChange={e => setSetting(SETTING_KEY.STARTING_COLOR, e.target.checked ? WHITE : BLACK)}
+        value={settings[SETTING_KEY.STARTING_COLOR]}
       />
     </Grid>
     <Grid item>
@@ -34,8 +37,8 @@ const Settings = ({ classes, settings, setSetting }) => (
             id: 'settings-moveDepth',
             name: 'moveDepth',
           }}
-          value={settings[SettingKey.MAX_MOVES]}
-          onChange={e => setSetting(SettingKey.MAX_MOVES, parseInt(e.target.value, 10))}
+          value={settings[SETTING_KEY.MAX_MOVES]}
+          onChange={e => setSetting(SETTING_KEY.MAX_MOVES, parseInt(e.target.value, 10))}
         >
           <MenuItem value={1}>1</MenuItem>
           <MenuItem value={2}>2</MenuItem>

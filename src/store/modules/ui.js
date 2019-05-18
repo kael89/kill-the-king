@@ -1,5 +1,5 @@
-import { APP_NAME, DefaultSettings } from '../../constants';
-import { SettingKey } from '../../enums';
+import { APP_NAME } from '../../constants';
+import { DEFAULT_SETTINGS, SETTING_KEY } from '../../modules/settings';
 import themes from '../../themes';
 
 /* Actions */
@@ -9,7 +9,7 @@ const TOGGLE_DIALOG = `${APP_NAME}/ui/TOGGLE_DIALOG`;
 
 const defaultState = {
   hintVisible: false,
-  theme: themes[DefaultSettings[SettingKey.DEFAULT_THEME]],
+  theme: themes[DEFAULT_SETTINGS[SETTING_KEY.DEFAULT_THEME]],
   visibleDialog: '',
 };
 

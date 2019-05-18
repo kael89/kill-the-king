@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import DraggablePiece from '../containers/DraggablePiece';
-import { Color } from '../enums';
+import { COLOR } from '../modules/chess';
 import propTypes from '../propTypes';
 import { withThemeAndStyles } from '../utils';
 
+const { BLACK, WHITE } = COLOR;
+
 export const SQUARE_SIZE = 70;
 
-const getSquareColor = (rowId, columnId) => ((rowId + columnId) % 2 === 0 ? Color.BLACK : Color.WHITE);
+const getSquareColor = (rowId, columnId) => ((rowId + columnId) % 2 === 0 ? BLACK : WHITE);
 
 const styles = theme => ({
   container: {
@@ -45,7 +47,7 @@ class Square extends React.Component {
 
   render() {
     const { classes, rowId, columnId, hinted, piece, selected } = this.props;
-    const colorClass = getSquareColor(rowId, columnId) === Color.BLACK ? 'black' : 'white';
+    const colorClass = getSquareColor(rowId, columnId) === BLACK ? 'black' : 'white';
 
     return (
       <div className={classnames(classes.container, classes[colorClass], { [classes.selected]: selected })}>

@@ -13,7 +13,8 @@ import MoveHistory from '../containers/MoveHistory';
 import Results from '../containers/Results';
 import Settings from '../containers/Settings';
 import ThemeProvider from '../containers/ThemeProvider';
-import { Color, Dialog } from '../enums';
+import { COLOR } from '../modules/chess';
+import { DIALOG } from '../modules/ui';
 import propTypes from '../propTypes';
 import store from '../store';
 import { withThemeAndStyles } from '../utils';
@@ -21,6 +22,9 @@ import Header from './Header';
 import PieceSelector from './PieceSelector';
 import SocialLinks from './SocialLinks';
 import Toolbar from './Toolbar';
+
+const { BLACK, WHITE } = COLOR;
+const { EXPORT, IMPORT, PIECE_CHANGE_CONFIRMATION } = DIALOG;
 
 const styles = theme => ({
   container: {
@@ -55,7 +59,7 @@ const App = ({ classes }) => (
             <Header />
           </Grid>
           <Grid item xs={12} align="center" className={classes.pieceSelectorContainer}>
-            <PieceSelector color={Color.BLACK} />
+            <PieceSelector color={BLACK} />
           </Grid>
           <Grid item xs={12} container>
             <Grid item xs={3}>
@@ -73,7 +77,7 @@ const App = ({ classes }) => (
             </Grid>
           </Grid>
           <Grid item xs={12} align="center" className={classes.pieceSelectorContainer}>
-            <PieceSelector color={Color.WHITE} />
+            <PieceSelector color={WHITE} />
           </Grid>
           <Grid item xs={12} container>
             <Grid item xs={3} />
@@ -93,11 +97,11 @@ const App = ({ classes }) => (
           </Grid>
         </Grid>
       </DragDropContextProvider>
-      <ConfirmationDialog id={Dialog.PIECE_CHANGE_CONFIRMATION} title="Warning">
+      <ConfirmationDialog id={PIECE_CHANGE_CONFIRMATION} title="Warning">
         This will clear current results. Continue?
       </ConfirmationDialog>
-      <ExportDialog id={Dialog.EXPORT} PaperProps={{ className: classes.dialog }} />
-      <ImportDialog id={Dialog.IMPORT} PaperProps={{ className: classnames(classes.dialog, classes.importDialog) }} />
+      <ExportDialog id={EXPORT} PaperProps={{ className: classes.dialog }} />
+      <ImportDialog id={IMPORT} PaperProps={{ className: classnames(classes.dialog, classes.importDialog) }} />
     </ThemeProvider>
   </Provider>
 );

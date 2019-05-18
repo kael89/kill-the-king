@@ -1,8 +1,15 @@
-import { Theme } from '../enums';
 import dark from './dark.json';
 import light from './light.json';
 
+const DARK = 'dark';
+const LIGHT = 'light';
+
+export const THEME_NAME = {
+  DARK,
+  LIGHT,
+};
+
 export default {
-  [Theme.DARK]: dark,
-  [Theme.LIGHT]: light,
+  [DARK]: dark,
+  [LIGHT]: light,
 };

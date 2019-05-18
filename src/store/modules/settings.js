@@ -1,10 +1,11 @@
-import { APP_NAME, DefaultSettings } from '../../constants';
+import { APP_NAME } from '../../constants';
+import { DEFAULT_SETTINGS } from '../../modules/settings';
 
 /* Actions */
 const SET_SETTING = `${APP_NAME}/settings/SET_SETTING`;
 
 /* Reducer */
-export default function reducer(settings = DefaultSettings, action) {
+export default function reducer(settings = DEFAULT_SETTINGS, action) {
   switch (action.type) {
     case SET_SETTING: {
       const { setting } = action;
