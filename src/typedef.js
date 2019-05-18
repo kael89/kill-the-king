@@ -13,14 +13,6 @@
  */
 
 /**
- * @typedef {Object} GetTreeInput
- * @property {string} type
- * @property {Board} board
- * @property {Color} startingColor
- * @property {number} depth
- */
-
-/**
  * @typedef {Object} Move
  * @property {string} source
  * @property {string} target
@@ -55,4 +47,8 @@
  * @property {string} defaultTheme
  * @property {number} maxMoves
  * @property {Color} startingColor
+ */
+
+/**
+ * @typedef {('game'|'forcedMate')} TreeType
  */
