@@ -1,8 +1,5 @@
 /**
- * @typedef {Object} Piece
- * @property {string} type
- * @property {string} position
- * @property {string} color
+ * @typedef {Object.<string, Piece>} Board
  */
 
 /**
@@ -12,7 +9,11 @@
  */
 
 /**
- * @typedef {Object.<string, Piece>} Board
+ * @typedef {Object} GetTreeInput
+ * @property {string} type
+ * @property {Board} board
+ * @property {string} startingColor
+ * @property {number} depth
  */
 
 /**
@@ -35,9 +36,8 @@
  */
 
 /**
- * @typedef {Object} GetTreeInput
+ * @typedef {Object} Piece
  * @property {string} type
- * @property {Board} board
- * @property {string} startingColor
- * @property {number} depth
+ * @property {string} position
+ * @property {string} color
  */
