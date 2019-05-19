@@ -12,7 +12,7 @@ const styles = {
 
 const Move = ({ classes, notation }) => (
   <Typography>
-    <span className={classes.icon}>{notation.code}</span>
+    <span className={classes.icon}>{notation.pieceCode}</span>
     {notation.text}
     {notation.promotionCode ? <span className={classes.icon}>{notation.promotionCode}</span> : null}
   </Typography>

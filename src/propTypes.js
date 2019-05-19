@@ -20,13 +20,15 @@ export default {
       boardId: PropTypes.number.isRequired,
       move: PropTypes.string.isRequired,
       notation: PropTypes.shape({
-        code: PropTypes.string.isRequired,
+        pieceCode: PropTypes.string.isRequired,
+        promotionCode: PropTypes.string,
         text: PropTypes.string.isRequired,
       }).isRequired,
     }),
   ),
   notation: PropTypes.shape({
-    code: PropTypes.string.isRequired,
+    pieceCode: PropTypes.string.isRequired,
+    promotionCode: PropTypes.string,
     text: PropTypes.string.isRequired,
   }),
   piece: sharedPropTypes.piece,

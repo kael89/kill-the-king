@@ -22,12 +22,13 @@
  * @typedef {Object} MoveData
  * @property {number} boardId
  * @property {string} move
- * @property {notation} string
+ * @property {Notation} string
  */
 
 /**
  * @typedef {Object} Notation
- * @property {string} code
+ * @property {string} pieceCode
+ * @property {string} promotionCode
  * @property {string} text
  */
 

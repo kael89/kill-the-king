@@ -63,7 +63,7 @@ BaseMoveRow.propTypes = {
 const MoveRow = withThemeAndStyles(BaseMoveRow, styles);
 
 const sanitizeMoveData = (moveData, startingColor) => {
-  const movePlaceholder = { boardId: -1, move: '', notation: { code: '', text: '' } };
+  const movePlaceholder = { boardId: -1, move: '', notation: { pieceCode: '', text: '' } };
 
   const result = [...moveData];
   if (moveData.length > 0 && startingColor === BLACK) {

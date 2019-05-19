@@ -13,8 +13,8 @@ export const getMoveNotation = (board, move) => {
   const { type, color } = piece;
 
   return {
-    code: PieceCodes[color][type],
-    text: target.toLowerCase() + (promotion ? '=' : ''),
+    pieceCode: PieceCodes[color][type],
     promotionCode: PieceCodes[color][parsePromotion(promotion)],
+    text: target.toLowerCase() + (promotion ? '=' : ''),
   };
 };
