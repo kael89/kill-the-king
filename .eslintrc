@@ -1,12 +1,14 @@
 {
   "parser": "babel-eslint",
   "extends": ["airbnb", "prettier", "prettier/react"],
-  "plugins": ["react", "prettier", "simple-import-sort"],
+  "plugins": ["cypress", "react", "prettier", "simple-import-sort"],
   "env": {
     "node": true,
     "es6": true,
     "browser": true,
-    "jest": true
+    "jest": true,
+    "mocha": true,
+    "cypress/globals": true
   },
   "rules": {
     "no-continue": "off",
