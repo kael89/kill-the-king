@@ -17,9 +17,9 @@ function collect(connect, monitor) {
   };
 }
 
-const DroppableSquare = ({ connectDropTarget, isOver, position, ...squareProps }) =>
+const DroppableSquare = ({ connectDropTarget, isOver, ...squareProps }) =>
   connectDropTarget(
-    <div>
+    <div data-testid="droppable-square">
       <Square {...squareProps} />
     </div>,
   );

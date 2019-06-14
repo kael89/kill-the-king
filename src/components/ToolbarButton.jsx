@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const ToolbarButton = ({ icon, onClick, text }) => (
-  <ListItem button onClick={onClick}>
+  <ListItem data-testid="toolbar-button" button onClick={onClick}>
     <ListItemIcon>{icon}</ListItemIcon>
     <ListItemText primary={text} />
   </ListItem>
