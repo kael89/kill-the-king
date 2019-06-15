@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import ConfirmationDialog from '../../components/ConfirmationDialog';
+import { ConfirmationDialog } from '../../components/Dialog';
 import { hideDialog } from '../../store/modules/ui';
 import Dialog from './Dialog';
 
