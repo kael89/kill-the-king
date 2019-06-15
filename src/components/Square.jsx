@@ -51,6 +51,8 @@ class Square extends React.Component {
 
     return (
       <div
+        data-testid="square"
+        data-piece={JSON.stringify(piece)}
         data-position={position}
         className={classnames(classes.container, classes[colorClass], { [classes.selected]: selected })}
       >
