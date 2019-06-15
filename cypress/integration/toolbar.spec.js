@@ -1,15 +1,7 @@
 import { INITIAL_BOARD } from '../../src/modules/board';
+import { boardObject, idToSelector } from '../support';
 
-// TODO export id selector
-const toolbarButton = text => cy.contains('[data-testid="toolbar-button"]', new RegExp(text, 'i'));
-const boardObject = () =>
-  cy.getById('square').then($squares => {
-    const pairs = $squares
-      .get()
-      .filter(square => square.dataset.piece !== 'null')
-      .map(square => [square.dataset.position, JSON.parse(square.dataset.piece)]);
-    return Cypress._.fromPairs(pairs);
-  });
+const toolbarButton = text => cy.contains(idToSelector('toolbar-button'), new RegExp(text, 'i'));
 
 beforeEach(() => {
   cy.visit('/');
@@ -80,9 +72,7 @@ context('Toolbar', () => {
     });
     it('can import valid data', () => {
       cy.fixture('board.json').then(boardData => {
-        cy.get('@importInput').type(
-          JSON.stringify(boardData).replace(/{/g, '{{}'), // TODO create helper!
-        );
+        cy.get('@importInput').typeJson(boardData);
         cy.get('@importButton').click();
         boardObject().should('deep.equal', boardData);
       });

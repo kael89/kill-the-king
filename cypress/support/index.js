@@ -14,3 +14,5 @@
 // ***********************************************************
 
 import './commands';
+
+export { boardObject, idToSelector } from './helpers';

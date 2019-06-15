@@ -1,8 +1,4 @@
-const idToSelector = idString =>
-  idString
-    .split(' ')
-    .map(testId => `[data-testid="${testId}"]`)
-    .join(' ');
+import { idToSelector } from '.';
 
 /**
  * Returns an element using its test id
@@ -36,3 +32,14 @@ const movePiece = (pieceSelector = '', targetSquareSelector = '') => {
   cy.get('@draggedPiece').trigger('dragend');
 };
 Cypress.Commands.add('movePiece', movePiece);
+
+/**
+ * @param {Chainable<Subject>} subject
+ * @param {string|Object} json
+ * @returns {Chainable<Subject>}
+ */
+const typeJson = (subject, json) => {
+  const jsonText = Cypress._.isString(json) ? json : JSON.stringify(json);
+  return cy.wrap(subject).type(jsonText.replace(/{/g, '{{}'));
+};
+Cypress.Commands.add('typeJson', { prevSubject: 'element' }, (subject, json) => typeJson(subject, json));
