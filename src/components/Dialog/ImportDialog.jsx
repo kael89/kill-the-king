@@ -50,7 +50,7 @@ class ImportDialog extends React.Component {
     const hasInput = !!input.trim();
 
     return (
-      <Dialog {...otherProps} onClose={this.handleClose}>
+      <Dialog {...otherProps} data-testid="import-dialog" onClose={this.handleClose}>
         <DialogTitle>Import</DialogTitle>
         <DialogContent>
           <DialogContentText>Paste your data here:</DialogContentText>

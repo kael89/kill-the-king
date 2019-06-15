@@ -1,20 +1,27 @@
 import { INITIAL_BOARD } from '../../src/modules/board';
 
+// TODO export id selector
 const toolbarButton = text => cy.contains('[data-testid="toolbar-button"]', new RegExp(text, 'i'));
 const boardObject = () =>
-  cy
-    .getById('square')
-    .filter(':not([data-piece=null])')
-    .then($squares => {
-      const pairs = $squares.get().map(square => [square.dataset.position, JSON.parse(square.dataset.piece)]);
-      return Cypress._.fromPairs(pairs);
-    });
+  cy.getById('square').then($squares => {
+    const pairs = $squares
+      .get()
+      .filter(square => square.dataset.piece !== 'null')
+      .map(square => [square.dataset.position, JSON.parse(square.dataset.piece)]);
+    return Cypress._.fromPairs(pairs);
+  });
+
+beforeEach(() => {
+  cy.visit('/');
+});
 
 context('Toolbar', () => {
   describe('Clear Button', () => {
-    it('can clear the board', () => {
-      cy.visit('/');
+    beforeEach(() => {
+      toolbarButton('Clear').as('clearButton');
+    });
 
+    it('can clear the board', () => {
       cy.getById('droppable-square')
         .first()
         .as('dropSquare');
@@ -23,7 +30,7 @@ context('Toolbar', () => {
       cy.get('@dropSquare')
         .invoke('text')
         .should('not.be.empty');
-      toolbarButton('Clear').invoke('click');
+      cy.get('@clearButton').invoke('click');
       cy.get('@dropSquare')
         .invoke('text')
         .should('be.empty');
@@ -31,18 +38,63 @@ context('Toolbar', () => {
   });
 
   describe('Default Board Button', () => {
-    it('can set an empty board to its default state', () => {
-      cy.visit('/');
+    beforeEach(() => {
+      toolbarButton('Default Board').as('defaultBoardButton');
+    });
 
-      toolbarButton('Default Board').invoke('click');
+    it('can set an empty board to its default state', () => {
+      cy.get('@defaultBoardButton').invoke('click');
       boardObject().should('deep.equal', INITIAL_BOARD);
     });
     it('can set a filled board to its default state', () => {
-      cy.visit('/');
-
       cy.movePiece();
-      toolbarButton('Default Board').invoke('click');
+      cy.get('@defaultBoardButton').invoke('click');
       boardObject().should('deep.equal', INITIAL_BOARD);
     });
+  });
+
+  describe('Import Button', () => {
+    beforeEach(() => {
+      toolbarButton('Import').click();
+
+      cy.getById('import-dialog').as('importDialog');
+      cy.get('@importDialog')
+        .find('textarea')
+        .as('importInput');
+      cy.get('@importDialog')
+        .contains('button', 'Import')
+        .as('importButton');
+    });
+
+    it('cannot import empty/no data', () => {
+      cy.get('@importButton').should('be.disabled');
+      cy.get('@importInput').type('   ');
+      cy.get('@importButton').should('be.disabled');
+      boardObject().should('be.empty');
+    });
+    it('cannot import invalid data', () => {
+      cy.get('@importInput').type('Random data');
+      cy.get('@importButton').should('be.disabled');
+      boardObject().should('be.empty');
+      cy.get('@importDialog').should('contain', 'Invalid data');
+    });
+    it('can import valid data', () => {
+      cy.fixture('board.json').then(boardData => {
+        cy.get('@importInput').type(
+          JSON.stringify(boardData).replace(/{/g, '{{}'), // TODO create helper!
+        );
+        cy.get('@importButton').click();
+        boardObject().should('deep.equal', boardData);
+      });
+    });
+  });
+
+  describe('Export Button', () => {
+    it('can export board data', () => {});
+    specify('Exportable data can be copied to clipboard', () => {});
+  });
+
+  describe('Export/Import scenario', () => {
+    specify('User can export and then import board data', () => {});
   });
 });

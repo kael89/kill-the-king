@@ -1,0 +1,4 @@
+{
+  "A2": { "type": "pawn", "color": "white", "position": "A2" },
+  "A7": { "type": "pawn", "color": "black", "position": "A7" }
+}
