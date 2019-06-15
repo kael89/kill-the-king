@@ -3,8 +3,8 @@ import nth from 'lodash/nth';
 
 import { APP_NAME } from '../../constants';
 import {
+  INITIAL_BOARD,
   addPiece as addPieceHelper,
-  getInitialBoardSetup,
   movePiece as movePieceHelper,
   removePiece as removePieceHelper,
 } from '../../modules/board';
@@ -66,7 +66,7 @@ export default function reducer(board = defaultState, action) {
     case SET_RESET_BOARD_ID:
       return { ...board, resetBoardId: board.history.length - 1 };
     case SETUP_DEFAULT_BOARD: {
-      const history = [...board.history, getInitialBoardSetup()];
+      const history = [...board.history, INITIAL_BOARD];
       return { ...board, history };
     }
     default:
@@ -144,7 +144,7 @@ const shouldConfirmChange = (state, action) => {
       return fetchedDataExist && !isEqual(piece, currentBoard[piece.position]);
     }
     case SETUP_DEFAULT_BOARD: {
-      return fetchedDataExist && !isEqual(getInitialBoardSetup(), currentBoard);
+      return fetchedDataExist && !isEqual(INITIAL_BOARD, currentBoard);
     }
     default:
       return fetchedDataExist;

@@ -6,7 +6,7 @@ import { PIECE_TYPE } from './piece';
 const { BLACK, WHITE } = COLOR;
 const { PAWN, KNIGHT, BISHOP, ROOK, KING, QUEEN } = PIECE_TYPE;
 
-const DEFAULT_BOARD_DATA = {
+const INITIAL_BOARD_DATA = {
   [WHITE]: {
     [PAWN]: ['A2', 'B2', 'C2', 'D2', 'E2', 'F2', 'G2', 'H2'],
     [ROOK]: ['A1', 'H1'],
@@ -25,21 +25,17 @@ const DEFAULT_BOARD_DATA = {
   },
 };
 
-const defaultBoard = {};
-Object.entries(DEFAULT_BOARD_DATA).forEach(([color, pieceData]) => {
+/**
+ * @type {Board}
+ */
+export const INITIAL_BOARD = {};
+Object.entries(INITIAL_BOARD_DATA).forEach(([color, pieceData]) => {
   Object.entries(pieceData).forEach(([type, positions]) => {
     positions.forEach(position => {
-      defaultBoard[position] = { type, color, position };
+      INITIAL_BOARD[position] = { type, color, position };
     });
   });
 });
-
-/**
- * @returns {Board}
- */
-export const getInitialBoardSetup = () => {
-  return defaultBoard;
-};
 
 /**
  * @param {Board} board
