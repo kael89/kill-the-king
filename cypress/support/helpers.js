@@ -31,7 +31,8 @@ export const movePiece = (pieceSelector = '', targetSquareSelector = '') => {
 
 /**
  * @param {Piece} piece
- */
-// export const addPiece = piece => {
-//   cy.getById(`${idToSelector('piece-selector')} `).
-// };
+//  */
+export const addPiece = piece => {
+  const { color } = piece;
+  cy.getByData({ testid: 'piece-selector', color });
+};
