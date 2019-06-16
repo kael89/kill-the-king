@@ -1,5 +1,5 @@
 import { INITIAL_BOARD } from '../../src/modules/board';
-import { boardObject, idToSelector } from '../support';
+import { boardObject, idToSelector, movePiece } from '../support';
 
 const toolbarButton = text => cy.contains(idToSelector('toolbar-button'), new RegExp(text, 'i'));
 
@@ -17,7 +17,7 @@ context('Toolbar', () => {
       cy.getById('droppable-square')
         .first()
         .as('dropSquare');
-      cy.movePiece('', '@dropSquare');
+      movePiece('', '@dropSquare');
 
       cy.get('@dropSquare')
         .invoke('text')
@@ -39,7 +39,7 @@ context('Toolbar', () => {
       boardObject().should('deep.equal', INITIAL_BOARD);
     });
     it('can set a filled board to its default state', () => {
-      cy.movePiece();
+      movePiece();
       cy.get('@defaultBoardButton').invoke('click');
       boardObject().should('deep.equal', INITIAL_BOARD);
     });

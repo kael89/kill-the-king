@@ -14,7 +14,7 @@ const styles = {
 };
 
 const PieceSelector = ({ classes, color, theme }) => (
-  <Paper elevation={1} className={classes.container}>
+  <Paper data-testid="piece-selector" data-color={color} elevation={1} className={classes.container}>
     {Object.values(PIECE_TYPE).map(type => (
       <DraggablePiece key={type} hoverColor={theme.piece.hovered} piece={{ color, type, position: '' }} />
     ))}
