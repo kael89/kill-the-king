@@ -25,13 +25,11 @@ const dataToSelector = data => {
 };
 
 /**
- * Returns an element using its test id and (optionally) additional data attributes
- *
  * @param {string} id
  * @param {Object} [data={}]
  * @returns {Chainable<JQuery<HTMLElementTagNameMap[K]>>}
  */
-const getByData = (data = {}) => cy.get(dataToSelector(data));
+const getByData = (...dataCollection) => cy.get(dataCollection.map(data => dataToSelector(data)).join(' '));
 Cypress.Commands.add('getByData', getByData);
 
 /**
@@ -44,3 +42,20 @@ const typeJson = (subject, json) => {
   return cy.wrap(subject).type(jsonText.replace(/{/g, '{{}'));
 };
 Cypress.Commands.add('typeJson', { prevSubject: 'element' }, (subject, json) => typeJson(subject, json));
+
+/**
+ * @param {Chainable<Subject>} subject
+ * @param {string} dropSelector
+ * @returns {Chainable<Subject>}
+ */
+const dragAndDrop = (subject, dropSelector) => {
+  cy.wrap(subject).as('draggedSubject');
+  cy.get('@draggedSubject').trigger('dragstart');
+  cy.get(dropSelector).trigger('drop');
+
+  return cy.get('@draggedSubject').trigger('dragend');
+};
+
+Cypress.Commands.add('dragAndDrop', { prevSubject: 'element' }, (subject, dropSelector) =>
+  dragAndDrop(subject, dropSelector),
+);

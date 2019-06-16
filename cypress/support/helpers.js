@@ -1,38 +1,32 @@
+import { square } from './elements';
+
 /**
  * @returns {Board}
  */
-export const boardObject = () =>
+export const getBoardObject = () =>
   cy.getByData({ testId: 'square' }).then($squares => {
     const pairs = $squares
       .get()
-      .filter(square => square.dataset.piece !== 'null')
-      .map(square => [square.dataset.position, JSON.parse(square.dataset.piece)]);
+      .filter($square => $square.dataset.piece !== 'null')
+      .map($square => [$square.dataset.position, JSON.parse($square.dataset.piece)]);
     return Cypress._.fromPairs(pairs);
   });
 
 /**
- * Moves a piece across the board
- *
- * @param {string} [pieceSelector] If empty, the first draggable piece will be used
- * @param {string} [targetSquareSelector] If empty, the first droppable square will be used
+ * @param {Piece} piece
  */
-export const movePiece = (pieceSelector = '', targetSquareSelector = '') => {
-  cy.get(pieceSelector || '[data-testid=draggable-piece]')
-    .first()
-    .as('draggedPiece');
-  cy.get(targetSquareSelector || '[data-testid=droppable-square]')
-    .first()
-    .as('dropSquare');
+export const addPiece = piece => {
+  const { color, type, position } = piece;
+  square(position).as('targetSquare');
 
-  cy.get('@draggedPiece').trigger('dragstart');
-  cy.get('@dropSquare').trigger('drop');
-  cy.get('@draggedPiece').trigger('dragend');
+  cy.getByData({ testid: 'piece-selector' }, { testid: 'piece', color, type }).then($piece =>
+    cy.wrap($piece).dragAndDrop('@targetSquare'),
+  );
 };
 
 /**
- * @param {Piece} piece
-//  */
-export const addPiece = piece => {
-  const { color } = piece;
-  cy.getByData({ testid: 'piece-selector', color });
+ * @param {Board} boardObject
+ */
+export const setBoard = boardObject => {
+  Object.values(boardObject).forEach(([piece]) => addPiece(piece));
 };

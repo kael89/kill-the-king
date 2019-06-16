@@ -19,7 +19,7 @@ function collect(connect, monitor) {
 
 const DroppableSquare = ({ connectDropTarget, isOver, ...squareProps }) =>
   connectDropTarget(
-    <div data-testid="droppable-square">
+    <div>
       <Square {...squareProps} />
     </div>,
   );

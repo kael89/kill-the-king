@@ -52,11 +52,22 @@ class Piece extends React.Component {
 
   render() {
     const { hovered } = this.state;
-    const { children, classes, hinted, hoverColor, piece, theme, ...otherProps } = this.props;
+    const {
+      children,
+      classes,
+      hinted,
+      hoverColor,
+      piece: { type, color },
+      theme,
+      ...otherProps
+    } = this.props;
 
     return (
       <div
         {...otherProps}
+        data-testid="piece"
+        data-type={type}
+        data-color={color}
         onMouseOver={() => this.handleMouseOver()}
         onMouseOut={this.handleMouseOut}
         onFocus={() => this.handleMouseOut()}
@@ -64,7 +75,7 @@ class Piece extends React.Component {
         className={classnames(classes.container, { [classes.hinted]: hinted })}
         style={hovered && hoverColor ? { backgroundColor: hoverColor } : {}}
       >
-        {PieceCodes[piece.color][piece.type]}
+        {PieceCodes[color][type]}
       </div>
     );
   }

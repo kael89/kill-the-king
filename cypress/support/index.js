@@ -15,4 +15,5 @@
 
 import './commands';
 
-export { boardObject, movePiece } from './helpers';
+export { importDialog, square, toolbarButton } from './elements';
+export { addPiece, getBoardObject } from './helpers';

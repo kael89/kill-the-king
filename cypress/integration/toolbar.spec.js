@@ -1,7 +1,5 @@
 import { INITIAL_BOARD } from '../../src/modules/board';
-import { boardObject, movePiece } from '../support';
-
-const toolbarButton = text => cy.contains('[data-testid=toolbar-button]', new RegExp(text, 'i'));
+import { addPiece, getBoardObject, importDialog, square, toolbarButton } from '../support';
 
 beforeEach(() => {
   cy.visit('/');
@@ -14,16 +12,9 @@ context('Toolbar', () => {
     });
 
     it('can clear the board', () => {
-      cy.getByData({ testid: 'droppable-square' })
-        .first()
-        .as('dropSquare');
-      movePiece('', '@dropSquare');
-
-      cy.get('@dropSquare')
-        .invoke('text')
-        .should('not.be.empty');
+      addPiece({ type: 'pawn', color: 'black', position: 'B7' });
       cy.get('@clearButton').invoke('click');
-      cy.get('@dropSquare')
+      square()
         .invoke('text')
         .should('be.empty');
     });
@@ -36,12 +27,12 @@ context('Toolbar', () => {
 
     it('can set an empty board to its default state', () => {
       cy.get('@defaultBoardButton').invoke('click');
-      boardObject().should('deep.equal', INITIAL_BOARD);
+      getBoardObject().should('deep.equal', INITIAL_BOARD);
     });
     it('can set a filled board to its default state', () => {
-      movePiece();
+      addPiece({ type: 'pawn', color: 'black', position: 'B7' });
       cy.get('@defaultBoardButton').invoke('click');
-      boardObject().should('deep.equal', INITIAL_BOARD);
+      getBoardObject().should('deep.equal', INITIAL_BOARD);
     });
   });
 
@@ -49,7 +40,7 @@ context('Toolbar', () => {
     beforeEach(() => {
       toolbarButton('Import').click();
 
-      cy.getByData({ testid: 'import-dialog' }).as('importDialog');
+      importDialog().as('importDialog');
       cy.get('@importDialog')
         .find('textarea')
         .as('importInput');
@@ -62,19 +53,19 @@ context('Toolbar', () => {
       cy.get('@importButton').should('be.disabled');
       cy.get('@importInput').type('   ');
       cy.get('@importButton').should('be.disabled');
-      boardObject().should('be.empty');
+      getBoardObject().should('be.empty');
     });
     it('cannot import invalid data', () => {
       cy.get('@importInput').type('Random data');
       cy.get('@importButton').should('be.disabled');
-      boardObject().should('be.empty');
+      getBoardObject().should('be.empty');
       cy.get('@importDialog').should('contain', 'Invalid data');
     });
     it('can import valid data', () => {
       cy.fixture('board.json').then(boardData => {
         cy.get('@importInput').typeJson(boardData);
         cy.get('@importButton').click();
-        boardObject().should('deep.equal', boardData);
+        getBoardObject().should('deep.equal', boardData);
       });
     });
   });

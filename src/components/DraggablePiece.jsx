@@ -25,7 +25,7 @@ const styles = {
 
 const DraggablePiece = ({ classes, connectDragSource, isDragging, piece, ...otherProps }) =>
   connectDragSource(
-    <div data-testid="draggable-piece" className={classes.pieceContainer}>
+    <div className={classes.pieceContainer}>
       <Piece piece={piece} {...otherProps} />
     </div>,
   );
