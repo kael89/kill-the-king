@@ -15,4 +15,4 @@
 
 import './commands';
 
-export { boardObject, idToSelector, movePiece } from './helpers';
+export { boardObject, movePiece } from './helpers';

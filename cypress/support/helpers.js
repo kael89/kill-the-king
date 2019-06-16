@@ -1,20 +1,8 @@
-const getDataSelector = data =>
-  Object.entries(data)
-    .map(([key, value]) => `[data-${key}="${value}"]`)
-    .join('');
-
-/**
- * @param {string} id
- * @param {Object} data
- * @returns {string}
- */
-export const idToSelector = (id, data = {}) => getDataSelector({ testid: id, ...data });
-
 /**
  * @returns {Board}
  */
 export const boardObject = () =>
-  cy.getById('square').then($squares => {
+  cy.getByData({ testId: 'square' }).then($squares => {
     const pairs = $squares
       .get()
       .filter(square => square.dataset.piece !== 'null')
@@ -29,10 +17,10 @@ export const boardObject = () =>
  * @param {string} [targetSquareSelector] If empty, the first droppable square will be used
  */
 export const movePiece = (pieceSelector = '', targetSquareSelector = '') => {
-  cy.get(pieceSelector || idToSelector('draggable-piece'))
+  cy.get(pieceSelector || '[data-testid=draggable-piece]')
     .first()
     .as('draggedPiece');
-  cy.get(targetSquareSelector || idToSelector('droppable-square'))
+  cy.get(targetSquareSelector || '[data-testid=droppable-square]')
     .first()
     .as('dropSquare');
 

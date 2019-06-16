@@ -1,4 +1,11 @@
-import { idToSelector } from '.';
+/**
+ * @param {Object} data
+ * @returns {string}
+ */
+export const dataToSelector = data =>
+  Object.entries(data)
+    .map(([key, value]) => `[data-${key}=${value}]`)
+    .join('');
 
 /**
  * Returns an element using its test id and (optionally) additional data attributes
@@ -7,8 +14,8 @@ import { idToSelector } from '.';
  * @param {Object} [data={}]
  * @returns {Chainable<JQuery<HTMLElementTagNameMap[K]>>}
  */
-const getById = (id, data = {}) => cy.get(idToSelector(id, data));
-Cypress.Commands.add('getById', getById);
+const getByData = (data = {}) => cy.get(dataToSelector(data));
+Cypress.Commands.add('getByData', getByData);
 
 /**
  * @param {Chainable<Subject>} subject

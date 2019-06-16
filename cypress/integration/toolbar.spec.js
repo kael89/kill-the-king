@@ -1,7 +1,7 @@
 import { INITIAL_BOARD } from '../../src/modules/board';
-import { boardObject, idToSelector, movePiece } from '../support';
+import { boardObject, movePiece } from '../support';
 
-const toolbarButton = text => cy.contains(idToSelector('toolbar-button'), new RegExp(text, 'i'));
+const toolbarButton = text => cy.contains('[data-testid=toolbar-button]', new RegExp(text, 'i'));
 
 beforeEach(() => {
   cy.visit('/');
@@ -14,7 +14,7 @@ context('Toolbar', () => {
     });
 
     it('can clear the board', () => {
-      cy.getById('droppable-square')
+      cy.getByData({ testid: 'droppable-square' })
         .first()
         .as('dropSquare');
       movePiece('', '@dropSquare');
@@ -49,7 +49,7 @@ context('Toolbar', () => {
     beforeEach(() => {
       toolbarButton('Import').click();
 
-      cy.getById('import-dialog').as('importDialog');
+      cy.getByData({ testid: 'import-dialog' }).as('importDialog');
       cy.get('@importDialog')
         .find('textarea')
         .as('importInput');
