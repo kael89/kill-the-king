@@ -20,6 +20,7 @@ export {
   exportDialogContent,
   exportDialogCopyButton,
   importDialog,
+  setting,
   square,
   toolbarButton,
 } from './elements';

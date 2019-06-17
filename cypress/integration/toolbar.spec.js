@@ -115,7 +115,7 @@ context('Toolbar', () => {
   });
 
   describe('Export/Import scenario', () => {
-    specify.only('User can export and then import board data', () => {
+    specify('User can export and then import board data', () => {
       // Set board
       cy.get('@boardData').then(setBoard);
 

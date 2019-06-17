@@ -1,5 +1,7 @@
 import { square } from './elements';
 
+export const camelToKebabCase = text => Cypress._.snakeCase(text).replace('_', '-');
+
 /**
  * @returns {Board}
  */
