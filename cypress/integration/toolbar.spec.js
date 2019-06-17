@@ -1,8 +1,9 @@
 import { INITIAL_BOARD } from '../../src/modules/board';
-import { addPiece, getBoardObject, importDialog, square, toolbarButton } from '../support';
+import { addPiece, getBoardObject, importDialog, setBoard, square, toolbarButton } from '../support';
 
 beforeEach(() => {
   cy.visit('/');
+  cy.fixture('board.json').as('boardData');
 });
 
 context('Toolbar', () => {
@@ -29,6 +30,7 @@ context('Toolbar', () => {
       cy.get('@defaultBoardButton').invoke('click');
       getBoardObject().should('deep.equal', INITIAL_BOARD);
     });
+
     it('can set a filled board to its default state', () => {
       addPiece({ type: 'pawn', color: 'black', position: 'B7' });
       cy.get('@defaultBoardButton').invoke('click');
@@ -55,23 +57,49 @@ context('Toolbar', () => {
       cy.get('@importButton').should('be.disabled');
       getBoardObject().should('be.empty');
     });
+
     it('cannot import invalid data', () => {
       cy.get('@importInput').type('Random data');
       cy.get('@importButton').should('be.disabled');
       getBoardObject().should('be.empty');
       cy.get('@importDialog').should('contain', 'Invalid data');
     });
+
     it('can import valid data', () => {
-      cy.fixture('board.json').then(boardData => {
+      cy.get('@boardData').then(boardData => {
         cy.get('@importInput').typeJson(boardData);
         cy.get('@importButton').click();
         getBoardObject().should('deep.equal', boardData);
       });
     });
+
+    it('can cancel import', () => {
+      cy.get('@boardData').then(boardData => {
+        cy.get('@importInput').typeJson(boardData);
+        cy.get('@importDialog')
+          .contains('button', 'Cancel')
+          .invoke('click');
+        getBoardObject().should('be.empty');
+      });
+    });
   });
 
   describe('Export Button', () => {
-    it('can export board data', () => {});
+    beforeEach(() => {
+      cy.get('@boardData').then(setBoard);
+      toolbarButton('Export').click();
+    });
+
+    it('can export board data', () => {
+      cy.get('@boardData').then(boardData => {
+        cy.getByData({ testid: 'export-dialog-content' })
+          .invoke('text')
+          .then(text => {
+            cy.wrap(JSON.parse(text)).should('be.deep.equal', boardData);
+          });
+      });
+    });
+
     specify('Exportable data can be copied to clipboard', () => {});
   });
 

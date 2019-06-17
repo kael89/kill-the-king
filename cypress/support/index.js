@@ -16,4 +16,4 @@
 import './commands';
 
 export { importDialog, square, toolbarButton } from './elements';
-export { addPiece, getBoardObject } from './helpers';
+export { addPiece, getBoardObject, setBoard } from './helpers';

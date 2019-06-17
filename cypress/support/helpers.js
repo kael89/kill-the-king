@@ -28,5 +28,5 @@ export const addPiece = piece => {
  * @param {Board} boardObject
  */
 export const setBoard = boardObject => {
-  Object.values(boardObject).forEach(([piece]) => addPiece(piece));
+  Object.values(boardObject).forEach(piece => addPiece(piece));
 };
