@@ -1,5 +1,15 @@
 import { INITIAL_BOARD } from '../../src/modules/board';
-import { addPiece, getBoardObject, importDialog, setBoard, square, toolbarButton } from '../support';
+import {
+  addPiece,
+  exportDialog,
+  exportDialogContent,
+  exportDialogCopyButton,
+  getBoardObject,
+  importDialog,
+  setBoard,
+  square,
+  toolbarButton,
+} from '../support';
 
 beforeEach(() => {
   cy.visit('/');
@@ -79,6 +89,7 @@ context('Toolbar', () => {
         cy.get('@importDialog')
           .contains('button', 'Cancel')
           .invoke('click');
+
         getBoardObject().should('be.empty');
       });
     });
@@ -92,7 +103,7 @@ context('Toolbar', () => {
 
     it('can export board data', () => {
       cy.get('@boardData').then(boardData => {
-        cy.getByData({ testid: 'export-dialog-content' })
+        exportDialogContent()
           .invoke('text')
           .then(text => {
             cy.wrap(JSON.parse(text)).should('be.deep.equal', boardData);
@@ -104,6 +115,32 @@ context('Toolbar', () => {
   });
 
   describe('Export/Import scenario', () => {
-    specify('User can export and then import board data', () => {});
+    specify.only('User can export and then import board data', () => {
+      // Set board
+      cy.get('@boardData').then(setBoard);
+
+      // Export
+      toolbarButton('Export').click();
+      exportDialogCopyButton().click();
+      exportDialog()
+        .contains('button', 'OK')
+        .click();
+
+      // Clear board
+      toolbarButton('Clear').click();
+
+      // Import
+      toolbarButton('Import').click();
+      cy.get('@boardData').then(boardData => {
+        importDialog()
+          .find('textarea')
+          .typeJson(boardData);
+        importDialog()
+          .contains('button', 'Import')
+          .click();
+
+        getBoardObject().should('be.deep.equal', boardData);
+      });
+    });
   });
 });

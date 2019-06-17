@@ -15,5 +15,12 @@
 
 import './commands';
 
-export { importDialog, square, toolbarButton } from './elements';
+export {
+  exportDialog,
+  exportDialogContent,
+  exportDialogCopyButton,
+  importDialog,
+  square,
+  toolbarButton,
+} from './elements';
 export { addPiece, getBoardObject, setBoard } from './helpers';
