@@ -11,6 +11,11 @@ export const exportDialogCopyButton = () => cy.getByData({ testid: 'export-dialo
 
 export const importDialog = () => cy.getByData({ testid: 'import-dialog' });
 
+export const pieceInBoard = position => cy.getByData({ testid: 'square', position }, { testid: 'piece' });
+
+export const pieceInSelector = (color, type) =>
+  cy.getByData({ testid: 'piece-selector' }, { testid: 'piece', color, type });
+
 export const setting = name => cy.getByData({ testid: `setting-${camelToKebabCase(name)}` });
 
 export const square = (position = '') =>

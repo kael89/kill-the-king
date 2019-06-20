@@ -20,6 +20,8 @@ export {
   exportDialogContent,
   exportDialogCopyButton,
   importDialog,
+  pieceInBoard,
+  pieceInSelector,
   setting,
   square,
   themeSwitch,
