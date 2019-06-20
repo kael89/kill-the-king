@@ -22,6 +22,7 @@ export {
   importDialog,
   setting,
   square,
+  themeSwitch,
   toolbarButton,
 } from './elements';
 export { addPiece, getBoardObject, setBoard } from './helpers';

@@ -16,4 +16,6 @@ export const setting = name => cy.getByData({ testid: `setting-${camelToKebabCas
 export const square = (position = '') =>
   cy.getByData(Object.assign({ testid: 'square' }, position ? { position } : {}));
 
+export const themeSwitch = () => cy.getByData({ testid: 'theme-switch' });
+
 export const toolbarButton = text => cy.contains('[data-testid=toolbar-button]', new RegExp(text, 'i'));
