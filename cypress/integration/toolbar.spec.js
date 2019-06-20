@@ -11,12 +11,12 @@ import {
   toolbarButton,
 } from '../support';
 
-beforeEach(() => {
-  cy.visit('/');
-  cy.fixture('board.json').as('boardData');
-});
-
 context('Toolbar', () => {
+  beforeEach(() => {
+    cy.visit('/');
+    cy.fixture('board.json').as('boardData');
+  });
+
   describe('Clear Button', () => {
     beforeEach(() => {
       toolbarButton('Clear').as('clearButton');

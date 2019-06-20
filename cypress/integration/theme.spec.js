@@ -2,11 +2,11 @@ import { themeSwitch } from '../support';
 
 const getAppBackgroundColor = () => Cypress.$('body').css('background-color');
 
-beforeEach(() => {
-  cy.visit('/');
-});
-
 context('Theme', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+
   specify('user should be able to switch theme', () => {
     const originalBgColor = getAppBackgroundColor();
 

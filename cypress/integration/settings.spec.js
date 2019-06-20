@@ -1,10 +1,10 @@
 import { setting } from '../support';
 
-beforeEach(() => {
-  cy.visit('/');
-});
-
 context('Settings', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+
   describe('starting player', () => {
     beforeEach(() => {
       setting('startingPlayer').as('startingPlayerSetting');
