@@ -4,7 +4,7 @@ import React from 'react';
 
 const ActionButton = ({ onClick }) => (
   <>
-    <Button color="primary" onClick={onClick} size="large" variant="contained">
+    <Button data-testid="action-button" color="primary" onClick={onClick} size="large" variant="contained">
       Go!
     </Button>
   </>

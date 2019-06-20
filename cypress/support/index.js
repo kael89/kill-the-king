@@ -16,12 +16,14 @@
 import './commands';
 
 export {
+  actionButton,
   exportDialog,
   exportDialogContent,
   exportDialogCopyButton,
   importDialog,
   pieceInBoard,
   pieceInSelector,
+  results,
   setting,
   square,
   themeSwitch,

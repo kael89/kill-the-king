@@ -1,0 +1,27 @@
+{
+  "board": {
+    "H7": {
+      "color": "white",
+      "type": "rook",
+      "position": "H7"
+    },
+    "G7": {
+      "color": "white",
+      "type": "pawn",
+      "position": "G7"
+    },
+    "A8": {
+      "color": "black",
+      "type": "king",
+      "position": "A8"
+    }
+  },
+  "response": {
+    "data": {
+      "G7-G8=Q": {},
+      "G7-G8=R": {}
+    },
+    "error": ""
+  },
+  "appResults": ["2 checkmates found", "♙g8=♕", "♙g8=♖"]
+}

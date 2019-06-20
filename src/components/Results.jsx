@@ -32,7 +32,11 @@ const Results = ({ error, onMoveSelect, moveData, loading }) => {
     );
   }
 
-  return <ExpansionPanel summary="Results">{contents}</ExpansionPanel>;
+  return (
+    <ExpansionPanel summary="Results">
+      <div data-testid="results">{contents}</div>
+    </ExpansionPanel>
+  );
 };
 
 Results.propTypes = {

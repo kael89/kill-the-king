@@ -3,6 +3,8 @@
  */
 import { camelToKebabCase } from './helpers';
 
+export const actionButton = () => cy.getByData({ testid: 'action-button' });
+
 export const exportDialog = () => cy.getByData({ testid: 'export-dialog' });
 
 export const exportDialogContent = () => cy.getByData({ testid: 'export-dialog-content' });
@@ -15,6 +17,8 @@ export const pieceInBoard = position => cy.getByData({ testid: 'square', positio
 
 export const pieceInSelector = (color, type) =>
   cy.getByData({ testid: 'piece-selector' }, { testid: 'piece', color, type });
+
+export const results = () => cy.getByData({ testid: 'results' });
 
 export const setting = name => cy.getByData({ testid: `setting-${camelToKebabCase(name)}` });
 

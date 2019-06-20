@@ -1,0 +1,19 @@
+{
+  "board": {
+    "A2": {
+      "color": "white",
+      "type": "pawn",
+      "position": "A2"
+    },
+    "A7": {
+      "color": "black",
+      "type": "pawn",
+      "position": "A7"
+    }
+  },
+  "response": {
+    "data": {},
+    "error": ""
+  },
+  "appResults": ["No checkmates found"]
+}

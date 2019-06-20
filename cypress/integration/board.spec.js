@@ -42,7 +42,7 @@ context('Board', () => {
     getBoardObject().should('deep.equal', { A2: newPiece });
   });
 
-  specify.only('user can remove pieces by dragging them off the board', () => {
+  specify('user can remove pieces by dragging them off the board', () => {
     themeSwitch().as('themeSwitch');
     setBoard({ A1: piece });
     dragFromBoardToDestination(piece.position, '@themeSwitch');

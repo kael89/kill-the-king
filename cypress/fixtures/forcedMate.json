@@ -1,0 +1,36 @@
+{
+  "board": {
+    "G6": {
+      "color": "white",
+      "type": "rook",
+      "position": "G6"
+    },
+    "H7": {
+      "color": "white",
+      "type": "rook",
+      "position": "H7"
+    },
+    "A8": {
+      "color": "black",
+      "type": "king",
+      "position": "A8"
+    },
+    "G7": {
+      "color": "black",
+      "type": "pawn",
+      "position": "G7"
+    }
+  },
+  "response": {
+    "data": {
+      "G6-G7": {
+        "A8-B8": {
+          "G7-G8": {},
+          "H7-H8": {}
+        }
+      }
+    },
+    "error": ""
+  },
+  "appResults": ["1 checkmate found", "♖g7"]
+}

@@ -1,7 +1,11 @@
 import fetch from 'cross-fetch';
 import queryString from 'query-string';
 
-const GET_TREE_RESOURCE = 'get-tree';
+const GET_TREE = 'get-tree';
+
+export const RESOURCES = {
+  GET_TREE,
+};
 
 /**
  * @enum {TreeType}
@@ -31,7 +35,7 @@ const getTree = async ({ type, board, startingColor, depth }) => {
     startingColor,
     depth,
   });
-  const url = `${process.env.REACT_APP_API_URL}/${GET_TREE_RESOURCE}?${params}`;
+  const url = `${process.env.REACT_APP_API_URL}/${GET_TREE}?${params}`;
 
   return fetch(url);
 };
