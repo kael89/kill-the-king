@@ -1,14 +1,7 @@
 import { RESOURCES } from '../../src/modules/api';
-import { actionButton, selectInput, setting } from '../support';
+import { actionButton, assertQueryParam, selectInput, setting } from '../support';
 
 const { GET_TREE } = RESOURCES;
-
-const assertQueryParam = (requestSelector, paramName, paramValue) => {
-  cy.wait(requestSelector).then(({ url }) => {
-    const queryParams = new URLSearchParams(url);
-    cy.wrap(queryParams.get(paramName)).should('equal', paramValue);
-  });
-};
 
 context('Settings', () => {
   beforeEach(() => {
@@ -16,8 +9,6 @@ context('Settings', () => {
     cy.route({
       method: 'GET',
       url: `**/${GET_TREE}?**`,
-      response: {},
-      status: 200,
     }).as('forcedMateTree');
 
     cy.visit('/');

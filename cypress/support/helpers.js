@@ -1,5 +1,22 @@
 import { square } from './elements';
 
+/**
+ * @param {string} requestSelector
+ * @param {string} paramName
+ * @param {string} paramValue
+ */
+export const assertQueryParam = (requestSelector, paramName, paramValue) => {
+  cy.wait(requestSelector).then(({ url }) => {
+    const queryParams = new URLSearchParams(url);
+    cy.wrap(queryParams.get(paramName)).should('equal', paramValue);
+  });
+};
+
+/**
+ *
+ * @param {string} text
+ * @returns {string}
+ */
 export const camelToKebabCase = text => Cypress._.snakeCase(text).replace('_', '-');
 
 /**

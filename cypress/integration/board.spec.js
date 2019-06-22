@@ -1,4 +1,7 @@
-import { getBoardObject, pieceInBoard, pieceInSelector, setBoard, square, themeSwitch } from '../support';
+import { RESOURCES } from '../../src/modules/api';
+import { actionButton, getBoardObject, pieceInBoard, pieceInSelector, setBoard, square, themeSwitch } from '../support';
+
+const { GET_TREE } = RESOURCES;
 
 /**
  * @param {Piece} piece
@@ -48,5 +51,24 @@ context('Board', () => {
     dragFromBoardToDestination(piece.position, '@themeSwitch');
 
     getBoardObject().should('be.empty');
+  });
+
+  specify('app should use the board to detect forced mate trees', () => {
+    cy.server();
+    cy.route({
+      method: 'GET',
+      url: `**/${GET_TREE}?**`,
+    }).as('forcedMateTree');
+
+    cy.fixture('board.json').then(setBoard);
+    actionButton().click();
+    getBoardObject().then(boardObject => {
+      cy.wait('@forcedMateTree').then(({ url }) => {
+        const queryParams = new URLSearchParams(url);
+        const queryBoardObject = JSON.parse(queryParams.get('board'));
+
+        cy.wrap(queryBoardObject).should('have.same.deep.members', Object.values(boardObject));
+      });
+    });
   });
 });
