@@ -3,13 +3,18 @@
     "backend",
     "chainable",
     "chasemate",
+    "circleci",
     "compose",
     "devtools",
     "droppable",
+    "eslintignore",
     "extension",
+    "gitignore",
+    "prettierc",
     "redux",
     "testid",
     "toolbar",
-    "uncheck"
+    "uncheck",
+    "workflows"
   ]
 }

@@ -1,0 +1,11 @@
+version: 2.1
+
+jobs:
+  test:
+    steps:
+      - run: 'npm test'
+
+workflows:
+  test:
+    jobs:
+      - test

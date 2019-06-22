@@ -28,7 +28,14 @@ The application should now be running at http://localhost:3000
 ## Project structure
 
 ```
-chasemate
+chasemate-ui
+├── .circleci
+├── .vscode
+├── cypress                 https://www.cypress.io end-to-end tests
+│   ├── fixtures
+│   ├── integration         Test home folder
+│   ├── plugins
+│   ├── support             Custom commands and helper methods
 ├── public
 ├── src
 │   ├── components          Presentational React components
@@ -49,10 +56,11 @@ chasemate
 ├── .eslintrc
 ├── .gitignore
 ├── .prettierc
+├── cypress.json
 ├── LICENSE
-├── README.md
 ├── package-lock.json
 └── package.json
+├── README.md
 ```
 
 ## Built with
