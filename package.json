@@ -42,7 +42,6 @@
     "lodash": "^4.17.11",
     "prism-react-renderer": "^0.1.6",
     "prop-types": "^15.7.2",
-    "query-string": "^6.4.0",
     "react": "^16.8.2",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dnd": "^7.4.5",

@@ -1,5 +1,4 @@
 import fetch from 'cross-fetch';
-import queryString from 'query-string';
 
 const GET_TREE = 'get-tree';
 
@@ -29,12 +28,12 @@ export const maxMovesToDepth = maxMoves => maxMoves * 2;
  * @param {number} params.depth
  */
 const getTree = async ({ type, board, startingColor, depth }) => {
-  const params = queryString.stringify({
+  const params = new URLSearchParams({
     type,
     board: JSON.stringify(board),
     startingColor,
     depth,
-  });
+  }).toString();
   const url = `${process.env.REACT_APP_API_URL}/${GET_TREE}?${params}`;
 
   return fetch(url);
