@@ -5,7 +5,7 @@ const { GET_TREE } = RESOURCES;
 
 const defaultResponse = { data: {}, error: '' };
 
-const checkForcedMateTreeResults = (board = {}, response = defaultResponse, appResults = []) => {
+const assertForcedMateTreeResults = (board = {}, response = defaultResponse, appResults = []) => {
   cy.server();
   cy.route({
     method: 'GET',
@@ -25,27 +25,27 @@ const checkForcedMateTreeResults = (board = {}, response = defaultResponse, appR
   );
 };
 
-const checkResultsByFixture = fixture =>
+const assertResultsByFixture = fixture =>
   cy.fixture(fixture).then(({ board, response, appResults }) => {
-    checkForcedMateTreeResults(board, response, appResults);
+    assertForcedMateTreeResults(board, response, appResults);
   });
 
 context('Results', () => {
   it('should show results when there is a forced checkmate', () => {
-    checkResultsByFixture('forcedMate.json');
+    assertResultsByFixture('forcedMate.json');
   });
 
   it('should show results when there is a forced checkmate with promotions', () => {
-    checkResultsByFixture('forcedMate_promotions.json');
+    assertResultsByFixture('forcedMate_promotions.json');
   });
 
   it('should show an informative message when there are no forced checkmates', () => {
-    checkResultsByFixture('forcedMate_emptyResults.json');
+    assertResultsByFixture('forcedMate_emptyResults.json');
   });
 
   it('should show an error which is contained in the response', () => {
     const error = 'An error occurred';
-    checkForcedMateTreeResults({}, { data: {}, error }, [error]);
+    assertForcedMateTreeResults({}, { data: {}, error }, [error]);
   });
 
   it('should show an error when the server is not available', () => {
