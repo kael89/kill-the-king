@@ -1,3 +1,5 @@
+import { selectInput, selectMenu } from './elements';
+
 /**
  * Transforms a key/value map of HTML data attributes to a CSS selector.
  * Example:
@@ -30,6 +32,7 @@ const dataToSelector = data => {
  * @returns {Chainable<JQuery<HTMLElementTagNameMap[K]>>}
  */
 const getByData = (...dataCollection) => cy.get(dataCollection.map(data => dataToSelector(data)).join(' '));
+
 Cypress.Commands.add('getByData', getByData);
 
 /**
@@ -41,6 +44,7 @@ const typeJson = (subject, json) => {
   const jsonText = Cypress._.isString(json) ? json : JSON.stringify(json);
   return cy.wrap(subject).type(jsonText.replace(/{/g, '{{}'));
 };
+
 Cypress.Commands.add('typeJson', { prevSubject: 'element' }, (subject, json) => typeJson(subject, json));
 
 /**
@@ -59,3 +63,14 @@ const dragAndDrop = (subject, dropSelector) => {
 Cypress.Commands.add('dragAndDrop', { prevSubject: 'element' }, (subject, dropSelector) =>
   dragAndDrop(subject, dropSelector),
 );
+
+/**
+ * @param {string} selectId
+ * @returns {Chainable<JQuery<HTMLElementTagNameMap[K]>>}
+ */
+const openSelectMenu = selectId => {
+  selectInput(selectId).click();
+  return selectMenu(selectId);
+};
+
+Cypress.Commands.add('openSelectMenu', openSelectMenu);

@@ -1,5 +1,5 @@
 import { RESOURCES } from '../../src/modules/api';
-import { actionButton, setting } from '../support';
+import { actionButton, selectInput, setting } from '../support';
 
 const { GET_TREE } = RESOURCES;
 
@@ -57,21 +57,31 @@ context('Settings', () => {
   });
 
   describe('move depth', () => {
-    beforeEach(() => {
-      setting('moveDepth').as('moveDepthSetting');
-      cy.get('@moveDepthSetting')
-        .find('input')
-        .as('moveDepthInput');
-    });
-
-    specify('the default move depth should be 2', () => {
-      cy.get('@moveDepthSetting')
-        .invoke('text')
-        .should('be', '2');
+    it('should have only [1, 2] as available options', () => {
+      cy.openSelectMenu('moveDepth')
+        .find('li')
+        .then($liItems => {
+          const options = $liItems.map((i, $li) => Cypress.$($li).text()).get();
+          cy.wrap(options).should('deep.equal', ['1', '2']);
+        });
     });
 
     specify('user can set the move depth', () => {
-      cy.get('@moveDepthInput').should('not.be.disabled');
+      cy.openSelectMenu('moveDepth')
+        .contains('1')
+        .click();
+
+      actionButton().click();
+      assertQueryParam('@forcedMateTree', 'depth', '2');
+    });
+
+    specify('the default move depth should be 2', () => {
+      selectInput('moveDepth')
+        .invoke('text')
+        .should('equal', '2');
+
+      actionButton().click();
+      assertQueryParam('@forcedMateTree', 'depth', '4');
     });
   });
 });

@@ -24,6 +24,8 @@ export {
   pieceInBoard,
   pieceInSelector,
   results,
+  selectInput,
+  selectMenu,
   setting,
   square,
   themeSwitch,

@@ -20,6 +20,10 @@ export const pieceInSelector = (color, type) =>
 
 export const results = () => cy.getByData({ testid: 'results' });
 
+export const selectInput = id => cy.get(`#select-${id}`);
+
+export const selectMenu = id => cy.get(`#menu-${id}`);
+
 export const setting = name => cy.getByData({ testid: `settings-${camelToKebabCase(name)}` });
 
 export const square = (position = '') =>

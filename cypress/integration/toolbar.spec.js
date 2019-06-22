@@ -106,7 +106,7 @@ context('Toolbar', () => {
         exportDialogContent()
           .invoke('text')
           .then(text => {
-            cy.wrap(JSON.parse(text)).should('be.deep.equal', boardData);
+            cy.wrap(JSON.parse(text)).should('deep.equal', boardData);
           });
       });
     });
@@ -139,7 +139,7 @@ context('Toolbar', () => {
           .contains('button', 'Import')
           .click();
 
-        getBoardObject().should('be.deep.equal', boardData);
+        getBoardObject().should('deep.equal', boardData);
       });
     });
   });
