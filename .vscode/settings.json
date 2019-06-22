@@ -4,13 +4,12 @@
     "chainable",
     "chasemate",
     "compose",
-    "confirmable",
     "devtools",
     "droppable",
     "extension",
-    "inbox",
     "redux",
     "testid",
-    "toolbar"
+    "toolbar",
+    "uncheck"
   ]
 }
