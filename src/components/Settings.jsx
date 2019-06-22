@@ -21,7 +21,7 @@ const Settings = ({ classes, settings, setSetting }) => (
   <Grid container justify="space-around" className={classes.container}>
     <Grid item>
       <FormControlLabel
-        data-testid="setting-starting-color"
+        data-testid="settings-starting-color"
         checked={settings.startingColor === WHITE}
         control={<Switch />}
         label={settings.startingColor === WHITE ? 'White plays first' : 'Black plays first'}
@@ -30,7 +30,7 @@ const Settings = ({ classes, settings, setSetting }) => (
       />
     </Grid>
     <Grid item>
-      <FormControl data-testid="setting-move-depth" className={classes.moveDepthInput}>
+      <FormControl data-testid="settings-move-depth" className={classes.moveDepthInput}>
         <InputLabel htmlFor="settings-moveDepth">Move depth</InputLabel>
         <Select
           inputProps={{
