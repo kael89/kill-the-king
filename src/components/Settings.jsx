@@ -21,7 +21,7 @@ const Settings = ({ classes, settings, setSetting }) => (
   <Grid container justify="space-around" className={classes.container}>
     <Grid item>
       <FormControlLabel
-        data-testid="setting-starting-player"
+        data-testid="setting-starting-color"
         checked={settings.startingColor === WHITE}
         control={<Switch />}
         label={settings.startingColor === WHITE ? 'White plays first' : 'Black plays first'}

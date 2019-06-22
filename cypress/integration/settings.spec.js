@@ -1,27 +1,58 @@
-import { setting } from '../support';
+import { RESOURCES } from '../../src/modules/api';
+import { actionButton, setting } from '../support';
+
+const { GET_TREE } = RESOURCES;
+
+const assertQueryParam = (requestSelector, paramName, paramValue) => {
+  cy.wait(requestSelector).then(({ url }) => {
+    const queryParams = new URLSearchParams(url);
+    cy.wrap(queryParams.get(paramName)).should('equal', paramValue);
+  });
+};
 
 context('Settings', () => {
   beforeEach(() => {
+    cy.server();
+    cy.route({
+      method: 'GET',
+      url: `**/${GET_TREE}?**`,
+      response: {},
+      status: 200,
+    }).as('forcedMateTree');
+
     cy.visit('/');
   });
 
-  describe('starting player', () => {
+  describe('starting color', () => {
     beforeEach(() => {
-      setting('startingPlayer').as('startingPlayerSetting');
-      cy.get('@startingPlayerSetting')
+      setting('startingColor').as('startingColorSetting');
+      cy.get('@startingColorSetting')
         .find('input')
-        .as('startingPlayerInput');
+        .as('startingColorInput');
     });
 
-    specify('the default starting player should be "white"', () => {
-      cy.get('@startingPlayerSetting')
+    specify('user can set the starting color to white', () => {
+      cy.get('@startingColorInput').uncheck();
+      cy.get('@startingColorInput').check();
+
+      actionButton().click();
+      assertQueryParam('@forcedMateTree', 'startingColor', 'white');
+    });
+
+    specify('user can set the starting color to black', () => {
+      cy.get('@startingColorInput').uncheck();
+
+      actionButton().click();
+      assertQueryParam('@forcedMateTree', 'startingColor', 'black');
+    });
+
+    specify('the default starting color should be "white"', () => {
+      cy.get('@startingColorSetting')
         .invoke('text')
         .should('match', /white/i);
-      cy.get('@startingPlayerInput').should('be.checked');
-    });
 
-    specify('user can set the starting player', () => {
-      cy.get('@startingPlayerInput').should('not.be.disabled');
+      actionButton().click();
+      assertQueryParam('@forcedMateTree', 'startingColor', 'white');
     });
   });
 
