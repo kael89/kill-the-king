@@ -1,8 +1,11 @@
 {
   "name": "chasemate-ui",
   "version": "0.1.0",
-  "private": true,
-  "proxy": "http://localhost:8080",
+  "description": "Front-end of Chasemate, a web app that calculates forced mates in a given chess position",
+  "homepage": "https://chasemate.app",
+  "author": "Kostas Karvounis",
+  "license": "GPL 3.0",
+  "main": "src/index.js",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -21,11 +24,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test; node_modules/cypress/bin/cypress run",
+    "lint": "$(npm bin)/eslint **/*.{js,jsx} --ignore-path .gitignore",
+    "test": "react-scripts test",
+    "e2e": "$(npm bin)/cypress run",
+    "test:all": "CI=true npm test; $(npm bin)/cypress run",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",

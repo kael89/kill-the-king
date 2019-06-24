@@ -1,11 +1,28 @@
-version: 2.1
-
+version: 2
 jobs:
-  test:
+  build:
+    docker:
+      - image: cypress/base:11.13.0
     steps:
-      - run: 'npm test'
-
-workflows:
-  test:
-    jobs:
-      - test
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+            - v1-deps-{{ .Branch }}
+            - v1-deps
+      - run:
+          name: Install Dependencies
+          command: npm ci; npm install -g wait-on
+      - save_cache:
+          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+          # cache NPM modules and the folder with the Cypress binary
+          paths:
+            - ~/.npm
+            - ~/.cache
+      - run:
+          name: Lint
+          command: npm run lint
+    branches:
+      only:
+        - master
+        - dev
