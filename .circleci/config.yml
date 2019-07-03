@@ -1,28 +1,94 @@
-version: 2
-jobs:
-  build:
+version: 2.1
+
+orbs:
+  aws-s3: circleci/aws-s3@1.0.0
+
+executors:
+  aws:
+    docker:
+      - image: circleci/python:3.7-node
+  cypress:
     docker:
       - image: cypress/base:11.13.0
+
+commands:
+  npm_install:
+    description: Install npm dependencies
     steps:
       - checkout
       - restore_cache:
-          keys:
-            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-            - v1-deps-{{ .Branch }}
-            - v1-deps
+          key: deps-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
-          name: Install Dependencies
-          command: npm ci; npm install -g wait-on
+          name: Install npm dependencies
+          command: npm ci;
       - save_cache:
-          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-          # cache NPM modules and the folder with the Cypress binary
+          key: deps-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - ~/.npm
-            - ~/.cache
+            - ~/.cache # Cypress binary
+
+jobs:
+  lint:
+    executor: cypress
+    steps:
+      - npm_install
       - run:
           name: Lint
           command: npm run lint
-    branches:
-      only:
-        - master
-        - dev
+  test:
+    executor: cypress
+    steps:
+      - npm_install
+      - run:
+          name: Run unit tests
+          command: npm run test -- --passWithNoTests
+  build_and_deploy:
+    parameters:
+      bucket:
+        type: string
+    executor: aws
+    steps:
+      - checkout
+      - npm_install
+      - run:
+          name: Build static files
+          command: npm run build
+      - aws-s3/copy:
+          from: build
+          to: s3://<< parameters.bucket >>
+          arguments: '--recursive'
+
+workflows:
+  version: 2.1
+  deploy:
+    jobs:
+      - lint:
+          filters:
+            branches:
+              only:
+                - dev
+                - master
+      - test:
+          filters:
+            branches:
+              only:
+                - dev
+                - master
+      - build_and_deploy:
+          requires:
+            - lint
+            - test
+          bucket: chasemate
+          filters:
+            branches:
+              only:
+                - master
+      - build_and_deploy:
+          requires:
+            - lint
+            - test
+          bucket: chasemate-dev
+          filters:
+            branches:
+              only:
+                - dev
