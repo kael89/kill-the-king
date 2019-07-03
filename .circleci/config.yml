@@ -65,6 +65,7 @@ jobs:
           from: /tmp/workspace/build
           to: s3://<< parameters.bucket >>
           arguments: '--recursive'
+          #
 
 workflows:
   deploy:
