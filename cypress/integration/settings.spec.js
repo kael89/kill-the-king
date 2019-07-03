@@ -9,6 +9,7 @@ context('Settings', () => {
     cy.route({
       method: 'GET',
       url: `**/${GET_TREE}?**`,
+      response: {},
     }).as('forcedMateTree');
 
     cy.visit('/');

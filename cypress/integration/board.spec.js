@@ -58,6 +58,7 @@ context('Board', () => {
     cy.route({
       method: 'GET',
       url: `**/${GET_TREE}?**`,
+      response: {},
     }).as('forcedMateTree');
 
     cy.fixture('board.json').then(setBoard);
