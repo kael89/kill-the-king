@@ -17,12 +17,12 @@ commands:
     steps:
       - checkout
       - restore_cache:
-          key: deps-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "package.json" }}
+          key: deps-{{ checksum "package.json" }}
       - run:
           name: Install npm dependencies
           command: npm ci;
       - save_cache:
-          key: deps-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "package.json" }}
+          key: deps-{{ checksum "package.json" }}
           paths:
             - ~/.npm
             - ~/.cache # Cypress binary
@@ -42,41 +42,56 @@ jobs:
       - run:
           name: Run unit tests
           command: npm run test -- --passWithNoTests
-  build_and_deploy:
+  build:
+    executor: cypress
+    steps:
+      - npm_install
+      - run:
+          name: Build static files
+          command: npm run build
+      - persist_to_workspace:
+          root: /root/project
+          paths:
+            - build
+  deploy:
     parameters:
       bucket:
         type: string
     executor: aws
     steps:
-      - checkout
-      - npm_install
-      - run:
-          name: Build static files
-          command: npm run build
+      - attach_workspace:
+          at: /tmp/workspace
       - aws-s3/copy:
-          from: build
+          from: /tmp/workspace/build
           to: s3://<< parameters.bucket >>
           arguments: '--recursive'
 
 workflows:
-  version: 2.1
   deploy:
     jobs:
       - lint
       - test
-      - build_and_deploy:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+                - dev
+      - deploy:
           requires:
             - lint
             - test
+            - build
           bucket: chasemate
           filters:
             branches:
               only:
                 - master
-      - build_and_deploy:
+      - deploy:
           requires:
             - lint
             - test
+            - build
           bucket: chasemate-dev
           filters:
             branches:
