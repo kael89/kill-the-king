@@ -62,18 +62,8 @@ workflows:
   version: 2.1
   deploy:
     jobs:
-      - lint:
-          filters:
-            branches:
-              only:
-                - dev
-                - master
-      - test:
-          filters:
-            branches:
-              only:
-                - dev
-                - master
+      - lint
+      - test
       - build_and_deploy:
           requires:
             - lint
