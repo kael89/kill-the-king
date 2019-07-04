@@ -48,7 +48,7 @@ jobs:
       - npm_install
       - run:
           name: Build static files
-          command: npm run build
+          command: source .circleci/setup_env.sh && npm run build
       - persist_to_workspace:
           root: /root/project
           paths:
