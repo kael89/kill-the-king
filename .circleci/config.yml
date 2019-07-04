@@ -1,6 +1,7 @@
 version: 2.1
 
 orbs:
+  aws-cli: circleci/aws-cli@0.1.13
   aws-s3: circleci/aws-s3@1.0.0
 
 executors:
@@ -12,6 +13,20 @@ executors:
       - image: cypress/base:11.13.0
 
 commands:
+  aws_s3_clean:
+    description: Removes all contents from an AWS S3 bucket
+    parameters:
+      target:
+        type: string
+    steps:
+      - aws-cli/install
+      - aws-cli/configure:
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          aws-region: AWS_REGION
+      - run:
+          name: S3 Delete all contents in << parameters.target >>
+          command: "aws s3 rm << parameters.target >> --recursive"
   npm_install:
     description: Install npm dependencies
     steps:
@@ -65,10 +80,12 @@ jobs:
     steps:
       - attach_workspace:
           at: /tmp/workspace
+      - aws_s3_clean:
+          target: s3://<< parameters.bucket >>
       - aws-s3/copy:
           from: /tmp/workspace/build
           to: s3://<< parameters.bucket >>
-          arguments: '--recursive'
+          arguments: --recursive
 
 workflows:
   deploy:
