@@ -1,8 +1,6 @@
 import { CssBaseline, Grid } from '@material-ui/core';
 import classnames from 'classnames';
 import React from 'react';
-import { DragDropContextProvider } from 'react-dnd';
-import html5Backend from 'react-dnd-html5-backend';
 import { Provider } from 'react-redux';
 
 import ActionButton from '../containers/ActionButton';
@@ -17,7 +15,7 @@ import { COLOR } from '../modules/chess';
 import { DIALOG } from '../modules/ui';
 import propTypes from '../propTypes';
 import store from '../store';
-import { withThemeAndStyles, withDragDropContext } from '../utils';
+import { withDragDropContext, withThemeAndStyles } from '../utils';
 import Header from './Header';
 import PieceSelector from './PieceSelector';
 import SocialLinks from './SocialLinks';

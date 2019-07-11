@@ -9,8 +9,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "lint": "eslint **/*.{js,jsx} --ignore-path .gitignore",
-    "lint:fix": "npm run lint -- --fix && prettier **/*.{json,md} --write --ignore-path .gitignore",
+    "lint": "eslint \"**/*.{js,jsx}\" --ignore-path .gitignore",
+    "lint:fix": "npm run lint -- --fix & prettier \"**/*.{json,md}\" --write --ignore-path .gitignore",
     "test": "react-scripts test",
     "test:e2e": "cypress run",
     "test:all": "CI=true npm test -- --passWithNoTests; npm run test:e2e",
