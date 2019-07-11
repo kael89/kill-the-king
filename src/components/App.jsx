@@ -17,7 +17,7 @@ import { COLOR } from '../modules/chess';
 import { DIALOG } from '../modules/ui';
 import propTypes from '../propTypes';
 import store from '../store';
-import { withThemeAndStyles } from '../utils';
+import { withThemeAndStyles, withDragDropContext } from '../utils';
 import Header from './Header';
 import PieceSelector from './PieceSelector';
 import SocialLinks from './SocialLinks';
@@ -51,52 +51,50 @@ const styles = theme => ({
 const App = ({ classes }) => (
   <Provider store={store}>
     <ThemeProvider>
-      <DragDropContextProvider backend={html5Backend}>
-        <CssBaseline />
+      <CssBaseline />
 
-        <Grid container className={classes.container}>
-          <Grid item xs={12}>
-            <Header />
+      <Grid container className={classes.container}>
+        <Grid item xs={12}>
+          <Header />
+        </Grid>
+        <Grid item xs={12} align="center" className={classes.pieceSelectorContainer}>
+          <PieceSelector color={BLACK} />
+        </Grid>
+        <Grid item xs={12} container>
+          <Grid item xs={3}>
+            <Toolbar />
           </Grid>
-          <Grid item xs={12} align="center" className={classes.pieceSelectorContainer}>
-            <PieceSelector color={BLACK} />
-          </Grid>
-          <Grid item xs={12} container>
-            <Grid item xs={3}>
-              <Toolbar />
-            </Grid>
-            <Grid item xs={6} container alignItems="center" direction="column">
-              <Grid item className={classes.boardContainer}>
-                <Board />
-              </Grid>
-            </Grid>
-            <Grid item xs={3} container direction="column">
-              <Results />
-              <AvailableMoves />
-              <MoveHistory />
+          <Grid item xs={6} container alignItems="center" direction="column">
+            <Grid item className={classes.boardContainer}>
+              <Board />
             </Grid>
           </Grid>
-          <Grid item xs={12} align="center" className={classes.pieceSelectorContainer}>
-            <PieceSelector color={WHITE} />
-          </Grid>
-          <Grid item xs={12} container>
-            <Grid item xs={3} />
-            <Grid item xs={6}>
-              <Settings />
-            </Grid>
-            <Grid item xs={3} />
-          </Grid>
-          <Grid item xs={12} container align="center">
-            <Grid item xs={3} />
-            <Grid item xs={6}>
-              <ActionButton />
-            </Grid>
-            <Grid item xs={3} align="right">
-              <SocialLinks />
-            </Grid>
+          <Grid item xs={3} container direction="column">
+            <Results />
+            <AvailableMoves />
+            <MoveHistory />
           </Grid>
         </Grid>
-      </DragDropContextProvider>
+        <Grid item xs={12} align="center" className={classes.pieceSelectorContainer}>
+          <PieceSelector color={WHITE} />
+        </Grid>
+        <Grid item xs={12} container>
+          <Grid item xs={3} />
+          <Grid item xs={6}>
+            <Settings />
+          </Grid>
+          <Grid item xs={3} />
+        </Grid>
+        <Grid item xs={12} container align="center">
+          <Grid item xs={3} />
+          <Grid item xs={6}>
+            <ActionButton />
+          </Grid>
+          <Grid item xs={3} align="right">
+            <SocialLinks />
+          </Grid>
+        </Grid>
+      </Grid>
       <ConfirmationDialog id={PIECE_CHANGE_CONFIRMATION} title="Warning">
         This will clear current results. Continue?
       </ConfirmationDialog>
@@ -113,4 +111,4 @@ App.propTypes = {
   classes: propTypes.classes.isRequired,
 };
 
-export default withThemeAndStyles(App, styles);
+export default withDragDropContext(withThemeAndStyles(App, styles));

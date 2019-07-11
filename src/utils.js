@@ -1,4 +1,6 @@
 import { withStyles, withTheme } from '@material-ui/core';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 const JSON_INDENTATION = 2;
 
@@ -32,3 +34,5 @@ export const showError = error => {
 
 export const withThemeAndStyles = (Component, styles = {}) =>
   withTheme()(withStyles(styles)(Component));
+
+export const withDragDropContext = DragDropContext(HTML5Backend);
