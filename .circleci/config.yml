@@ -90,8 +90,20 @@ jobs:
 workflows:
   deploy:
     jobs:
-      - lint
-      - test
+      - lint:
+          filters:
+            branches:
+              only:
+                - feature
+                - master
+                - dev
+      - test:
+          filters:
+            branches:
+              only:
+                - feature
+                - master
+                - dev
       - build:
           filters:
             branches:
