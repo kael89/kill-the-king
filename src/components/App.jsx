@@ -101,7 +101,10 @@ const App = ({ classes }) => (
         This will clear current results. Continue?
       </ConfirmationDialog>
       <ExportDialog id={EXPORT} PaperProps={{ className: classes.dialog }} />
-      <ImportDialog id={IMPORT} PaperProps={{ className: classnames(classes.dialog, classes.importDialog) }} />
+      <ImportDialog
+        id={IMPORT}
+        PaperProps={{ className: classnames(classes.dialog, classes.importDialog) }}
+      />
     </ThemeProvider>
   </Provider>
 );

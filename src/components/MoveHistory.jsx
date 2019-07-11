@@ -46,7 +46,11 @@ const BaseMoveRow = ({ classes, id, moveData, onMoveSelect }) => (
 
       return (
         <TableCell key={boardId} className={classes.move}>
-          {boardId === -1 ? '' : <MoveButton onClick={() => onMoveSelect(moveId, boardId)} {...moveDatum} />}
+          {boardId === -1 ? (
+            ''
+          ) : (
+            <MoveButton onClick={() => onMoveSelect(moveId, boardId)} {...moveDatum} />
+          )}
         </TableCell>
       );
     })}
@@ -92,7 +96,12 @@ const MoveHistory = ({ classes, moveData, startingColor, onMoveSelect }) => {
           </TableHead>
           <TableBody>
             {chunk(sanitizedMoveData, 2).map((movePair, rowId) => (
-              <MoveRow key={movePair[0].boardId} id={rowId} moveData={movePair} onMoveSelect={onMoveSelect} />
+              <MoveRow
+                key={movePair[0].boardId}
+                id={rowId}
+                moveData={movePair}
+                onMoveSelect={onMoveSelect}
+              />
             ))}
           </TableBody>
         </Table>

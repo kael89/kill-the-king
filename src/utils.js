@@ -30,4 +30,5 @@ export const showError = error => {
   alert(error);
 };
 
-export const withThemeAndStyles = (Component, styles = {}) => withTheme()(withStyles(styles)(Component));
+export const withThemeAndStyles = (Component, styles = {}) =>
+  withTheme()(withStyles(styles)(Component));

@@ -9,4 +9,7 @@ import rootReducer from './rootReducer';
 // eslint-disable-next-line no-underscore-dangle
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default createStore(rootReducer, composeEnhancers(applyMiddleware(pieceChangeMiddleware, thunkMiddleware)));
+export default createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(pieceChangeMiddleware, thunkMiddleware)),
+);

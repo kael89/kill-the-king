@@ -1,5 +1,13 @@
 import { RESOURCES } from '../../src/modules/api';
-import { actionButton, getBoardObject, pieceInBoard, pieceInSelector, setBoard, square, themeSwitch } from '../support';
+import {
+  actionButton,
+  getBoardObject,
+  pieceInBoard,
+  pieceInSelector,
+  setBoard,
+  square,
+  themeSwitch,
+} from '../support';
 
 const { GET_TREE } = RESOURCES;
 

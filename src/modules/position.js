@@ -14,7 +14,8 @@ export const rowIdToString = rowId => rowId + 1;
  * @param {Coordinates}
  * @returns {string}
  */
-export const coordinatesToPosition = ({ rowId, columnId }) => `${columnIdToString(columnId)}${rowIdToString(rowId)}`;
+export const coordinatesToPosition = ({ rowId, columnId }) =>
+  `${columnIdToString(columnId)}${rowIdToString(rowId)}`;
 
 /**
  *

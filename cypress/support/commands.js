@@ -31,7 +31,8 @@ const dataToSelector = data => {
  * @param {Object} [data={}]
  * @returns {Chainable<JQuery<HTMLElementTagNameMap[K]>>}
  */
-const getByData = (...dataCollection) => cy.get(dataCollection.map(data => dataToSelector(data)).join(' '));
+const getByData = (...dataCollection) =>
+  cy.get(dataCollection.map(data => dataToSelector(data)).join(' '));
 
 Cypress.Commands.add('getByData', getByData);
 
@@ -45,7 +46,9 @@ const typeJson = (subject, json) => {
   return cy.wrap(subject).type(jsonText.replace(/{/g, '{{}'));
 };
 
-Cypress.Commands.add('typeJson', { prevSubject: 'element' }, (subject, json) => typeJson(subject, json));
+Cypress.Commands.add('typeJson', { prevSubject: 'element' }, (subject, json) =>
+  typeJson(subject, json),
+);
 
 /**
  * @param {Chainable<Subject>} subject

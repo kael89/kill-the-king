@@ -54,7 +54,9 @@ class Square extends React.Component {
         data-testid="square"
         data-piece={JSON.stringify(piece)}
         data-position={position}
-        className={classnames(classes.container, classes[colorClass], { [classes.selected]: selected })}
+        className={classnames(classes.container, classes[colorClass], {
+          [classes.selected]: selected,
+        })}
       >
         {piece ? <DraggablePiece hinted={hinted} piece={piece} /> : null}
       </div>
