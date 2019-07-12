@@ -1,7 +1,5 @@
 import { BoardJsonError, validateBoardJson } from './validateBoardJson';
 
-// TODO duplicate keys?
-
 describe('validateBoardJson', () => {
   it('should not throw an error if the input is valid', () => {
     const input = JSON.stringify({
@@ -25,11 +23,16 @@ describe('validateBoardJson', () => {
     expect(() => validateBoardJson('[]')).toThrow(BoardJsonError);
   });
 
-  it('should throw an error if a position has invalid format', () => {
-    const input = JSON.stringify({
-      random: { type: 'pawn', color: 'black', position: 'A2' },
+  it('should throw an error if a position is invalid', () => {
+    const input1 = JSON.stringify({
+      random: { type: 'pawn', color: 'black', position: 'A1' },
     });
-    expect(() => validateBoardJson(input)).toThrow(BoardJsonError);
+    const input2 = JSON.stringify({
+      a1: { type: 'pawn', color: 'black', position: 'A1' },
+    });
+
+    expect(() => validateBoardJson(input1)).toThrow(BoardJsonError);
+    expect(() => validateBoardJson(input2)).toThrow(BoardJsonError);
   });
 
   it('should throw an error if a position is outside boundaries', () => {
@@ -72,6 +75,18 @@ describe('validateBoardJson', () => {
     expect(() => validateBoardJson(input)).toThrow(BoardJsonError);
   });
 
+  it('should throw an error if a type is invalid', () => {
+    const input1 = JSON.stringify({
+      A1: { type: 'random', color: 'black', position: 'A1' },
+    });
+    const input2 = JSON.stringify({
+      A1: { type: 'Pawn', color: 'black', position: 'A1' },
+    });
+
+    expect(() => validateBoardJson(input1)).toThrow(BoardJsonError);
+    expect(() => validateBoardJson(input2)).toThrow(BoardJsonError);
+  });
+
   it('should throw an error if a piece does not have a color', () => {
     const input = JSON.stringify({
       A1: { type: 'pawn', position: 'A1' },
@@ -80,12 +95,16 @@ describe('validateBoardJson', () => {
     expect(() => validateBoardJson(input)).toThrow(BoardJsonError);
   });
 
-  it('should throw an error if a piece does not have a position', () => {
-    const input = JSON.stringify({
-      A1: { color: 'black', position: 'A1' },
+  it('should throw an error if a color is invalid', () => {
+    const input1 = JSON.stringify({
+      A1: { type: 'pawn', color: 'random', position: 'A1' },
+    });
+    const input2 = JSON.stringify({
+      A1: { type: 'pawn', color: 'Black', position: 'A1' },
     });
 
-    expect(() => validateBoardJson(input)).toThrow(BoardJsonError);
+    expect(() => validateBoardJson(input1)).toThrow(BoardJsonError);
+    expect(() => validateBoardJson(input2)).toThrow(BoardJsonError);
   });
 
   it('should throw an error if a piece does not have a position', () => {
@@ -94,6 +113,18 @@ describe('validateBoardJson', () => {
     });
 
     expect(() => validateBoardJson(input)).toThrow(BoardJsonError);
+  });
+
+  it('should throw an error if a piece position is invalid', () => {
+    const input1 = JSON.stringify({
+      A1: { type: 'pawn', color: 'random', position: 'random' },
+    });
+    const input2 = JSON.stringify({
+      A1: { type: 'pawn', color: 'Black', position: 'a1' },
+    });
+
+    expect(() => validateBoardJson(input1)).toThrow(BoardJsonError);
+    expect(() => validateBoardJson(input2)).toThrow(BoardJsonError);
   });
 
   it('should throw an error if a piece has an invalid property', () => {
@@ -112,5 +143,3 @@ describe('validateBoardJson', () => {
     expect(() => validateBoardJson(input)).toThrow(BoardJsonError);
   });
 });
-
-// TODO invalid prop values
