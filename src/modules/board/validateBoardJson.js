@@ -19,6 +19,12 @@ export const validateBoardJson = json => {
     throw new BoardJsonError(error.message);
   }
 
+  if (typeof object !== 'object' || Array.isArray(object)) {
+    throw new BoardJsonError(
+      'Input must be a JSON object, with positions as keys and piece data as values',
+    );
+  }
+
   Object.entries(object).forEach(([key, value]) => {
     validatePosition(key);
     validatePiece(value);

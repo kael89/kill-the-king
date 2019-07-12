@@ -1,2 +1,2 @@
 export { INITIAL_BOARD, addPiece, removePiece, movePiece } from './board';
-export { validateBoardJson } from './validateBoardJson';
+export { BoardJsonError, validateBoardJson } from './validateBoardJson';

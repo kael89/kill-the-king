@@ -1,7 +1,6 @@
 import { BoardJsonError, validateBoardJson } from './validateBoardJson';
 
 // TODO duplicate keys?
-// TODO upper/lowercase?
 
 describe('validateBoardJson', () => {
   it('should not throw an error if the input is valid', () => {
@@ -17,8 +16,13 @@ describe('validateBoardJson', () => {
   });
 
   it('should throw an error if the input is not a valid json', () => {
-    expect(() => validateBoardJson('a')).toThrow(BoardJsonError); // TODO message?
-    expect(() => validateBoardJson('')).toThrow(BoardJsonError); // TODO test empty?
+    expect(() => validateBoardJson('{ a: }')).toThrow(BoardJsonError);
+  });
+
+  it('should throw an error if the input is not an object', () => {
+    expect(() => validateBoardJson('"a"')).toThrow(BoardJsonError);
+    expect(() => validateBoardJson('3')).toThrow(BoardJsonError);
+    expect(() => validateBoardJson('[]')).toThrow(BoardJsonError);
   });
 
   it('should throw an error if a position has invalid format', () => {

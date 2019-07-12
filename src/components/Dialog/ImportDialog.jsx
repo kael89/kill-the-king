@@ -26,8 +26,17 @@ class ImportDialog extends React.Component {
   }
 
   handleInputChange(input) {
+    let errorMessage = '';
+    if (input.trim()) {
+      try {
+        validateBoardJson(input.trim());
+      } catch (error) {
+        errorMessage = error.message;
+      }
+    }
+
     this.setState({
-      error: input.trim() ? validateBoardJson(input) : '',
+      error: errorMessage,
       input,
     });
   }
