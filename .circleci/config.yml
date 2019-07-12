@@ -56,7 +56,7 @@ jobs:
       - npm_install
       - run:
           name: Run unit tests
-          command: npm run test -- --passWithNoTests
+          command: npm run test
       - run:
           name: Run end-to-end tests
           command: npm run start & npm run test:e2e

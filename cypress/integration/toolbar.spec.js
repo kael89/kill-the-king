@@ -68,11 +68,14 @@ context('Toolbar', () => {
       getBoardObject().should('be.empty');
     });
 
-    it('cannot import invalid data', () => {
+    it.only('cannot import invalid data', () => {
       cy.get('@importInput').type('Random data');
       cy.get('@importButton').should('be.disabled');
       getBoardObject().should('be.empty');
-      cy.get('@importDialog').should('contain', 'Invalid data');
+      cy.get('@importDialog')
+        .find('label')
+        .invoke('text')
+        .should('not.be.empty');
     });
 
     it('can import valid data', () => {

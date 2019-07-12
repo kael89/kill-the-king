@@ -13,7 +13,7 @@
     "lint:fix": "npm run lint -- --fix & prettier \"**/*.{json,md}\" --write --ignore-path .gitignore",
     "test": "react-scripts test",
     "test:e2e": "cypress run",
-    "test:all": "CI=true npm test -- --passWithNoTests; npm run test:e2e",
+    "test:all": "CI=true npm test; npm run test:e2e",
     "eject": "react-scripts eject"
   },
   "browserslist": [
