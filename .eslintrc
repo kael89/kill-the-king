@@ -13,6 +13,7 @@
   "rules": {
     "no-continue": "off",
     "no-plusplus": "off",
+    "no-use-before-define": ["error", { "functions": false, "variables": false }],
     "import/prefer-default-export": "off",
     "prettier/prettier": "error",
     "simple-import-sort/sort": "error"
