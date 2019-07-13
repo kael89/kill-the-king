@@ -5,6 +5,12 @@ import HTML5Backend from 'react-dnd-html5-backend';
 const JSON_INDENTATION = 2;
 
 /**
+ * @param {*} value
+ * @returns {boolean}
+ */
+export const isHashObject = value => value && typeof value === 'object' && !Array.isArray(value);
+
+/**
  * @param {string} json
  * @returns {string}
  */

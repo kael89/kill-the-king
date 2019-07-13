@@ -1,5 +1,7 @@
 import { forOwn, has } from 'lodash';
 
+import { isHashObject } from '../../utils';
+
 export class BoardJsonError extends Error {
   constructor(message) {
     super(message);
@@ -19,10 +21,8 @@ export const validateBoardJson = json => {
     throw new BoardJsonError(error.message);
   }
 
-  if (typeof object !== 'object' || Array.isArray(object)) {
-    throw new BoardJsonError(
-      'Input must be a JSON object, with positions as keys and piece data as values',
-    );
+  if (!isHashObject(object)) {
+    throw new BoardJsonError('Input must be an object');
   }
 
   Object.entries(object).forEach(([key, value]) => {
@@ -30,7 +30,7 @@ export const validateBoardJson = json => {
     validatePiece(value);
     if (key !== value.position) {
       throw new BoardJsonError(
-        `Position key ${key} is different than piece position ${value.position}`,
+        `Position '${key}' is different than piece position '${value.position}'`,
       );
     }
   });
@@ -42,9 +42,7 @@ export const validateBoardJson = json => {
  */
 const validatePosition = position => {
   if (!position.match(/^[A-H][1-8]$/i)) {
-    throw new BoardJsonError(
-      `Invalid position ${position}, must be a combination of column [A-H] and row [1-8]`,
-    );
+    throw new BoardJsonError(`Invalid position '${position}'`);
   }
 };
 
@@ -54,15 +52,19 @@ const validatePosition = position => {
  * @throws {BoardJsonError}
  */
 const validatePiece = piece => {
-  const requiredProps = ['type', 'color', 'position'];
-  requiredProps.forEach(prop => {
-    if (!has(piece, prop)) {
-      throw new BoardJsonError(`Property ${prop} is required`);
-    }
-  });
+  if (!isHashObject(piece)) {
+    throw new BoardJsonError('Piece must be an object');
+  }
 
   forOwn(piece, (value, prop) => {
     validatePieceProperty(prop, value);
+  });
+
+  const requiredProps = ['type', 'color', 'position'];
+  requiredProps.forEach(prop => {
+    if (!has(piece, prop)) {
+      throw new BoardJsonError(`Piece ${prop} is required`);
+    }
   });
 };
 
@@ -75,18 +77,18 @@ const validatePieceProperty = (name, value) => {
   switch (name) {
     case 'type':
       if (!['bishop', 'king', 'knight', 'pawn', 'queen', 'rook'].includes(value)) {
-        throw new BoardJsonError(`Invalid type ${value}`);
+        throw new BoardJsonError(`Invalid type '${value}'`);
       }
       break;
     case 'color':
       if (!['black', 'white'].includes(value)) {
-        throw new BoardJsonError(`Invalid color ${value}`);
+        throw new BoardJsonError(`Invalid color '${value}'`);
       }
       break;
     case 'position':
       validatePosition(value);
       break;
     default:
-      throw new BoardJsonError(`Invalid piece property: ${JSON.stringify(value)}`);
+      throw new BoardJsonError(`Invalid property '${name}'`);
   }
 };
