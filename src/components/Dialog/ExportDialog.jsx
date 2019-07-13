@@ -26,7 +26,11 @@ const ExportDialog = ({ board, classes, onClose, ...otherProps }) => {
     <Dialog data-testid="export-dialog" onClose={onClose} {...dialogProps}>
       <DialogTitle>Export</DialogTitle>
       <DialogContent data-testid="export-dialog-content" className={classes.content}>
-        <CopyToClipboardButton data-testid="export-dialog-copy-button" text={exportData} className={classes.copyIcon} />
+        <CopyToClipboardButton
+          data-testid="export-dialog-copy-button"
+          text={exportData}
+          className={classes.copyIcon}
+        />
         <CodeBlock code={exportData} language="json" />
       </DialogContent>
       <DialogActions>

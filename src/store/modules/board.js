@@ -129,7 +129,13 @@ export const setResetBoardId = () => ({
  * Middleware
  */
 const shouldConfirmChange = (state, action) => {
-  const restrictedActionsTypes = [ADD_PIECE, CLEAR_BOARD, MOVE_PIECE, REMOVE_PIECE, SETUP_DEFAULT_BOARD];
+  const restrictedActionsTypes = [
+    ADD_PIECE,
+    CLEAR_BOARD,
+    MOVE_PIECE,
+    REMOVE_PIECE,
+    SETUP_DEFAULT_BOARD,
+  ];
 
   if (!restrictedActionsTypes.includes(action.type)) {
     return false;

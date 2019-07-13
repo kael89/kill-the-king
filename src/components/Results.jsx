@@ -26,7 +26,13 @@ const Results = ({ error, onMoveSelect, moveData, loading }) => {
 
         {moveData.map(moveDatum => {
           const { boardId, move } = moveDatum;
-          return <MoveButton key={move} onClick={() => onMoveSelect(moveDatum, boardId)} {...moveDatum} />;
+          return (
+            <MoveButton
+              key={move}
+              onClick={() => onMoveSelect(moveDatum, boardId)}
+              {...moveDatum}
+            />
+          );
         })}
       </div>
     );

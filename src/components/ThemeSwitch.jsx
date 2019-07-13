@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const ThemeSwitch = ({ onChange }) => (
-  <FormControlLabel data-testid="theme-switch" onChange={onChange} control={<Switch />} label="Dark Theme" />
+  <FormControlLabel
+    data-testid="theme-switch"
+    onChange={onChange}
+    control={<Switch />}
+    label="Dark Theme"
+  />
 );
 
 ThemeSwitch.propTypes = {

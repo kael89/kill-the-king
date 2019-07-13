@@ -36,5 +36,7 @@ export default {
     startingColor: PropTypes.string.isRequired,
     maxMoves: PropTypes.number.isRequired,
   }),
-  theme: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.string])),
+  theme: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.string]),
+  ),
 };

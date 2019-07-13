@@ -1,8 +1,6 @@
 import { CssBaseline, Grid } from '@material-ui/core';
 import classnames from 'classnames';
 import React from 'react';
-import { DragDropContextProvider } from 'react-dnd';
-import html5Backend from 'react-dnd-html5-backend';
 import { Provider } from 'react-redux';
 
 import ActionButton from '../containers/ActionButton';
@@ -17,7 +15,7 @@ import { COLOR } from '../modules/chess';
 import { DIALOG } from '../modules/ui';
 import propTypes from '../propTypes';
 import store from '../store';
-import { withThemeAndStyles } from '../utils';
+import { withDragDropContext, withThemeAndStyles } from '../utils';
 import Header from './Header';
 import PieceSelector from './PieceSelector';
 import SocialLinks from './SocialLinks';
@@ -51,57 +49,58 @@ const styles = theme => ({
 const App = ({ classes }) => (
   <Provider store={store}>
     <ThemeProvider>
-      <DragDropContextProvider backend={html5Backend}>
-        <CssBaseline />
+      <CssBaseline />
 
-        <Grid container className={classes.container}>
-          <Grid item xs={12}>
-            <Header />
+      <Grid container className={classes.container}>
+        <Grid item xs={12}>
+          <Header />
+        </Grid>
+        <Grid item xs={12} align="center" className={classes.pieceSelectorContainer}>
+          <PieceSelector color={BLACK} />
+        </Grid>
+        <Grid item xs={12} container>
+          <Grid item xs={3}>
+            <Toolbar />
           </Grid>
-          <Grid item xs={12} align="center" className={classes.pieceSelectorContainer}>
-            <PieceSelector color={BLACK} />
-          </Grid>
-          <Grid item xs={12} container>
-            <Grid item xs={3}>
-              <Toolbar />
-            </Grid>
-            <Grid item xs={6} container alignItems="center" direction="column">
-              <Grid item className={classes.boardContainer}>
-                <Board />
-              </Grid>
-            </Grid>
-            <Grid item xs={3} container direction="column">
-              <Results />
-              <AvailableMoves />
-              <MoveHistory />
+          <Grid item xs={6} container alignItems="center" direction="column">
+            <Grid item className={classes.boardContainer}>
+              <Board />
             </Grid>
           </Grid>
-          <Grid item xs={12} align="center" className={classes.pieceSelectorContainer}>
-            <PieceSelector color={WHITE} />
-          </Grid>
-          <Grid item xs={12} container>
-            <Grid item xs={3} />
-            <Grid item xs={6}>
-              <Settings />
-            </Grid>
-            <Grid item xs={3} />
-          </Grid>
-          <Grid item xs={12} container align="center">
-            <Grid item xs={3} />
-            <Grid item xs={6}>
-              <ActionButton />
-            </Grid>
-            <Grid item xs={3} align="right">
-              <SocialLinks />
-            </Grid>
+          <Grid item xs={3} container direction="column">
+            <Results />
+            <AvailableMoves />
+            <MoveHistory />
           </Grid>
         </Grid>
-      </DragDropContextProvider>
+        <Grid item xs={12} align="center" className={classes.pieceSelectorContainer}>
+          <PieceSelector color={WHITE} />
+        </Grid>
+        <Grid item xs={12} container>
+          <Grid item xs={3} />
+          <Grid item xs={6}>
+            <Settings />
+          </Grid>
+          <Grid item xs={3} />
+        </Grid>
+        <Grid item xs={12} container align="center">
+          <Grid item xs={3} />
+          <Grid item xs={6}>
+            <ActionButton />
+          </Grid>
+          <Grid item xs={3} align="right">
+            <SocialLinks />
+          </Grid>
+        </Grid>
+      </Grid>
       <ConfirmationDialog id={PIECE_CHANGE_CONFIRMATION} title="Warning">
         This will clear current results. Continue?
       </ConfirmationDialog>
       <ExportDialog id={EXPORT} PaperProps={{ className: classes.dialog }} />
-      <ImportDialog id={IMPORT} PaperProps={{ className: classnames(classes.dialog, classes.importDialog) }} />
+      <ImportDialog
+        id={IMPORT}
+        PaperProps={{ className: classnames(classes.dialog, classes.importDialog) }}
+      />
     </ThemeProvider>
   </Provider>
 );
@@ -110,4 +109,4 @@ App.propTypes = {
   classes: propTypes.classes.isRequired,
 };
 
-export default withThemeAndStyles(App, styles);
+export default withDragDropContext(withThemeAndStyles(App, styles));
