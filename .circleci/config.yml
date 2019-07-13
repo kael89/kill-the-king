@@ -59,7 +59,7 @@ jobs:
           command: npm run test
       - run:
           name: Run end-to-end tests
-          command: npm run start & npm run test:e2e
+          command: npm run test:e2e
 
   build:
     executor: cypress

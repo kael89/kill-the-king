@@ -12,7 +12,7 @@
     "lint": "eslint \"**/*.{js,jsx}\" --ignore-path .gitignore",
     "lint:fix": "npm run lint -- --fix & prettier \"**/*.{json,md}\" --write --ignore-path .gitignore",
     "test": "react-scripts test",
-    "test:e2e": "cypress run",
+    "test:e2e": "npm run start & wait-on http://localhost:3000 && cypress run",
     "test:all": "CI=true npm test; npm run test:e2e",
     "eject": "react-scripts eject"
   },
@@ -39,7 +39,8 @@
     "react-redux": "^6.0.0",
     "react-scripts": "2.1.5",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "wait-on": "^3.3.0"
   },
   "devDependencies": {
     "babel-eslint": "9.0.0",
