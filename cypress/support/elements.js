@@ -13,7 +13,8 @@ export const exportDialogCopyButton = () => cy.getByData({ testid: 'export-dialo
 
 export const importDialog = () => cy.getByData({ testid: 'import-dialog' });
 
-export const pieceInBoard = position => cy.getByData({ testid: 'square', position }, { testid: 'piece' });
+export const pieceInBoard = position =>
+  cy.getByData({ testid: 'square', position }, { testid: 'piece' });
 
 export const pieceInSelector = (color, type) =>
   cy.getByData({ testid: 'piece-selector' }, { testid: 'piece', color, type });
@@ -31,4 +32,5 @@ export const square = (position = '') =>
 
 export const themeSwitch = () => cy.getByData({ testid: 'theme-switch' });
 
-export const toolbarButton = text => cy.contains('[data-testid=toolbar-button]', new RegExp(text, 'i'));
+export const toolbarButton = text =>
+  cy.contains('[data-testid=toolbar-button]', new RegExp(text, 'i'));

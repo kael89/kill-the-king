@@ -1,7 +1,6 @@
-import { isValidJson } from '../utils';
-import { COLOR } from './chess';
-import { stringToMove } from './move';
-import { PIECE_TYPE } from './piece';
+import { COLOR } from '../chess';
+import { stringToMove } from '../move';
+import { PIECE_TYPE } from '../piece';
 
 const { BLACK, WHITE } = COLOR;
 const { PAWN, KNIGHT, BISHOP, ROOK, KING, QUEEN } = PIECE_TYPE;
@@ -70,9 +69,3 @@ export const movePiece = (board, moveString) => {
   const newBoard = removePiece(board, source);
   return addPiece(newBoard, piece);
 };
-
-/**
- * @param {string} json
- * @returns {string} The error message, or empty string if no errors were detected
- */
-export const validateBoardJson = json => (isValidJson(json) ? '' : 'Invalid data');

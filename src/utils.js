@@ -1,20 +1,14 @@
 import { withStyles, withTheme } from '@material-ui/core';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 const JSON_INDENTATION = 2;
 
 /**
- * @param {string} json
+ * @param {*} value
  * @returns {boolean}
  */
-export const isValidJson = json => {
-  try {
-    JSON.parse(json);
-  } catch (e) {
-    return false;
-  }
-
-  return true;
-};
+export const isHashObject = value => value && typeof value === 'object' && !Array.isArray(value);
 
 /**
  * @param {string} json
@@ -30,4 +24,7 @@ export const showError = error => {
   alert(error);
 };
 
-export const withThemeAndStyles = (Component, styles = {}) => withTheme()(withStyles(styles)(Component));
+export const withThemeAndStyles = (Component, styles = {}) =>
+  withTheme()(withStyles(styles)(Component));
+
+export const withDragDropContext = DragDropContext(HTML5Backend);

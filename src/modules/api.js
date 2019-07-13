@@ -41,4 +41,5 @@ const getTree = async ({ type, board, startingColor, depth }) => {
 
 export const getGameTree = async params => getTree({ ...params, type: TREE_TYPE.GAME });
 
-export const getForcedMateTree = async params => getTree({ ...params, type: TREE_TYPE.FORCED_MATE });
+export const getForcedMateTree = async params =>
+  getTree({ ...params, type: TREE_TYPE.FORCED_MATE });

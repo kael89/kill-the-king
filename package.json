@@ -6,28 +6,14 @@
   "author": "Kostas Karvounis",
   "license": "GPL 3.0",
   "main": "src/index.js",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx}": [
-      "eslint --fix",
-      "git add"
-    ],
-    "*.{json,md}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "lint": "eslint **/*.{js,jsx} --ignore-path .gitignore",
+    "lint": "eslint \"**/*.{js,jsx}\" --ignore-path .gitignore",
+    "lint:fix": "npm run lint -- --fix & prettier \"**/*.{json,md}\" --write --ignore-path .gitignore",
     "test": "react-scripts test",
-    "test:e2e": "cypress run",
-    "test:all": "CI=true npm test -- --passWithNoTests; npm run test:e2e",
+    "test:e2e": "npm run start & wait-on http://localhost:3000 && cypress run",
+    "test:all": "CI=true npm test; npm run test:e2e",
     "eject": "react-scripts eject"
   },
   "browserslist": [
@@ -53,7 +39,8 @@
     "react-redux": "^6.0.0",
     "react-scripts": "2.1.5",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "wait-on": "^3.3.0"
   },
   "devDependencies": {
     "babel-eslint": "9.0.0",
@@ -67,8 +54,6 @@
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-simple-import-sort": "^3.0.0",
-    "husky": "^1.3.1",
-    "lint-staged": "^8.1.4",
     "prettier": "^1.16.4"
   }
 }
