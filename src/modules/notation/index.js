@@ -1,0 +1,1 @@
+export { getMoveNotation } from './notation';

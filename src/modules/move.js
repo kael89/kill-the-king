@@ -2,7 +2,7 @@
  * @param {string} moveString
  * @returns {Move}
  */
-export const stringToMove = moveString => {
+export const parseMoveString = moveString => {
   const regexp = /([A-H][1-8])-([A-H][1-8])(=([bnqr]))?/i;
   const [, source, target, , promotion] = moveString.match(regexp);
 

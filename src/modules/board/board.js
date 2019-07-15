@@ -1,4 +1,4 @@
-import { stringToMove } from '../move';
+import { parseMoveString } from '../move';
 
 /**
  * @param {Board} board
@@ -26,7 +26,7 @@ export const removePiece = (board, position) => {
  * @returns {Board}
  */
 export const movePiece = (board, moveString) => {
-  const { source, target } = stringToMove(moveString);
+  const { source, target } = parseMoveString(moveString);
   const piece = { ...board[source] };
   piece.position = target;
 
