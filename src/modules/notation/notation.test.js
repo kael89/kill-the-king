@@ -30,11 +30,13 @@ describe('getMoveNotation', () => {
   it('should return the notation for a promotion move', () => {
     const board = { B7: { type: PAWN, color: WHITE, position: 'B7' } };
 
-    expect(getMoveNotation(board, 'B7-B8=Q', ['B7-B8=Q'])).toEqual({
-      pieceCode: PieceCodes[WHITE][PAWN],
-      text: 'b8=',
-      promotionCode: PieceCodes[WHITE][QUEEN],
-    });
+    expect(getMoveNotation(board, 'B7-B8=Q', ['B7-B8=B', 'B7-B8=N', 'B7-B8=Q', 'B7-B8=R'])).toEqual(
+      {
+        pieceCode: PieceCodes[WHITE][PAWN],
+        text: 'b8=',
+        promotionCode: PieceCodes[WHITE][QUEEN],
+      },
+    );
   });
 
   it('should specify the column for an ambiguous move', () => {

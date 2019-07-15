@@ -78,7 +78,7 @@ class NotationCalculator {
       const piece = this.getPieceAtPosition(source);
 
       const isIdenticalPiece = piece.type === type;
-      const isDifferentPiece = move !== this.move;
+      const isDifferentPiece = source !== this.source;
       const hasSameTarget = parseMoveString(move).target === this.target;
 
       return isIdenticalPiece && isDifferentPiece && hasSameTarget;
