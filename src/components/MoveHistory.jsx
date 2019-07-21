@@ -67,14 +67,15 @@ BaseMoveRow.propTypes = {
 const MoveRow = withThemeAndStyles(BaseMoveRow, styles);
 
 const sanitizeMoveData = (moveData, startingColor) => {
-  const movePlaceholder = { boardId: -1, move: '', notation: { pieceCode: '', text: '' } };
+  const emptyMove = { boardId: -1, move: '', notation: { pieceCode: '', text: '' } };
 
   const result = [...moveData];
-  if (moveData.length > 0 && startingColor === BLACK) {
-    result.unshift(movePlaceholder);
+  if (result.length > 0 && startingColor === BLACK) {
+    result.unshift(emptyMove);
   }
-  if (moveData.length % 2 === 1) {
-    result.push(movePlaceholder);
+  if (result.length % 2 === 1) {
+    // Make result length even for consistent line width
+    result.push(emptyMove);
   }
 
   return result;
