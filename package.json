@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "description": "Front-end of Chasemate, a web app that calculates forced mates in a given chess position",
   "homepage": "https://chasemate.app",
+  "repository": {
+    "type": "git",
+    "url": "https://https://github.com/kael89/chasemate-ui"
+  },
   "author": "Kostas Karvounis",
-  "license": "GPL 3.0",
+  "license": "GPL-3.0-or-later",
   "main": "src/index.js",
   "scripts": {
     "start": "react-scripts start",
