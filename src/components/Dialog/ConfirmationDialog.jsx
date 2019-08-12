@@ -1,6 +1,6 @@
 import {
   Button,
-  Dialog,
+  Dialog as DialogMaterial,
   DialogActions,
   DialogContent,
   DialogContentText,
@@ -8,9 +8,13 @@ import {
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { hideDialog } from '../../store/ui/actions';
+import Dialog from './Dialog';
 
 const ConfirmationDialog = ({ children, onClose, onConfirm, open, title }) => (
-  <Dialog open={open}>
+  <DialogMaterial open={open}>
     <DialogTitle>{title}</DialogTitle>
     <DialogContent>
       <DialogContentText>{children}</DialogContentText>
@@ -23,7 +27,7 @@ const ConfirmationDialog = ({ children, onClose, onConfirm, open, title }) => (
         OK
       </Button>
     </DialogActions>
-  </Dialog>
+  </DialogMaterial>
 );
 
 ConfirmationDialog.propTypes = {
@@ -39,4 +43,28 @@ ConfirmationDialog.defaultProps = {
   title: '',
 };
 
-export default ConfirmationDialog;
+const mapStateToProps = state => ({
+  onConfirm: state.confirmationDialog.onConfirm,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onConfirm: callback => {
+    if (callback) {
+      callback();
+    }
+    dispatch(hideDialog());
+  },
+});
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...ownProps,
+  ...stateProps,
+  ...dispatchProps,
+  onConfirm: () => dispatchProps.onConfirm(stateProps.onConfirm),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps,
+)(Dialog(ConfirmationDialog));

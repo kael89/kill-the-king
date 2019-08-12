@@ -36,8 +36,7 @@ chasemate-ui
 │   ├── support             Custom commands and helper methods
 ├── public
 ├── src
-│   ├── components          Presentational React components
-│   ├── containers          React components connected to the Redux state
+│   ├── components          React components
 │   ├── images
 │   ├── modules             Entity-specific methods
 │   ├── store               Redux store

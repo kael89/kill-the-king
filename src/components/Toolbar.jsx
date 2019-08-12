@@ -7,12 +7,7 @@ import {
 } from '@material-ui/icons';
 import React from 'react';
 
-import {
-  ClearButton,
-  DefaultBoardButton,
-  ExportButton,
-  ImportButton,
-} from '../containers/ToolbarButton';
+import { ClearButton, DefaultBoardButton, ExportButton, ImportButton } from './ToolbarButton';
 
 const Toolbar = () => (
   <>

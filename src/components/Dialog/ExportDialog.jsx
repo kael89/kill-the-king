@@ -1,11 +1,20 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
+import {
+  Button,
+  Dialog as DialogMaterial,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from '@material-ui/core';
+import { last } from 'lodash';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 
 import propTypes from '../../propTypes';
 import { printJson, withThemeAndStyles } from '../../utils';
 import CodeBlock from '../CodeBlock';
 import CopyToClipboardButton from '../CopyToClipboardButton';
+import Dialog from './Dialog';
 
 const styles = theme => ({
   content: {
@@ -23,7 +32,7 @@ const ExportDialog = ({ board, classes, onClose, ...otherProps }) => {
   const { dispatch, ...dialogProps } = otherProps;
 
   return (
-    <Dialog data-testid="export-dialog" onClose={onClose} {...dialogProps}>
+    <DialogMaterial data-testid="export-dialog" onClose={onClose} {...dialogProps}>
       <DialogTitle>Export</DialogTitle>
       <DialogContent data-testid="export-dialog-content" className={classes.content}>
         <CopyToClipboardButton
@@ -38,7 +47,7 @@ const ExportDialog = ({ board, classes, onClose, ...otherProps }) => {
           OK
         </Button>
       </DialogActions>
-    </Dialog>
+    </DialogMaterial>
   );
 };
 
@@ -54,4 +63,8 @@ ExportDialog.defaultProps = {
   PaperProps: {},
 };
 
-export default withThemeAndStyles(ExportDialog, styles);
+const mapStateToProps = state => ({
+  board: last(state.board.history),
+});
+
+export default connect(mapStateToProps)(Dialog(withThemeAndStyles(ExportDialog, styles)));

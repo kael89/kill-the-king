@@ -1,6 +1,6 @@
 import {
   Button,
-  Dialog,
+  Dialog as DialogMaterial,
   DialogActions,
   DialogContent,
   DialogContentText,
@@ -8,9 +8,13 @@ import {
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 
 import { validateBoardJson } from '../../modules/board';
+import { importBoard } from '../../store/board/actions';
+import { hideDialog } from '../../store/ui/actions';
 import CodeInput from '../CodeInput';
+import Dialog from './Dialog';
 
 class ImportDialog extends React.Component {
   constructor(props) {
@@ -66,7 +70,7 @@ class ImportDialog extends React.Component {
     const hasInput = !!input.trim();
 
     return (
-      <Dialog {...otherProps} data-testid="import-dialog" onClose={this.handleClose}>
+      <DialogMaterial {...otherProps} data-testid="import-dialog" onClose={this.handleClose}>
         <DialogTitle>Import</DialogTitle>
         <DialogContent>
           <DialogContentText>Paste your data here:</DialogContentText>
@@ -86,7 +90,7 @@ class ImportDialog extends React.Component {
             Import
           </Button>
         </DialogActions>
-      </Dialog>
+      </DialogMaterial>
     );
   }
 }
@@ -97,4 +101,14 @@ ImportDialog.propTypes = {
   open: PropTypes.bool.isRequired,
 };
 
-export default ImportDialog;
+const mapDispatchToProps = dispatch => ({
+  onImport: boardJson => {
+    dispatch(importBoard(boardJson));
+    dispatch(hideDialog());
+  },
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Dialog(ImportDialog));

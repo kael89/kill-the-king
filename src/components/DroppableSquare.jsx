@@ -1,8 +1,8 @@
 import React from 'react';
 import { DropTarget } from 'react-dnd';
 
-import Square from '../containers/Square';
 import { DRAGGABLE } from '../modules/ui';
+import Square from './Square';
 
 const { PIECE } = DRAGGABLE;
 

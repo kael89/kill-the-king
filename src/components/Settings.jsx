@@ -9,9 +9,11 @@ import {
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 
 import { COLOR } from '../modules/chess';
 import propTypes from '../propTypes';
+import { setSetting as setSettingAction } from '../store/settings/actions';
 import { withThemeAndStyles } from '../utils';
 
 const { BLACK, WHITE } = COLOR;
@@ -62,4 +64,15 @@ Settings.propTypes = {
   setSetting: PropTypes.func.isRequired,
 };
 
-export default withThemeAndStyles(Settings, styles);
+const mapStateToProps = state => ({
+  settings: state.settings,
+});
+
+const mapDispatchToProps = dispatch => ({
+  setSetting: (name, value) => dispatch(setSettingAction({ [name]: value })),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withThemeAndStyles(Settings, styles));

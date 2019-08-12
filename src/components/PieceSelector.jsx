@@ -2,10 +2,10 @@ import { Paper } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import DraggablePiece from '../containers/DraggablePiece';
 import { PIECE_TYPE } from '../modules/piece';
 import propTypes from '../propTypes';
 import { withThemeAndStyles } from '../utils';
+import DraggablePiece from './DraggablePiece';
 
 const styles = {
   container: {

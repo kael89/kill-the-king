@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 
-import ToolbarButton from '../../components/ToolbarButton';
 import { DIALOG } from '../../modules/ui';
 import { showDialog } from '../../store/ui/actions';
+import ToolbarButton from './ToolbarButton';
 
 const { IMPORT } = DIALOG;
 
