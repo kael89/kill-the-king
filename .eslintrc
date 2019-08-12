@@ -11,6 +11,7 @@
     "node": true
   },
   "rules": {
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": ["cypress/**/*"] }],
     "import/prefer-default-export": "off",
     "no-continue": "off",
     "no-plusplus": "off",

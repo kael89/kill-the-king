@@ -17,6 +17,7 @@ export const addPiece = (board, piece) => {
 export const removePiece = (board, position) => {
   const newBoard = { ...board };
   delete newBoard[position];
+
   return newBoard;
 };
 
@@ -29,7 +30,7 @@ export const movePiece = (board, moveString) => {
   const { source, target } = parseMoveString(moveString);
   const piece = { ...board[source] };
   piece.position = target;
-
   const newBoard = removePiece(board, source);
+
   return addPiece(newBoard, piece);
 };

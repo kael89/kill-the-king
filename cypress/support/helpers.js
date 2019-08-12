@@ -13,13 +13,6 @@ export const assertQueryParam = (requestSelector, paramName, paramValue) => {
 };
 
 /**
- *
- * @param {string} text
- * @returns {string}
- */
-export const camelToKebabCase = text => Cypress._.snakeCase(text).replace('_', '-');
-
-/**
  * @returns {Board}
  */
 export const getBoardObject = () =>
