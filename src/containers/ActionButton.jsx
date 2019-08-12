@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import ActionButton from '../components/ActionButton';
 import { maxMovesToDepth } from '../modules/api';
-import { fetchForcedMateTree } from '../store/modules/results';
+import { fetchForcedMateTree } from '../store/results/actions';
 
 const mapStateToProps = state => ({
   board: Object.values(last(state.board.history)),

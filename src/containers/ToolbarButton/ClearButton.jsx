@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import ToolbarButton from '../../components/ToolbarButton';
-import { clearBoard } from '../../store/modules/board';
+import { clearBoard } from '../../store/board/actions';
 
 const mapDispatchToProps = dispatch => ({
   onClick: () => dispatch(clearBoard()),

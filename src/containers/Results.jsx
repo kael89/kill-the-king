@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 
 import Results from '../components/Results';
 import { getMoveData } from '../modules/moveData';
-import { playMove, revertBoard } from '../store/modules/board';
-import { clearMoveHistory } from '../store/modules/moveHistory';
+import { playMove, revertBoard } from '../store/board/actions';
+import { clearMoveHistory } from '../store/moveHistory/actions';
 
 const mapStateToProps = state => {
   const { history, resetBoardId } = state.board;

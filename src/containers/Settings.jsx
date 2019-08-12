@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import Settings from '../components/Settings';
-import { setSetting } from '../store/modules/settings';
+import { setSetting } from '../store/settings/actions';
 
 const mapStateToProps = state => ({
   settings: state.settings,

@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 
 import MoveButton from '../components/MoveButton';
 import { movePiece } from '../modules/board';
-import { setHint } from '../store/modules/board';
-import { hideBoardHint, showBoardHint } from '../store/modules/ui';
+import { setHint } from '../store/board/actions';
+import { hideBoardHint, showBoardHint } from '../store/ui/actions';
 
 const mapStateToProps = (state, ownProps) => ({
   board: ownProps.boardId ? state.board.history[ownProps.boardId] : {},

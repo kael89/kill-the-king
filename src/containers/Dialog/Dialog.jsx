@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { hideDialog } from '../../store/modules/ui';
+import { hideDialog } from '../../store/ui/actions';
 
 const mapStateToProps = (state, ownProps) => ({
   open: state.ui.visibleDialog === ownProps.id,

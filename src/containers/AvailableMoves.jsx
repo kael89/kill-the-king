@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import AvailableMoves from '../components/AvailableMoves';
 import { getMoveData } from '../modules/moveData';
-import { playMove } from '../store/modules/board';
+import { playMove } from '../store/board';
 
 const mapStateToProps = state => {
   const {

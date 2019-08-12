@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { ConfirmationDialog } from '../../components/Dialog';
-import { hideDialog } from '../../store/modules/ui';
+import { hideDialog } from '../../store/ui/actions';
 import Dialog from './Dialog';
 
 const mapStateToProps = state => ({

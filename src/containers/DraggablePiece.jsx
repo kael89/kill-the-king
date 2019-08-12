@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import DraggablePiece from '../components/DraggablePiece';
 import { moveToString } from '../modules/move';
-import { addPiece, movePiece, removePiece } from '../store/modules/board';
+import { addPiece, movePiece, removePiece } from '../store/board/actions';
 
 const mapDispatchToProps = dispatch => ({
   onDrop: (piece, dropData) => {

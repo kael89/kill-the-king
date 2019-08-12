@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import ToolbarButton from '../../components/ToolbarButton';
 import { DIALOG } from '../../modules/ui';
-import { showDialog } from '../../store/modules/ui';
+import { showDialog } from '../../store/ui/actions';
 
 const { EXPORT } = DIALOG;
 

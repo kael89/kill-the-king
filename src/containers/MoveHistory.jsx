@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 
 import MoveHistory from '../components/MoveHistory';
-import { revertBoard } from '../store/modules/board';
-import { restoreMove } from '../store/modules/moveHistory';
+import { revertBoard } from '../store/board/actions';
+import { restoreMove } from '../store/moveHistory/actions';
 
 const mapStateToProps = state => ({
   moveData: state.moveHistory,

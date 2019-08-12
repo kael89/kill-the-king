@@ -1,10 +1,6 @@
-import { APP_NAME } from '../../constants';
 import { DEFAULT_SETTINGS } from '../../modules/settings';
+import { SET_SETTING } from './actions';
 
-/* Actions */
-const SET_SETTING = `${APP_NAME}/settings/SET_SETTING`;
-
-/* Reducer */
 export default function reducer(settings = DEFAULT_SETTINGS, action) {
   switch (action.type) {
     case SET_SETTING: {
@@ -18,9 +14,3 @@ export default function reducer(settings = DEFAULT_SETTINGS, action) {
     }
   }
 }
-
-/* Action Creators */
-export const setSetting = setting => ({
-  setting,
-  type: SET_SETTING,
-});

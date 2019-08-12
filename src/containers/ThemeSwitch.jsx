@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import ThemeSwitch from '../components/ThemeSwitch';
-import { changeTheme } from '../store/modules/ui';
+import { changeTheme } from '../store/ui/actions';
 import themes, { THEME_NAME } from '../themes';
 
 const { DARK, LIGHT } = THEME_NAME;
