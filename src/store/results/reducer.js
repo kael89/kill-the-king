@@ -3,7 +3,7 @@ import {
   INVALIDATE_FORCED_MATE_TREE,
   RECEIVE_FORCED_MATE_TREE,
   REQUEST_FORCED_MATE_TREE,
-} from '../results/actions';
+} from './actions';
 
 const defaultResults = {
   data: null,
