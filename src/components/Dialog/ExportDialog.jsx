@@ -1,6 +1,6 @@
 import {
   Button,
-  Dialog as DialogMaterial,
+  Dialog as DialogMui,
   DialogActions,
   DialogContent,
   DialogTitle,
@@ -32,7 +32,7 @@ const ExportDialog = ({ board, classes, onClose, ...otherProps }) => {
   const { dispatch, ...dialogProps } = otherProps;
 
   return (
-    <DialogMaterial data-testid="export-dialog" onClose={onClose} {...dialogProps}>
+    <DialogMui data-testid="export-dialog" onClose={onClose} {...dialogProps}>
       <DialogTitle>Export</DialogTitle>
       <DialogContent data-testid="export-dialog-content" className={classes.content}>
         <CopyToClipboardButton
@@ -47,7 +47,7 @@ const ExportDialog = ({ board, classes, onClose, ...otherProps }) => {
           OK
         </Button>
       </DialogActions>
-    </DialogMaterial>
+    </DialogMui>
   );
 };
 

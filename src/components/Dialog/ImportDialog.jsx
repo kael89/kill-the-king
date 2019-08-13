@@ -1,6 +1,6 @@
 import {
   Button,
-  Dialog as DialogMaterial,
+  Dialog as DialogMui,
   DialogActions,
   DialogContent,
   DialogContentText,
@@ -70,7 +70,7 @@ class ImportDialog extends React.Component {
     const hasInput = !!input.trim();
 
     return (
-      <DialogMaterial {...otherProps} data-testid="import-dialog" onClose={this.handleClose}>
+      <DialogMui {...otherProps} data-testid="import-dialog" onClose={this.handleClose}>
         <DialogTitle>Import</DialogTitle>
         <DialogContent>
           <DialogContentText>Paste your data here:</DialogContentText>
@@ -90,7 +90,7 @@ class ImportDialog extends React.Component {
             Import
           </Button>
         </DialogActions>
-      </DialogMaterial>
+      </DialogMui>
     );
   }
 }

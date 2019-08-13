@@ -1,6 +1,6 @@
 import {
   Button,
-  Dialog as DialogMaterial,
+  Dialog as DialogMui,
   DialogActions,
   DialogContent,
   DialogContentText,
@@ -14,7 +14,7 @@ import { hideDialog } from '../../store/ui/actions';
 import Dialog from './Dialog';
 
 const ConfirmationDialog = ({ children, onClose, onConfirm, open, title }) => (
-  <DialogMaterial open={open}>
+  <DialogMui open={open}>
     <DialogTitle>{title}</DialogTitle>
     <DialogContent>
       <DialogContentText>{children}</DialogContentText>
@@ -27,7 +27,7 @@ const ConfirmationDialog = ({ children, onClose, onConfirm, open, title }) => (
         OK
       </Button>
     </DialogActions>
-  </DialogMaterial>
+  </DialogMui>
 );
 
 ConfirmationDialog.propTypes = {
