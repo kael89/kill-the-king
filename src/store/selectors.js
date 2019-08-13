@@ -3,18 +3,22 @@ import { get } from 'lodash';
 import { getMoveNotation } from '../modules/notation/notation';
 import { getBoardById, getCurrentBoardId } from './board/selectors';
 
-const getCurrentChessTree = state => {
+export const getPlayedMovesByBoardId = (state, boardId) => {
+  const playedMovesCount = boardId - state.board.resetBoardId;
+  return state.moveHistory.slice(0, playedMovesCount).map(moveDatum => moveDatum.move);
+};
+
+const getChessTreeByBoardId = (state, boardId) => {
   const {
-    moveHistory,
     results: { data },
   } = state;
-  const playedMoves = moveHistory.map(moveDatum => moveDatum.move);
+  const playedMoves = getPlayedMovesByBoardId(state, boardId);
 
   return get(data, playedMoves, data);
 };
 
 export const getMoveDataByBoardId = (state, boardId) => {
-  const chessTree = getCurrentChessTree(state);
+  const chessTree = getChessTreeByBoardId(state, boardId);
   if (chessTree === null) {
     return [];
   }

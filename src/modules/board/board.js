@@ -1,4 +1,4 @@
-import { parseMoveString } from '../move';
+import { parseMoveString } from '../../utilities/move';
 
 /**
  * @param {Board} board

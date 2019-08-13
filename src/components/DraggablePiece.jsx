@@ -2,10 +2,10 @@ import React from 'react';
 import { DragSource } from 'react-dnd';
 import { connect } from 'react-redux';
 
-import { moveToString } from '../modules/move';
 import { DRAGGABLE } from '../modules/ui';
 import { addPiece, movePiece, removePiece } from '../store/board/actions';
 import { withThemeAndStyles } from '../utilities/generic';
+import { moveToString } from '../utilities/move';
 import Piece from './Piece';
 
 const { PIECE } = DRAGGABLE;

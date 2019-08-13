@@ -10,7 +10,6 @@ export const parseMoveString = moveString => {
 };
 
 /**
- *
  * @param {Move} move
  * @returns {string}
  */

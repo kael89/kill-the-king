@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { columnIdToString, coordinatesToPosition, rowIdToString } from '../modules/position';
 import propTypes from '../propTypes';
 import { withThemeAndStyles } from '../utilities/generic';
+import { columnIdToString, coordinatesToPosition, rowIdToString } from '../utilities/position';
 import DroppableSquare from './DroppableSquare';
 import { SQUARE_SIZE } from './Square';
 

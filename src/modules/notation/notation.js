@@ -1,5 +1,5 @@
 import { PieceCodes } from '../../constants';
-import { parseMoveString } from '../move';
+import { parseMoveString } from '../../utilities/move';
 import { parsePromotion } from '../piece';
 
 class NotationCalculator {
