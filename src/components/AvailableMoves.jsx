@@ -1,12 +1,12 @@
 import { Typography } from '@material-ui/core';
-import { get, isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { getMoveData } from '../modules/moveData';
 import propTypes from '../propTypes';
 import { playMove } from '../store/board/actions';
+import { isCheckmateFound } from '../store/results/selectors';
+import { getMoveDataForCurrentBoard } from '../store/selectors';
 import ExpansionPanel from './ExpansionPanel';
 import MoveButton from './MoveButton';
 
@@ -38,20 +38,10 @@ AvailableMoves.defaultProps = {
   moveData: null,
 };
 
-const mapStateToProps = state => {
-  const {
-    board: { history },
-    moveHistory,
-    results: { data },
-  } = state;
-  const chessTree = get(data, moveHistory.map(moveDatum => moveDatum.move), data);
-  const boardId = history.length - 1;
-
-  return {
-    checkmateFound: !isEmpty(data),
-    moveData: getMoveData(chessTree, history[boardId], boardId),
-  };
-};
+const mapStateToProps = state => ({
+  checkmateFound: isCheckmateFound(state),
+  moveData: getMoveDataForCurrentBoard(state),
+});
 
 const mapDispatchToProps = dispatch => ({
   onMoveSelect: moveDatum => dispatch(playMove(moveDatum)),

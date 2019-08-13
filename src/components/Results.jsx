@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { getMoveData } from '../modules/moveData';
 import propTypes from '../propTypes';
 import { playMove, revertBoard } from '../store/board/actions';
 import { clearMoveHistory } from '../store/moveHistory/actions';
+import { getMoveDataForResetBoard } from '../store/selectors';
 import ExpansionPanel from './ExpansionPanel';
 import MoveButton from './MoveButton';
 import Spinner from './Spinner';
@@ -63,13 +63,13 @@ Results.defaultProps = {
 };
 
 const mapStateToProps = state => {
-  const { history, resetBoardId } = state.board;
+  const { resetBoardId } = state.board;
   const { data, loading, error } = state.results;
 
   return {
     error,
     loading,
-    moveData: data !== null ? getMoveData(data, history[resetBoardId], resetBoardId) : null,
+    moveData: data && getMoveDataForResetBoard(state),
     resetBoardId,
   };
 };
