@@ -1,6 +1,6 @@
 import { ADD_MOVE, CLEAR_MOVE_HISTORY, RESTORE_MOVE } from './actions';
 
-export default function reducer(moveHistory = [], action) {
+export default (moveHistory = [], action) => {
   switch (action.type) {
     case ADD_MOVE:
       return [...moveHistory, action.moveDatum];
@@ -12,4 +12,4 @@ export default function reducer(moveHistory = [], action) {
     default:
       return moveHistory;
   }
-}
+};

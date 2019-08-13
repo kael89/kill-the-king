@@ -8,8 +8,7 @@ const defaultState = {
   visibleDialog: '',
 };
 
-/* Reducer */
-export default function reducer(ui = defaultState, action) {
+export default (ui = defaultState, action) => {
   switch (action.type) {
     case CHANGE_THEME:
       return { ...ui, theme: action.theme };
@@ -21,4 +20,4 @@ export default function reducer(ui = defaultState, action) {
       return ui;
     }
   }
-}
+};

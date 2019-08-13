@@ -11,7 +11,7 @@ const defaultResults = {
   error: '',
 };
 
-export default function reducer(results = defaultResults, action) {
+export default (results = defaultResults, action) => {
   switch (action.type) {
     case CLEAR_RESULTS:
       return defaultResults;
@@ -24,4 +24,4 @@ export default function reducer(results = defaultResults, action) {
     default:
       return results;
   }
-}
+};

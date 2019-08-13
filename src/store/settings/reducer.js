@@ -1,7 +1,7 @@
 import { DEFAULT_SETTINGS } from '../../modules/settings';
 import { SET_SETTING } from './actions';
 
-export default function reducer(settings = DEFAULT_SETTINGS, action) {
+export default (settings = DEFAULT_SETTINGS, action) => {
   switch (action.type) {
     case SET_SETTING: {
       const { setting } = action;
@@ -13,4 +13,4 @@ export default function reducer(settings = DEFAULT_SETTINGS, action) {
       return settings;
     }
   }
-}
+};
