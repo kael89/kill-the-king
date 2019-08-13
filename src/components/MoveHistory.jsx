@@ -2,12 +2,15 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/c
 import chunk from 'lodash/chunk';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 
-import MoveButton from '../containers/MoveButton';
 import { COLOR } from '../modules/chess';
 import propTypes from '../propTypes';
+import { revertBoard } from '../store/board/actions';
+import { restoreMove } from '../store/moveHistory/actions';
 import { withThemeAndStyles } from '../utils';
 import ExpansionPanel from './ExpansionPanel';
+import MoveButton from './MoveButton';
 
 const { BLACK } = COLOR;
 
@@ -67,14 +70,15 @@ BaseMoveRow.propTypes = {
 const MoveRow = withThemeAndStyles(BaseMoveRow, styles);
 
 const sanitizeMoveData = (moveData, startingColor) => {
-  const movePlaceholder = { boardId: -1, move: '', notation: { pieceCode: '', text: '' } };
+  const emptyMove = { boardId: -1, move: '', notation: { pieceCode: '', text: '' } };
 
   const result = [...moveData];
-  if (moveData.length > 0 && startingColor === BLACK) {
-    result.unshift(movePlaceholder);
+  if (result.length > 0 && startingColor === BLACK) {
+    result.unshift(emptyMove);
   }
-  if (moveData.length % 2 === 1) {
-    result.push(movePlaceholder);
+  if (result.length % 2 === 1) {
+    // Make result length even for consistent line width
+    result.push(emptyMove);
   }
 
   return result;
@@ -117,4 +121,19 @@ MoveHistory.propTypes = {
   startingColor: PropTypes.string.isRequired,
 };
 
-export default withThemeAndStyles(MoveHistory, styles);
+const mapStateToProps = state => ({
+  moveData: state.moveHistory,
+  startingColor: state.settings.startingColor,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onMoveSelect: (index, boardId) => {
+    dispatch(restoreMove(index));
+    dispatch(revertBoard(boardId + 1));
+  },
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withThemeAndStyles(MoveHistory, styles));

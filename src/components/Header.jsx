@@ -1,9 +1,9 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
 
-import ThemeSwitch from '../containers/ThemeSwitch';
 import propTypes from '../propTypes';
 import { withThemeAndStyles } from '../utils';
+import ThemeSwitch from './ThemeSwitch';
 
 const styles = theme => ({
   container: {

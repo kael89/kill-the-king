@@ -1,7 +1,9 @@
 import { Grid } from '@material-ui/core';
 import classnames from 'classnames';
+import last from 'lodash/last';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 
 import { columnIdToString, coordinatesToPosition, rowIdToString } from '../modules/position';
 import propTypes from '../propTypes';
@@ -109,4 +111,10 @@ Board.propTypes = {
   showHint: PropTypes.bool.isRequired,
 };
 
-export default withThemeAndStyles(Board, styles);
+const mapStateToProps = state => ({
+  board: last(state.board.history),
+  hint: state.board.hint,
+  showHint: state.ui.hintVisible,
+});
+
+export default connect(mapStateToProps)(withThemeAndStyles(Board, styles));

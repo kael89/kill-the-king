@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "target": "es2017"
+  },
+  "include": ["src"]
+}

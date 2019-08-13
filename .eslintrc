@@ -3,19 +3,21 @@
   "extends": ["airbnb", "prettier", "prettier/react"],
   "plugins": ["cypress", "react", "prettier", "simple-import-sort"],
   "env": {
-    "node": true,
-    "es6": true,
     "browser": true,
+    "cypress/globals": true,
+    "es6": true,
     "jest": true,
     "mocha": true,
-    "cypress/globals": true
+    "node": true
   },
   "rules": {
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": ["cypress/**/*"] }],
+    "import/prefer-default-export": "off",
     "no-continue": "off",
     "no-plusplus": "off",
     "no-use-before-define": ["error", { "functions": false, "variables": false }],
-    "import/prefer-default-export": "off",
     "prettier/prettier": "error",
+    "radix": "off",
     "simple-import-sort/sort": "error"
   }
 }

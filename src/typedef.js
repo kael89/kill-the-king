@@ -16,6 +16,7 @@
  * @typedef {Object} Move
  * @property {string} source
  * @property {string} target
+ * @property {string} [promotion]
  */
 
 /**
@@ -28,8 +29,8 @@
 /**
  * @typedef {Object} Notation
  * @property {string} pieceCode
- * @property {string} promotionCode
  * @property {string} text
+ * @property {string} [promotionCode]
  */
 
 /**

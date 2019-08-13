@@ -1,10 +1,14 @@
 {
   "name": "chasemate-ui",
   "version": "0.1.0",
-  "description": "Front-end of Chasemate, a web app that calculates forced mates in a given chess position",
+  "description": "Front-end of Chasemate, a web app that calculates forced checkmates in a given chess position",
   "homepage": "https://chasemate.app",
+  "repository": {
+    "type": "git",
+    "url": "https://https://github.com/kael89/chasemate-ui"
+  },
   "author": "Kostas Karvounis",
-  "license": "GPL 3.0",
+  "license": "GPL-3.0-or-later",
   "main": "src/index.js",
   "scripts": {
     "start": "react-scripts start",
@@ -14,6 +18,7 @@
     "test": "react-scripts test",
     "test:e2e": "npm run start & wait-on http://localhost:3000 && cypress run",
     "test:all": "CI=true npm test; npm run test:e2e",
+    "ts:check": "tsc -p jsconfig.json",
     "eject": "react-scripts eject"
   },
   "browserslist": [
@@ -23,12 +28,11 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "@babel/polyfill": "^7.2.5",
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
     "classnames": "^2.2.6",
     "cross-fetch": "^3.0.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.14",
     "prism-react-renderer": "^0.1.6",
     "prop-types": "^15.7.2",
     "react": "^16.8.2",
@@ -37,23 +41,29 @@
     "react-dnd-html5-backend": "^7.4.4",
     "react-dom": "^16.8.2",
     "react-redux": "^6.0.0",
-    "react-scripts": "2.1.5",
+    "react-scripts": "3.0.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "typescript": "^3.5.3",
     "wait-on": "^3.3.0"
   },
   "devDependencies": {
-    "babel-eslint": "9.0.0",
-    "cypress": "^3.3.1",
-    "eslint": "5.12.0",
+    "@types/classnames": "^2.2.9",
+    "@types/jest": "^24.0.15",
+    "@types/lodash": "^4.14.136",
+    "@types/node": "^12.7.1",
+    "@types/react-copy-to-clipboard": "^4.2.6",
+    "@types/react-dom": "^16.8.5",
+    "@types/react-redux": "^7.1.1",
+    "cypress": "^3.4.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-cypress": "^2.2.1",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.0.1",
-    "eslint-plugin-react": "^7.12.4",
-    "eslint-plugin-simple-import-sort": "^3.0.0",
+    "eslint-plugin-react": "^7.14.2",
+    "eslint-plugin-simple-import-sort": "^4.0.0",
     "prettier": "^1.16.4"
   }
 }

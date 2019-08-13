@@ -1,6 +1,7 @@
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 
 import propTypes from '../propTypes';
 
@@ -13,4 +14,8 @@ ThemeProvider.propTypes = {
   theme: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.object, PropTypes.string])).isRequired,
 };
 
-export default ThemeProvider;
+const mapStateToProps = state => ({
+  theme: state.ui.theme,
+});
+
+export default connect(mapStateToProps)(ThemeProvider);

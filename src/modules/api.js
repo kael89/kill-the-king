@@ -6,12 +6,17 @@ export const RESOURCES = {
   GET_TREE,
 };
 
+/** @type {TreeType} */
+const GAME = 'game';
+/** @type {TreeType} */
+const FORCED_MATE = 'forcedMate';
+
 /**
  * @enum {TreeType}
  */
 const TREE_TYPE = {
-  GAME: 'game',
-  FORCED_MATE: 'forcedMate',
+  GAME,
+  FORCED_MATE,
 };
 
 /**
