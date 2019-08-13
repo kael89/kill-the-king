@@ -8,7 +8,7 @@ export const columnIdToString = columnId => String.fromCharCode('A'.charCodeAt(0
  * @param {number} rowId
  * @returns {string}
  */
-export const rowIdToString = rowId => rowId + 1;
+export const rowIdToString = rowId => `${rowId + 1}`;
 
 /**
  * @param {Coordinates}
@@ -23,7 +23,7 @@ export const coordinatesToPosition = ({ rowId, columnId }) =>
  * @returns {Coordinates}
  */
 export const positionToCoordinates = position => {
-  const rowId = position.substr(-1) - 1;
+  const rowId = parseInt(position.substr(-1)) - 1;
   const columnId = position.charCodeAt(0) - 'A'.charCodeAt(0);
 
   return {

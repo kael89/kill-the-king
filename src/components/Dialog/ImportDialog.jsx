@@ -98,7 +98,11 @@ class ImportDialog extends React.Component {
 ImportDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   onImport: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
+  open: PropTypes.bool,
+};
+
+ImportDialog.defaultProps = {
+  open: false,
 };
 
 const mapDispatchToProps = dispatch => ({

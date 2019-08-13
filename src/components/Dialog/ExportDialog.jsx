@@ -55,11 +55,12 @@ ExportDialog.propTypes = {
   board: propTypes.board.isRequired,
   classes: propTypes.classes.isRequired,
   onClose: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
+  open: PropTypes.bool,
   PaperProps: PropTypes.objectOf(PropTypes.any),
 };
 
 ExportDialog.defaultProps = {
+  open: false,
   PaperProps: {},
 };
 

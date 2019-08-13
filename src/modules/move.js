@@ -11,9 +11,7 @@ export const parseMoveString = moveString => {
 
 /**
  *
- * @param {string} source
- * @param {string} target
- * @param {string} promotion
+ * @param {Move} move
  * @returns {string}
  */
 export const moveToString = ({ source, target, promotion }) => {

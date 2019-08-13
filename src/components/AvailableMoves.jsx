@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import { getMoveData } from '../modules/moveData';
 import propTypes from '../propTypes';
-import { playMove } from '../store/board';
+import { playMove } from '../store/board/actions';
 import ExpansionPanel from './ExpansionPanel';
 import MoveButton from './MoveButton';
 

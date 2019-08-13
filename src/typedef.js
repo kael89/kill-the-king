@@ -16,6 +16,7 @@
  * @typedef {Object} Move
  * @property {string} source
  * @property {string} target
+ * @property {string} [promotion]
  */
 
 /**

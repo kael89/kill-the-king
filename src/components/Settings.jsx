@@ -48,7 +48,7 @@ const Settings = ({ classes, settings, setSetting }) => (
             name: 'moveDepth',
           }}
           value={settings.maxMoves}
-          onChange={e => setSetting('maxMoves', parseInt(e.target.value, 10))}
+          onChange={e => setSetting('maxMoves', parseInt(e.target.value))}
         >
           <MenuItem value={1}>1</MenuItem>
           <MenuItem value={2}>2</MenuItem>
