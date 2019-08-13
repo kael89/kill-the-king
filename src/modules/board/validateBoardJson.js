@@ -1,6 +1,6 @@
 import { forOwn, has } from 'lodash';
 
-import { isHashObject } from '../../utils';
+import { isHashObject } from '../../utilities/generic';
 
 /**
  * @param {string} json

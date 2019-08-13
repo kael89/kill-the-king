@@ -7,7 +7,7 @@ import { COLOR } from '../modules/chess';
 import { DIALOG } from '../modules/ui';
 import propTypes from '../propTypes';
 import store from '../store';
-import { withDragDropContext, withThemeAndStyles } from '../utils';
+import { withDragDropContext, withThemeAndStyles } from '../utilities/generic';
 import ActionButton from './ActionButton';
 import AvailableMoves from './AvailableMoves';
 import Board from './Board';

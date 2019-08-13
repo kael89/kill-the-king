@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { moveToString } from '../modules/move';
 import { DRAGGABLE } from '../modules/ui';
 import { addPiece, movePiece, removePiece } from '../store/board/actions';
-import { withThemeAndStyles } from '../utils';
+import { withThemeAndStyles } from '../utilities/generic';
 import Piece from './Piece';
 
 const { PIECE } = DRAGGABLE;

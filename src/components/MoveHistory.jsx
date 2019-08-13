@@ -8,7 +8,7 @@ import { COLOR } from '../modules/chess';
 import propTypes from '../propTypes';
 import { revertBoard } from '../store/board/actions';
 import { restoreMove } from '../store/moveHistory/actions';
-import { withThemeAndStyles } from '../utils';
+import { withThemeAndStyles } from '../utilities/generic';
 import ExpansionPanel from './ExpansionPanel';
 import MoveButton from './MoveButton';
 

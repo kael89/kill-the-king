@@ -4,7 +4,7 @@ import React from 'react';
 
 import { PieceCodes } from '../constants';
 import propTypes from '../propTypes';
-import { withThemeAndStyles } from '../utils';
+import { withThemeAndStyles } from '../utilities/generic';
 
 const styles = theme => ({
   container: {

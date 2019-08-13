@@ -7,7 +7,7 @@ import { movePiece } from '../modules/board';
 import propTypes from '../propTypes';
 import { setHint } from '../store/board/actions';
 import { hideBoardHint, showBoardHint } from '../store/ui/actions';
-import { withThemeAndStyles } from '../utils';
+import { withThemeAndStyles } from '../utilities/generic';
 import Move from './Move';
 
 const styles = {

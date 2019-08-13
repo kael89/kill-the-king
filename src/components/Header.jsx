@@ -2,7 +2,7 @@ import { Typography } from '@material-ui/core';
 import React from 'react';
 
 import propTypes from '../propTypes';
-import { withThemeAndStyles } from '../utils';
+import { withThemeAndStyles } from '../utilities/generic';
 import ThemeSwitch from './ThemeSwitch';
 
 const styles = theme => ({

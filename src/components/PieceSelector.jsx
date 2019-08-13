@@ -4,7 +4,7 @@ import React from 'react';
 
 import { PIECE_TYPE } from '../modules/piece';
 import propTypes from '../propTypes';
-import { withThemeAndStyles } from '../utils';
+import { withThemeAndStyles } from '../utilities/generic';
 import DraggablePiece from './DraggablePiece';
 
 const styles = {
