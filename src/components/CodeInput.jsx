@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import propTypes from '../propTypes';
-import { withThemeAndStyles } from '../utils';
+import { withThemeAndStyles } from '../utilities/generic';
 
 const styles = theme => ({
   input: {
@@ -15,10 +15,10 @@ const styles = theme => ({
   },
 });
 
-const CodeInput = ({ classes, code, error, fullWidth, id, label, onChange, rows }) => (
+const CodeInput = ({ classes, code, error, fullWidth, id, label, language, onChange, rows }) => (
   <FormControl error={error} fullWidth={fullWidth} variant="filled">
     <InputLabel htmlFor={id}>{label}</InputLabel>
-    <Highlight {...defaultProps} code={code}>
+    <Highlight {...defaultProps} code={code} language={language}>
       {({ className, style }) => (
         <FilledInput
           className={classnames(classes.input, className)}
@@ -41,6 +41,7 @@ CodeInput.propTypes = {
   fullWidth: PropTypes.bool,
   id: PropTypes.string,
   label: PropTypes.string,
+  language: PropTypes.string,
   onChange: PropTypes.func,
   rows: PropTypes.number,
 };
@@ -50,8 +51,9 @@ CodeInput.defaultProps = {
   error: false,
   fullWidth: true,
   id: `code-input-${Date.now()}`,
+  language: 'json',
   label: '',
-  onChange: PropTypes.null,
+  onChange: null,
   rows: 1,
 };
 

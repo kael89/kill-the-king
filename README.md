@@ -29,8 +29,6 @@ The application should now be running at http://localhost:3000
 
 ```
 chasemate-ui
-├── .circleci
-├── .vscode
 ├── cypress                 https://www.cypress.io end-to-end tests
 │   ├── fixtures
 │   ├── integration         Test home folder
@@ -38,29 +36,17 @@ chasemate-ui
 │   ├── support             Custom commands and helper methods
 ├── public
 ├── src
-│   ├── components          Presentational React components
-│   ├── containers          React components connected to the Redux state
+│   ├── components          React components
+│   ├── constants
+│   ├── enums
 │   ├── images
-│   ├── modules             Entity-specific methods
 │   ├── store               Redux store
-│   │   └── modules         Store ducks, see https://github.com/erikras/ducks-modular-redux
 │   ├── styles              Global stylesheets
 │   ├── themes
-│   ├── constants.js        Shared constants
-│   ├── index.js
+│   └── utilities
+│   ├── api.js              Back-end API
 │   ├── propTypes.js        Shared propTypes
 │   ├── typedef.js          jsDoc type definitions
-│   └── utils.js            Generic utilities
-├── .env.example
-├── .eslintignore
-├── .eslintrc
-├── .gitignore
-├── .prettierc
-├── cypress.json
-├── LICENSE
-├── package-lock.json
-└── package.json
-├── README.md
 ```
 
 ## Built with
@@ -69,9 +55,12 @@ chasemate-ui
 - [React.js](https://reactjs.org/)
 - [Redux.js](https://redux.js.org/)
 - [Create React App](https://github.com/facebook/create-react-app)
-- [Material UI](https://material-ui.com/)
+- [Babel](https://babeljs.io/)
 - [ESLint](https://eslint.org/)
 - [Prettier](https://github.com/prettier/prettier)
+- [Material UI](https://material-ui.com/)
+- [Cypress](https://www.cypress.io/)
+- [Jest](https://jestjs.io/)
 
 ## Acknowledgments
 

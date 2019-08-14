@@ -3,26 +3,25 @@ import classnames from 'classnames';
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import ActionButton from '../containers/ActionButton';
-import AvailableMoves from '../containers/AvailableMoves';
-import Board from '../containers/Board';
-import { ConfirmationDialog, ExportDialog, ImportDialog } from '../containers/Dialog';
-import MoveHistory from '../containers/MoveHistory';
-import Results from '../containers/Results';
-import Settings from '../containers/Settings';
-import ThemeProvider from '../containers/ThemeProvider';
-import { COLOR } from '../modules/chess';
-import { DIALOG } from '../modules/ui';
+import { COLOR, DIALOG_NAME } from '../enums';
 import propTypes from '../propTypes';
 import store from '../store';
-import { withDragDropContext, withThemeAndStyles } from '../utils';
+import { withDragDropContext, withThemeAndStyles } from '../utilities/generic';
+import ActionButton from './ActionButton';
+import AvailableMoves from './AvailableMoves';
+import Board from './Board';
+import { ConfirmationDialog, ExportDialog, ImportDialog } from './Dialog';
 import Header from './Header';
+import MoveHistory from './MoveHistory';
 import PieceSelector from './PieceSelector';
+import Results from './Results';
+import Settings from './Settings';
 import SocialLinks from './SocialLinks';
+import ThemeProvider from './ThemeProvider';
 import Toolbar from './Toolbar';
 
 const { BLACK, WHITE } = COLOR;
-const { EXPORT, IMPORT, PIECE_CHANGE_CONFIRMATION } = DIALOG;
+const { EXPORT, IMPORT, PIECE_CHANGE_CONFIRMATION } = DIALOG_NAME;
 
 const styles = theme => ({
   container: {

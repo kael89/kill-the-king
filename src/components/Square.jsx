@@ -1,11 +1,12 @@
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 
-import DraggablePiece from '../containers/DraggablePiece';
-import { COLOR } from '../modules/chess';
+import { COLOR } from '../enums';
 import propTypes from '../propTypes';
-import { withThemeAndStyles } from '../utils';
+import { withThemeAndStyles } from '../utilities/generic';
+import DraggablePiece from './DraggablePiece';
 
 const { BLACK, WHITE } = COLOR;
 
@@ -80,4 +81,14 @@ Square.defaultProps = {
   selected: false,
 };
 
-export default withThemeAndStyles(Square, styles);
+const mapStateToProps = state => {
+  const {
+    ui: { hintVisible },
+  } = state;
+
+  return {
+    hinted: hintVisible,
+  };
+};
+
+export default connect(mapStateToProps)(withThemeAndStyles(Square, styles));

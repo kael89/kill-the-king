@@ -1,10 +1,14 @@
 import { Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 
-import MoveButton from '../containers/MoveButton';
 import propTypes from '../propTypes';
+import { playMove, revertBoard } from '../store/board/actions';
+import { clearMoveHistory } from '../store/moveHistory/actions';
+import { getMoveDataForResetBoard } from '../store/selectors';
 import ExpansionPanel from './ExpansionPanel';
+import MoveButton from './MoveButton';
 import Spinner from './Spinner';
 
 const Results = ({ error, onMoveSelect, moveData, loading }) => {
@@ -58,4 +62,34 @@ Results.defaultProps = {
   moveData: null,
 };
 
-export default Results;
+const mapStateToProps = state => {
+  const { resetBoardId } = state.board;
+  const { data, loading, error } = state.results;
+
+  return {
+    error,
+    loading,
+    moveData: data && getMoveDataForResetBoard(state),
+    resetBoardId,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  onMoveSelect: (resetBoardId, moveDatum) => {
+    dispatch(clearMoveHistory());
+    dispatch(revertBoard(resetBoardId));
+    dispatch(playMove(moveDatum));
+  },
+});
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...ownProps,
+  ...stateProps,
+  onMoveSelect: moveDatum => dispatchProps.onMoveSelect(stateProps.resetBoardId, moveDatum),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps,
+)(Results);

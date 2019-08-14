@@ -1,6 +1,6 @@
 import React from 'react';
 
-import githubLogo from '../images/githubLogo.svg';
+import githubLogo from '../images/github_logo.svg';
 
 const SocialLinks = () => (
   <div>

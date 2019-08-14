@@ -1,10 +1,14 @@
 import { Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 
-import MoveButton from '../containers/MoveButton';
 import propTypes from '../propTypes';
+import { playMove } from '../store/board/actions';
+import { isCheckmateFound } from '../store/results/selectors';
+import { getMoveDataForCurrentBoard } from '../store/selectors';
 import ExpansionPanel from './ExpansionPanel';
+import MoveButton from './MoveButton';
 
 const AvailableMoves = ({ checkmateFound, moveData, onMoveSelect }) => {
   let contents;
@@ -34,4 +38,24 @@ AvailableMoves.defaultProps = {
   moveData: null,
 };
 
-export default AvailableMoves;
+const mapStateToProps = state => ({
+  checkmateFound: isCheckmateFound(state),
+  moveData: getMoveDataForCurrentBoard(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+  onMoveSelect: moveDatum => dispatch(playMove(moveDatum)),
+});
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...ownProps,
+  ...stateProps,
+  ...dispatchProps,
+  onMoveSelect: moveDatum => dispatchProps.onMoveSelect(moveDatum),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps,
+)(AvailableMoves);
