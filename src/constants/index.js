@@ -1,5 +1,4 @@
 import { COLOR, PIECE_TYPE } from '../enums';
-import initialBoard from './initialBoard.json';
 
 const { BLACK, WHITE } = COLOR;
 const { PAWN, KNIGHT, BISHOP, ROOK, KING, QUEEN } = PIECE_TYPE;
@@ -14,6 +13,8 @@ export const DEFAULT_SETTINGS = {
   maxMoves: 2,
   startingColor: WHITE,
 };
+
+export { INITIAL_BOARD } from './initialBoard';
 
 export const PIECE_CODES = {
   [BLACK]: {
@@ -33,5 +34,3 @@ export const PIECE_CODES = {
     [ROOK]: '\u2656',
   },
 };
-
-export const INITIAL_BOARD = initialBoard;
