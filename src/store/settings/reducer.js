@@ -1,4 +1,4 @@
-import { DEFAULT_SETTINGS } from '../../modules/settings';
+import { DEFAULT_SETTINGS } from '../../constants';
 import { SET_SETTING } from './actions';
 
 export default (settings = DEFAULT_SETTINGS, action) => {

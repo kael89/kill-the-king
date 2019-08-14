@@ -1,5 +1,5 @@
 /**
- * @typedef {Object.<string, Piece>} Board
+ * @typedef {Object<string, Piece>} Board
  */
 
 /**
@@ -10,6 +10,14 @@
  * @typedef {Object} Coordinates
  * @property {number} rowId
  * @property {number} columnId
+ */
+
+/**
+ * @typedef {('export'|'import'|'pieceChangeConfirmation')} DialogName
+ */
+
+/**
+ * @typedef {('piece')} DraggableType
  */
 
 /**
@@ -49,12 +57,4 @@
  * @property {string} defaultTheme
  * @property {number} maxMoves
  * @property {Color} startingColor
- */
-
-/**
- * @typedef {('dark'|'light')} ThemeName
- */
-
-/**
- * @typedef {('game'|'forcedMate')} TreeType
  */

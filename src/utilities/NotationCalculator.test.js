@@ -1,6 +1,5 @@
 import { PIECE_CODES } from '../constants';
-import { COLOR } from '../modules/chess';
-import { PIECE_TYPE } from '../modules/piece';
+import { COLOR, PIECE_TYPE } from '../enums';
 import { NotationCalculator } from './NotationCalculator';
 
 const { BLACK, WHITE } = COLOR;

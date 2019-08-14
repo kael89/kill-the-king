@@ -1,4 +1,4 @@
-import { getForcedMateTree } from '../../modules/api';
+import { getForcedMateTree } from '../../api';
 import { showError } from '../../utilities/generic';
 import { setResetBoardId } from '../board/actions';
 import { clearMoveHistory } from '../moveHistory/actions';

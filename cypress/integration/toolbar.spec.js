@@ -1,4 +1,4 @@
-import { INITIAL_BOARD } from '../../src/modules/board';
+import { INITIAL_BOARD } from '../../src/constants';
 import {
   addPiece,
   exportDialog,

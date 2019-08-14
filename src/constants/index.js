@@ -1,11 +1,19 @@
-import { COLOR } from '../modules/chess';
-import { PIECE_TYPE } from '../modules/piece';
+import { COLOR, PIECE_TYPE } from '../enums';
 import initialBoard from './initialBoard.json';
 
 const { BLACK, WHITE } = COLOR;
 const { PAWN, KNIGHT, BISHOP, ROOK, KING, QUEEN } = PIECE_TYPE;
 
 export const BOARD_SIZE = 8;
+
+/**
+ * @type {Settings}
+ */
+export const DEFAULT_SETTINGS = {
+  defaultTheme: 'light',
+  maxMoves: 2,
+  startingColor: WHITE,
+};
 
 export const PIECE_CODES = {
   [BLACK]: {

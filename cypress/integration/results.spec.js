@@ -1,7 +1,5 @@
-import { RESOURCES } from '../../src/modules/api';
+import { RESOURCES } from '../../src/api';
 import { actionButton, results, setBoard } from '../support';
-
-const { GET_TREE } = RESOURCES;
 
 const defaultResponse = { data: {}, error: '' };
 
@@ -9,7 +7,7 @@ const assertForcedMateTreeResults = (board = {}, response = defaultResponse, app
   cy.server();
   cy.route({
     method: 'GET',
-    url: `**/${GET_TREE}?**`,
+    url: `**/${RESOURCES.GET_TREE}?**`,
     response,
   }).as('forcedMateTree');
 
@@ -53,7 +51,7 @@ context('Results', () => {
     cy.server();
     cy.route({
       method: 'GET',
-      url: `**/${GET_TREE}?**`,
+      url: `**/${RESOURCES.GET_TREE}?**`,
       status: 404,
     }).as('forcedMateTree');
 

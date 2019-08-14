@@ -1,14 +1,12 @@
-import { RESOURCES } from '../../src/modules/api';
+import { RESOURCES } from '../../src/api';
 import { actionButton, assertQueryParam, selectInput, setting } from '../support';
-
-const { GET_TREE } = RESOURCES;
 
 context('Settings', () => {
   beforeEach(() => {
     cy.server();
     cy.route({
       method: 'GET',
-      url: `**/${GET_TREE}?**`,
+      url: `**/${RESOURCES.GET_TREE}?**`,
       response: {},
     }).as('forcedMateTree');
 

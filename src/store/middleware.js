@@ -1,7 +1,7 @@
 import { isEqual, last } from 'lodash';
 
 import { INITIAL_BOARD } from '../constants';
-import { DIALOG } from '../modules/ui';
+import { DIALOG_NAME } from '../enums';
 import {
   ADD_PIECE,
   CLEAR_BOARD,
@@ -43,7 +43,7 @@ const shouldConfirmChange = (state, action) => {
 
 export const pieceChangeMiddleware = store => next => action => {
   const resultingAction = shouldConfirmChange(store.getState(), action)
-    ? showConfirmationDialog(DIALOG.PIECE_CHANGE_CONFIRMATION, () => {
+    ? showConfirmationDialog(DIALOG_NAME.PIECE_CHANGE_CONFIRMATION, () => {
         next(clearResults());
         next(action);
       })

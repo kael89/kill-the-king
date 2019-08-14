@@ -6,7 +6,7 @@ const WHITE = 'white';
 /**
  * @enum {Color}
  */
-export const COLOR = {
+export default {
   BLACK,
   WHITE,
 };
