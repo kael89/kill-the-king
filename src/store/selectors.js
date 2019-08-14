@@ -1,6 +1,6 @@
 import { get } from 'lodash';
 
-import { getMoveNotation } from '../modules/notation/notation';
+import { NotationCalculator } from '../utilities/NotationCalculator';
 import { getBoardById, getCurrentBoardId } from './board/selectors';
 
 export const getPlayedMovesByBoardId = (state, boardId) => {
@@ -29,7 +29,7 @@ export const getMoveDataByBoardId = (state, boardId) => {
   return availableMoves.map(move => ({
     boardId,
     move,
-    notation: getMoveNotation(board, move, availableMoves),
+    notation: new NotationCalculator(board, availableMoves).calculate(move),
   }));
 };
 
