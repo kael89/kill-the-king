@@ -10,9 +10,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { validateBoardJson } from '../../modules/board';
 import { importBoard } from '../../store/board/actions';
 import { hideDialog } from '../../store/ui/actions';
+import { validateBoardJson } from '../../utilities/validateBoardJson';
 import CodeInput from '../CodeInput';
 import Dialog from './Dialog';
 

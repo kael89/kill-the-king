@@ -1,14 +1,13 @@
-import { COLOR } from './modules/chess';
-import { PIECE_TYPE } from './modules/piece';
+import { COLOR } from '../modules/chess';
+import { PIECE_TYPE } from '../modules/piece';
+import initialBoard from './initialBoard.json';
 
 const { BLACK, WHITE } = COLOR;
 const { PAWN, KNIGHT, BISHOP, ROOK, KING, QUEEN } = PIECE_TYPE;
 
-export const APP_NAME = 'chasemate';
-
 export const BOARD_SIZE = 8;
 
-export const PieceCodes = {
+export const PIECE_CODES = {
   [BLACK]: {
     [BISHOP]: '\u265D',
     [KING]: '\u265A',
@@ -26,3 +25,5 @@ export const PieceCodes = {
     [ROOK]: '\u2656',
   },
 };
+
+export const INITIAL_BOARD = initialBoard;

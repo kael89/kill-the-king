@@ -1,6 +1,6 @@
 import { isEqual, last } from 'lodash';
 
-import { INITIAL_BOARD } from '../modules/board';
+import { INITIAL_BOARD } from '../constants';
 import { DIALOG } from '../modules/ui';
 import {
   ADD_PIECE,

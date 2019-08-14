@@ -1,4 +1,4 @@
-import { PieceCodes } from '../constants';
+import { PIECE_CODES } from '../constants';
 import { COLOR } from '../modules/chess';
 import { PIECE_TYPE } from '../modules/piece';
 import { NotationCalculator } from './NotationCalculator';
@@ -13,7 +13,7 @@ describe('NotationCalculator', () => {
       const calculator = new NotationCalculator(board, ['B3-B4']);
 
       expect(calculator.calculate('B3-B4')).toEqual({
-        pieceCode: PieceCodes[WHITE][PAWN],
+        pieceCode: PIECE_CODES[WHITE][PAWN],
         text: 'b4',
         promotionCode: '',
       });
@@ -24,7 +24,7 @@ describe('NotationCalculator', () => {
       const calculator = new NotationCalculator(board, ['B3-B4']);
 
       expect(calculator.calculate('B3-B4')).toEqual({
-        pieceCode: PieceCodes[BLACK][PAWN],
+        pieceCode: PIECE_CODES[BLACK][PAWN],
         text: 'b4',
         promotionCode: '',
       });
@@ -40,9 +40,9 @@ describe('NotationCalculator', () => {
       ]);
 
       expect(calculator.calculate('B7-B8=Q')).toEqual({
-        pieceCode: PieceCodes[WHITE][PAWN],
+        pieceCode: PIECE_CODES[WHITE][PAWN],
         text: 'b8=',
-        promotionCode: PieceCodes[WHITE][QUEEN],
+        promotionCode: PIECE_CODES[WHITE][QUEEN],
       });
     });
 
@@ -54,7 +54,7 @@ describe('NotationCalculator', () => {
       const queensCalculator = new NotationCalculator(boardWithQueens, ['A1-A8', 'H8-A8']);
 
       expect(queensCalculator.calculate('A1-A8')).toEqual({
-        pieceCode: PieceCodes[WHITE][ROOK],
+        pieceCode: PIECE_CODES[WHITE][ROOK],
         text: 'aa8',
         promotionCode: '',
       });
@@ -67,7 +67,7 @@ describe('NotationCalculator', () => {
       const knightsCalculator = new NotationCalculator(boardWithKnights, ['E6-D4', 'F3-D4']);
 
       expect(knightsCalculator.calculate('C2-D4')).toEqual({
-        pieceCode: PieceCodes[WHITE][KNIGHT],
+        pieceCode: PIECE_CODES[WHITE][KNIGHT],
         text: 'cd4',
         promotionCode: '',
       });
@@ -81,7 +81,7 @@ describe('NotationCalculator', () => {
 
       const calculator = new NotationCalculator(board, ['A1-A4', 'A8-A4']);
       expect(calculator.calculate('A1-A4')).toEqual({
-        pieceCode: PieceCodes[WHITE][ROOK],
+        pieceCode: PIECE_CODES[WHITE][ROOK],
         text: '1a4',
         promotionCode: '',
       });
@@ -96,7 +96,7 @@ describe('NotationCalculator', () => {
       const calculator = new NotationCalculator(board, ['A1-A4', 'A8-A4', 'D1-A4']);
 
       expect(calculator.calculate('A1-A4')).toEqual({
-        pieceCode: PieceCodes[WHITE][QUEEN],
+        pieceCode: PIECE_CODES[WHITE][QUEEN],
         text: 'a1a4',
         promotionCode: '',
       });

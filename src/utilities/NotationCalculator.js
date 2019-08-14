@@ -1,4 +1,4 @@
-import { PieceCodes } from '../constants';
+import { PIECE_CODES } from '../constants';
 import { parsePromotion } from '../modules/piece';
 import { parseMoveString } from './move';
 
@@ -36,7 +36,7 @@ export class NotationCalculator {
 
   getPieceCode() {
     const { type, color } = this.getMovingPiece();
-    return PieceCodes[color][type];
+    return PIECE_CODES[color][type];
   }
 
   getMovingPiece() {
@@ -102,6 +102,6 @@ export class NotationCalculator {
 
   getPromotionCode() {
     const { color } = this.getMovingPiece();
-    return PieceCodes[color][parsePromotion(this.promotion)] || '';
+    return PIECE_CODES[color][parsePromotion(this.promotion)] || '';
   }
 }
