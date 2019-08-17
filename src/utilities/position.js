@@ -18,16 +18,10 @@ export const coordinatesToPosition = ({ rowId, columnId }) =>
   `${columnIdToString(columnId)}${rowIdToString(rowId)}`;
 
 /**
- *
  * @param {string} position
  * @returns {Coordinates}
  */
-export const positionToCoordinates = position => {
-  const rowId = parseInt(position.substr(-1)) - 1;
-  const columnId = position.charCodeAt(0) - 'A'.charCodeAt(0);
-
-  return {
-    rowId,
-    columnId,
-  };
-};
+export const positionToCoordinates = position => ({
+  rowId: parseInt(position.substr(-1)) - 1,
+  columnId: position.charCodeAt(0) - 'A'.charCodeAt(0),
+});

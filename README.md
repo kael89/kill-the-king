@@ -37,15 +37,16 @@ chasemate-ui
 ├── public
 ├── src
 │   ├── components          React components
+│   ├── constants
+│   ├── enums
 │   ├── images
-│   ├── modules             Entity-specific methods
 │   ├── store               Redux store
 │   ├── styles              Global stylesheets
 │   ├── themes
-│   ├── constants.js        Shared constants
+│   └── utilities
+│   ├── api.js              Back-end API
 │   ├── propTypes.js        Shared propTypes
 │   ├── typedef.js          jsDoc type definitions
-│   └── utils.js            Generic utilities
 ```
 
 ## Built with

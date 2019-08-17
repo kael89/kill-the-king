@@ -11,10 +11,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { COLOR } from '../modules/chess';
+import { COLOR } from '../enums';
 import propTypes from '../propTypes';
 import { setSetting as setSettingAction } from '../store/settings/actions';
-import { withThemeAndStyles } from '../utils';
+import { withThemeAndStyles } from '../utilities/generic';
 
 const { BLACK, WHITE } = COLOR;
 

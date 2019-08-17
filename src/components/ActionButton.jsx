@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { maxMovesToDepth } from '../modules/api';
+import { maxMovesToDepth } from '../api';
 import { fetchForcedMateTree } from '../store/results/actions';
 
 const ActionButton = ({ onClick }) => (

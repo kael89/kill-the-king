@@ -11,7 +11,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import propTypes from '../../propTypes';
-import { printJson, withThemeAndStyles } from '../../utils';
+import { printJson, withThemeAndStyles } from '../../utilities/generic';
 import CodeBlock from '../CodeBlock';
 import CopyToClipboardButton from '../CopyToClipboardButton';
 import Dialog from './Dialog';

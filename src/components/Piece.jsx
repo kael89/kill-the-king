@@ -2,9 +2,9 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { PieceCodes } from '../constants';
+import { PIECE_CODES } from '../constants';
 import propTypes from '../propTypes';
-import { withThemeAndStyles } from '../utils';
+import { withThemeAndStyles } from '../utilities/generic';
 
 const styles = theme => ({
   container: {
@@ -75,7 +75,7 @@ class Piece extends React.Component {
         className={classnames(classes.container, { [classes.hinted]: hinted })}
         style={hovered && hoverColor ? { backgroundColor: hoverColor } : {}}
       >
-        {PieceCodes[color][type]}
+        {PIECE_CODES[color][type]}
       </div>
     );
   }

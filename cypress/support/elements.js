@@ -1,7 +1,7 @@
 /**
  * Functions that select elements based on their attributes
  */
-import { camelToKebabCase } from '../../src/utils';
+import { camelToKebabCase } from '../../src/utilities/generic';
 
 export const actionButton = () => cy.getByData({ testid: 'action-button' });
 

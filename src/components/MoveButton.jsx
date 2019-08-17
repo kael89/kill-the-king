@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { movePiece } from '../modules/board';
 import propTypes from '../propTypes';
 import { setHint } from '../store/board/actions';
+import { movePiece } from '../store/board/reducer';
 import { hideBoardHint, showBoardHint } from '../store/ui/actions';
-import { withThemeAndStyles } from '../utils';
+import { withThemeAndStyles } from '../utilities/generic';
 import Move from './Move';
 
 const styles = {

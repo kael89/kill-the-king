@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { COLOR } from '../modules/chess';
+import { COLOR } from '../enums';
 import propTypes from '../propTypes';
 import { revertBoard } from '../store/board/actions';
 import { restoreMove } from '../store/moveHistory/actions';
-import { withThemeAndStyles } from '../utils';
+import { withThemeAndStyles } from '../utilities/generic';
 import ExpansionPanel from './ExpansionPanel';
 import MoveButton from './MoveButton';
 

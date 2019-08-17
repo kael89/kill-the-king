@@ -3,11 +3,10 @@ import classnames from 'classnames';
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import { COLOR } from '../modules/chess';
-import { DIALOG } from '../modules/ui';
+import { COLOR, DIALOG_NAME } from '../enums';
 import propTypes from '../propTypes';
 import store from '../store';
-import { withDragDropContext, withThemeAndStyles } from '../utils';
+import { withDragDropContext, withThemeAndStyles } from '../utilities/generic';
 import ActionButton from './ActionButton';
 import AvailableMoves from './AvailableMoves';
 import Board from './Board';
@@ -22,7 +21,7 @@ import ThemeProvider from './ThemeProvider';
 import Toolbar from './Toolbar';
 
 const { BLACK, WHITE } = COLOR;
-const { EXPORT, IMPORT, PIECE_CHANGE_CONFIRMATION } = DIALOG;
+const { EXPORT, IMPORT, PIECE_CHANGE_CONFIRMATION } = DIALOG_NAME;
 
 const styles = theme => ({
   container: {

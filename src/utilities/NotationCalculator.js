@@ -1,28 +1,31 @@
-import { PieceCodes } from '../../constants';
-import { parseMoveString } from '../move';
-import { parsePromotion } from '../piece';
+import { PIECE_CODES } from '../constants';
+import { parseMoveString, promotionToPieceType } from './move';
 
-class NotationCalculator {
+export class NotationCalculator {
   /**
+   * @public
+   *
    * @param {Board} board
-   * @param {string} move
    * @param {string[]} availableMoves
    */
-  constructor(board, move, availableMoves) {
+  constructor(board, availableMoves) {
     this.board = board;
-    this.move = move;
     this.availableMoves = availableMoves;
+  }
 
+  /**
+   * @public
+   *
+   * @param {string} move
+   * @returns {Notation}
+   */
+  calculate(move) {
+    this.move = move;
     const { source, target, promotion } = parseMoveString(move);
     this.source = source;
     this.target = target;
     this.promotion = promotion;
-  }
 
-  /**
-   * @returns {Notation}
-   */
-  calculate() {
     return {
       pieceCode: this.getPieceCode(),
       text: this.getText(),
@@ -32,7 +35,7 @@ class NotationCalculator {
 
   getPieceCode() {
     const { type, color } = this.getMovingPiece();
-    return PieceCodes[color][type];
+    return PIECE_CODES[color][type];
   }
 
   getMovingPiece() {
@@ -98,15 +101,8 @@ class NotationCalculator {
 
   getPromotionCode() {
     const { color } = this.getMovingPiece();
-    return PieceCodes[color][parsePromotion(this.promotion)] || '';
+    const pieceType = promotionToPieceType(this.promotion);
+
+    return PIECE_CODES[color][pieceType] || '';
   }
 }
-
-/**
- * @param {Board} board
- * @param {string} move
- * @param {string[]} availableMoves
- * @returns {Notation}
- */
-export const getMoveNotation = (board, move, availableMoves) =>
-  new NotationCalculator(board, move, availableMoves).calculate();

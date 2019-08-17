@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import propTypes from '../propTypes';
-import { withThemeAndStyles } from '../utils';
+import { withThemeAndStyles } from '../utilities/generic';
 
 const styles = theme => ({
   input: {

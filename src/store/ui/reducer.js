@@ -1,4 +1,4 @@
-import { DEFAULT_SETTINGS } from '../../modules/settings';
+import { DEFAULT_SETTINGS } from '../../constants';
 import themes from '../../themes';
 import { CHANGE_THEME, TOGGLE_BOARD_HINT, TOGGLE_DIALOG } from './actions';
 

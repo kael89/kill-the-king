@@ -16,7 +16,7 @@ const ROOK = 'rook';
  *
  * @enum {PieceType}
  */
-export const PIECE_TYPE = {
+export default {
   PAWN,
   KNIGHT,
   BISHOP,
@@ -24,16 +24,3 @@ export const PIECE_TYPE = {
   KING,
   QUEEN,
 };
-
-const PROMOTION_TO_PIECE_TYPE = {
-  B: BISHOP,
-  N: KNIGHT,
-  Q: QUEEN,
-  R: ROOK,
-};
-
-/**
- * @param {string} promotion
- * @returns {string}
- */
-export const parsePromotion = promotion => PROMOTION_TO_PIECE_TYPE[promotion.toUpperCase()];

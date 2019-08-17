@@ -4,9 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { changeTheme } from '../store/ui/actions';
-import themes, { THEME_NAME } from '../themes';
-
-const { DARK, LIGHT } = THEME_NAME;
+import themes from '../themes';
 
 const ThemeSwitch = ({ onChange }) => (
   <FormControlLabel
@@ -22,7 +20,7 @@ ThemeSwitch.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onChange: e => dispatch(changeTheme(e.target.checked ? themes[DARK] : themes[LIGHT])),
+  onChange: e => dispatch(changeTheme(e.target.checked ? themes.dark : themes.light)),
 });
 
 export default connect(

@@ -1,12 +1,8 @@
 import { last } from 'lodash';
 import nth from 'lodash/nth';
 
-import {
-  addPiece as addPieceHelper,
-  INITIAL_BOARD,
-  movePiece as movePieceHelper,
-  removePiece as removePieceHelper,
-} from '../../modules/board';
+import { INITIAL_BOARD } from '../../constants';
+import { parseMoveString } from '../../utilities/move';
 import {
   ADD_PIECE,
   CLEAR_BOARD,
@@ -20,6 +16,24 @@ import {
   SETUP_DEFAULT_BOARD,
 } from './actions';
 
+const addPiece = (board, piece) => ({ ...board, [piece.position]: piece });
+
+const removePiece = (board, position) => {
+  const newBoard = { ...board };
+  delete newBoard[position];
+
+  return newBoard;
+};
+
+export const movePiece = (board, moveString) => {
+  const { source, target } = parseMoveString(moveString);
+  const piece = { ...board[source] };
+  piece.position = target;
+  const newBoard = removePiece(board, source);
+
+  return addPiece(newBoard, piece);
+};
+
 const defaultState = {
   hint: {},
   history: [{}],
@@ -31,7 +45,7 @@ export default (board = defaultState, action) => {
 
   switch (action.type) {
     case ADD_PIECE: {
-      const history = [...board.history, addPieceHelper(currentBoard, action.piece)];
+      const history = [...board.history, addPiece(currentBoard, action.piece)];
       return { ...board, history };
     }
     case CLEAR_BOARD: {
@@ -44,11 +58,11 @@ export default (board = defaultState, action) => {
     }
     case MOVE_PIECE:
     case PLAY_MOVE: {
-      const history = [...board.history, movePieceHelper(currentBoard, action.move)];
+      const history = [...board.history, movePiece(currentBoard, action.move)];
       return { ...board, history };
     }
     case REMOVE_PIECE: {
-      const history = [...board.history, removePieceHelper(currentBoard, action.position)];
+      const history = [...board.history, removePiece(currentBoard, action.position)];
       return { ...board, history };
     }
     case REVERT_BOARD: {

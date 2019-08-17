@@ -1,14 +1,22 @@
-import { COLOR } from './modules/chess';
-import { PIECE_TYPE } from './modules/piece';
+import { COLOR, PIECE_TYPE } from '../enums';
 
 const { BLACK, WHITE } = COLOR;
 const { PAWN, KNIGHT, BISHOP, ROOK, KING, QUEEN } = PIECE_TYPE;
 
-export const APP_NAME = 'chasemate';
-
 export const BOARD_SIZE = 8;
 
-export const PieceCodes = {
+/**
+ * @type {Settings}
+ */
+export const DEFAULT_SETTINGS = {
+  defaultTheme: 'light',
+  maxMoves: 2,
+  startingColor: WHITE,
+};
+
+export { INITIAL_BOARD } from './initialBoard';
+
+export const PIECE_CODES = {
   [BLACK]: {
     [BISHOP]: '\u265D',
     [KING]: '\u265A',
