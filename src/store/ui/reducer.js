@@ -4,7 +4,7 @@ import { CHANGE_THEME, TOGGLE_BOARD_HINT, TOGGLE_DIALOG } from './actions';
 
 const defaultState = {
   hintVisible: false,
-  theme: themes[DEFAULT_SETTINGS.defaultTheme],
+  theme: themes[DEFAULT_SETTINGS.theme],
   visibleDialog: '',
 };
 

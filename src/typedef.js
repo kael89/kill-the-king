@@ -54,7 +54,7 @@
 
 /**
  * @typedef {Object} Settings
- * @property {string} defaultTheme
+ * @property {string} theme
  * @property {number} maxMoves
  * @property {Color} startingColor
  */

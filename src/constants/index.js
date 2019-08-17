@@ -9,7 +9,7 @@ export const BOARD_SIZE = 8;
  * @type {Settings}
  */
 export const DEFAULT_SETTINGS = {
-  defaultTheme: 'light',
+  theme: 'light',
   maxMoves: 2,
   startingColor: WHITE,
 };
