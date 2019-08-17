@@ -18,10 +18,18 @@ export const camelToKebabCase = text => snakeCase(text).replace('_', '-');
 export const isHashObject = value => value && typeof value === 'object' && !Array.isArray(value);
 
 /**
- * @param {string} json
+ * @param {any} input
  * @returns {string}
  */
-export const printJson = json => JSON.stringify(json, null, JSON_INDENTATION);
+export const prettifyJson = input => {
+  const processedInput = isHashObject(input) ? sortObjectKeys(input) : input;
+  return JSON.stringify(processedInput, null, JSON_INDENTATION);
+};
+
+const sortObjectKeys = object =>
+  Object.keys(object)
+    .sort()
+    .reduce((result, key) => ({ ...result, [key]: object[key] }), {});
 
 /**
  * @param {string} error

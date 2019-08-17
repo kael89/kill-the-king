@@ -11,7 +11,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import propTypes from '../../propTypes';
-import { printJson, withThemeAndStyles } from '../../utilities/generic';
+import { prettifyJson, withThemeAndStyles } from '../../utilities/generic';
 import CodeBlock from '../CodeBlock';
 import CopyToClipboardButton from '../CopyToClipboardButton';
 import Dialog from './Dialog';
@@ -28,7 +28,7 @@ const styles = theme => ({
 });
 
 const ExportDialog = ({ board, classes, onClose, ...otherProps }) => {
-  const exportData = printJson(board);
+  const exportData = prettifyJson(board);
   const { dispatch, ...dialogProps } = otherProps;
 
   return (
