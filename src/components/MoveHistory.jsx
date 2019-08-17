@@ -14,16 +14,6 @@ import MoveButton from './MoveButton';
 
 const { BLACK } = COLOR;
 
-const sharedPropTypes = {
-  moveData: PropTypes.arrayOf(
-    PropTypes.shape({
-      boardId: PropTypes.number.isRequired,
-      notation: propTypes.notation.isRequired,
-    }),
-  ),
-  onMoveSelect: PropTypes.func,
-};
-
 const styles = {
   container: {
     width: '100%',
@@ -40,11 +30,11 @@ const styles = {
   },
 };
 
-const BaseMoveRow = ({ classes, id, moveData, onMoveSelect }) => (
+const BaseMoveRow = ({ classes, id, renderMoves, onMoveSelect }) => (
   <TableRow className={classes.row}>
     <TableCell className={classes.rowNumber}>{id + 1}.</TableCell>
-    {moveData.map((moveDatum, index) => {
-      const { boardId } = moveDatum;
+    {renderMoves.map((renderMove, index) => {
+      const { boardId } = renderMove;
       const moveId = id * 2 + index;
 
       return (
@@ -52,7 +42,7 @@ const BaseMoveRow = ({ classes, id, moveData, onMoveSelect }) => (
           {boardId === -1 ? (
             ''
           ) : (
-            <MoveButton onClick={() => onMoveSelect(moveId, boardId)} {...moveDatum} />
+            <MoveButton onClick={() => onMoveSelect(moveId, boardId)} {...renderMove} />
           )}
         </TableCell>
       );
@@ -63,16 +53,16 @@ const BaseMoveRow = ({ classes, id, moveData, onMoveSelect }) => (
 BaseMoveRow.propTypes = {
   id: PropTypes.number.isRequired,
   classes: propTypes.classes.isRequired,
-  moveData: sharedPropTypes.moveData.isRequired,
-  onMoveSelect: sharedPropTypes.onMoveSelect.isRequired,
+  renderMoves: propTypes.renderMoves.isRequired,
+  onMoveSelect: PropTypes.func.isRequired,
 };
 
 const MoveRow = withThemeAndStyles(BaseMoveRow, styles);
 
-const sanitizeMoveData = (moveData, startingColor) => {
+const sanitizeRenderMoves = (renderMoves, startingColor) => {
   const emptyMove = { boardId: -1, move: '', notation: { pieceCode: '', text: '' } };
 
-  const result = [...moveData];
+  const result = [...renderMoves];
   if (result.length > 0 && startingColor === BLACK) {
     result.unshift(emptyMove);
   }
@@ -84,8 +74,8 @@ const sanitizeMoveData = (moveData, startingColor) => {
   return result;
 };
 
-const MoveHistory = ({ classes, moveData, startingColor, onMoveSelect }) => {
-  const sanitizedMoveData = sanitizeMoveData(moveData, startingColor);
+const MoveHistory = ({ classes, renderMoves, startingColor, onMoveSelect }) => {
+  const sanitizedRenderedMoves = sanitizeRenderMoves(renderMoves, startingColor);
 
   return (
     <ExpansionPanel summary="Move History">
@@ -99,11 +89,11 @@ const MoveHistory = ({ classes, moveData, startingColor, onMoveSelect }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {chunk(sanitizedMoveData, 2).map((movePair, rowId) => (
+            {chunk(sanitizedRenderedMoves, 2).map((renderMovePair, rowId) => (
               <MoveRow
-                key={movePair[0].boardId}
+                key={renderMovePair[0].boardId}
                 id={rowId}
-                moveData={movePair}
+                renderMoves={renderMovePair}
                 onMoveSelect={onMoveSelect}
               />
             ))}
@@ -116,13 +106,13 @@ const MoveHistory = ({ classes, moveData, startingColor, onMoveSelect }) => {
 
 MoveHistory.propTypes = {
   classes: propTypes.classes.isRequired,
-  moveData: sharedPropTypes.moveData.isRequired,
-  onMoveSelect: sharedPropTypes.onMoveSelect.isRequired,
+  renderMoves: propTypes.renderMoves.isRequired,
+  onMoveSelect: PropTypes.func.isRequired,
   startingColor: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
-  moveData: state.moveHistory,
+  renderMoves: state.moveHistory,
   startingColor: state.settings.startingColor,
 });
 

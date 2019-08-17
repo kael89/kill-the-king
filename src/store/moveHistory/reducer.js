@@ -3,7 +3,7 @@ import { ADD_MOVE, CLEAR_MOVE_HISTORY, RESTORE_MOVE } from './actions';
 export default (moveHistory = [], action) => {
   switch (action.type) {
     case ADD_MOVE:
-      return [...moveHistory, action.moveDatum];
+      return [...moveHistory, action.renderMove];
     case CLEAR_MOVE_HISTORY: {
       return [];
     }

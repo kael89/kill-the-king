@@ -15,7 +15,7 @@ export default {
   board: PropTypes.objectOf(sharedPropTypes.piece),
   classes: PropTypes.objectOf(PropTypes.string),
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
-  moveData: PropTypes.arrayOf(
+  renderMoves: PropTypes.arrayOf(
     PropTypes.shape({
       boardId: PropTypes.number.isRequired,
       move: PropTypes.string.isRequired,

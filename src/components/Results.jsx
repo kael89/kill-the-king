@@ -6,35 +6,35 @@ import { connect } from 'react-redux';
 import propTypes from '../propTypes';
 import { playMove, revertBoard } from '../store/board/actions';
 import { clearMoveHistory } from '../store/moveHistory/actions';
-import { getMoveDataForResetBoard } from '../store/selectors';
+import { getRenderMovesForResetBoard } from '../store/selectors';
 import ExpansionPanel from './ExpansionPanel';
 import MoveButton from './MoveButton';
 import Spinner from './Spinner';
 
-const Results = ({ error, onMoveSelect, moveData, loading }) => {
+const Results = ({ error, onMoveSelect, renderMoves, loading }) => {
   let contents;
   if (error.length > 0) {
     contents = <p>Error: {error}</p>;
   } else if (loading) {
     contents = <Spinner />;
-  } else if (moveData === null) {
+  } else if (renderMoves === null) {
     contents = <Typography>Click &quot;Go&quot; to find forced checkmates</Typography>;
-  } else if (moveData.length === 0) {
+  } else if (renderMoves.length === 0) {
     contents = <Typography>No checkmates found. Try changing the board or settings</Typography>;
   } else {
     contents = (
       <div style={{ width: '100%' }}>
         <Typography>
-          {moveData.length} checkmate{moveData.length > 1 ? 's' : ''} found:
+          {renderMoves.length} checkmate{renderMoves.length > 1 ? 's' : ''} found:
         </Typography>
 
-        {moveData.map(moveDatum => {
-          const { boardId, move } = moveDatum;
+        {renderMoves.map(renderMove => {
+          const { boardId, move } = renderMove;
           return (
             <MoveButton
               key={move}
-              onClick={() => onMoveSelect(moveDatum, boardId)}
-              {...moveDatum}
+              onClick={() => onMoveSelect(renderMove, boardId)}
+              {...renderMove}
             />
           );
         })}
@@ -52,14 +52,14 @@ const Results = ({ error, onMoveSelect, moveData, loading }) => {
 Results.propTypes = {
   error: PropTypes.string,
   loading: PropTypes.bool,
-  moveData: propTypes.moveData,
+  renderMoves: propTypes.renderMoves,
   onMoveSelect: PropTypes.func.isRequired,
 };
 
 Results.defaultProps = {
   error: '',
   loading: false,
-  moveData: null,
+  renderMoves: null,
 };
 
 const mapStateToProps = state => {
@@ -69,23 +69,23 @@ const mapStateToProps = state => {
   return {
     error,
     loading,
-    moveData: data && getMoveDataForResetBoard(state),
+    renderMoves: data && getRenderMovesForResetBoard(state),
     resetBoardId,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  onMoveSelect: (resetBoardId, moveDatum) => {
+  onMoveSelect: (resetBoardId, renderMove) => {
     dispatch(clearMoveHistory());
     dispatch(revertBoard(resetBoardId));
-    dispatch(playMove(moveDatum));
+    dispatch(playMove(renderMove));
   },
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
   ...stateProps,
-  onMoveSelect: moveDatum => dispatchProps.onMoveSelect(stateProps.resetBoardId, moveDatum),
+  onMoveSelect: renderMove => dispatchProps.onMoveSelect(stateProps.resetBoardId, renderMove),
 });
 
 export default connect(

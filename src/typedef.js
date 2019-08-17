@@ -28,10 +28,10 @@
  */
 
 /**
- * @typedef {Object} MoveData
+ * @typedef {Object} RenderMove
  * @property {number} boardId
  * @property {string} move
- * @property {Notation} string
+ * @property {Notation} notation
  */
 
 /**
