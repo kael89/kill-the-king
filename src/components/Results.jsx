@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import propTypes from '../propTypes';
+import { PROP_TYPES } from '../propTypes';
 import { playMove, revertBoard } from '../store/board/actions';
 import { clearMoveHistory } from '../store/moveHistory/actions';
 import { getRenderMovesForResetBoard } from '../store/selectors';
@@ -52,7 +52,7 @@ const Results = ({ error, onMoveSelect, renderMoves, loading }) => {
 Results.propTypes = {
   error: PropTypes.string,
   loading: PropTypes.bool,
-  renderMoves: propTypes.renderMoves,
+  renderMoves: PROP_TYPES.renderMoves,
   onMoveSelect: PropTypes.func.isRequired,
 };
 

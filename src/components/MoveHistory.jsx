@@ -5,7 +5,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { COLOR } from '../enums';
-import propTypes from '../propTypes';
+import { PROP_TYPES } from '../propTypes';
 import { revertBoard } from '../store/board/actions';
 import { restoreMove } from '../store/moveHistory/actions';
 import { withThemeAndStyles } from '../utilities/generic';
@@ -52,8 +52,8 @@ const BaseMoveRow = ({ classes, id, renderMoves, onMoveSelect }) => (
 
 BaseMoveRow.propTypes = {
   id: PropTypes.number.isRequired,
-  classes: propTypes.classes.isRequired,
-  renderMoves: propTypes.renderMoves.isRequired,
+  classes: PROP_TYPES.classes.isRequired,
+  renderMoves: PROP_TYPES.renderMoves.isRequired,
   onMoveSelect: PropTypes.func.isRequired,
 };
 
@@ -105,8 +105,8 @@ const MoveHistory = ({ classes, renderMoves, startingColor, onMoveSelect }) => {
 };
 
 MoveHistory.propTypes = {
-  classes: propTypes.classes.isRequired,
-  renderMoves: propTypes.renderMoves.isRequired,
+  classes: PROP_TYPES.classes.isRequired,
+  renderMoves: PROP_TYPES.renderMoves.isRequired,
   onMoveSelect: PropTypes.func.isRequired,
   startingColor: PropTypes.string.isRequired,
 };

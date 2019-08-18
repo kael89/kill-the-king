@@ -8,7 +8,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import propTypes from '../propTypes';
+import { PROP_TYPES } from '../propTypes';
 import { withThemeAndStyles } from '../utilities/generic';
 
 const styles = theme => ({
@@ -27,8 +27,8 @@ const ExpansionPanel = ({ children, classes, summary }) => (
 );
 
 ExpansionPanel.propTypes = {
-  children: propTypes.children,
-  classes: propTypes.classes.isRequired,
+  children: PROP_TYPES.children,
+  classes: PROP_TYPES.classes.isRequired,
   summary: PropTypes.string,
 };
 

@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { COLOR } from '../enums';
-import propTypes from '../propTypes';
+import { PROP_TYPES } from '../propTypes';
 import { withThemeAndStyles } from '../utilities/generic';
 import DraggablePiece from './DraggablePiece';
 
@@ -66,10 +66,10 @@ class Square extends React.Component {
 }
 
 Square.propTypes = {
-  classes: propTypes.classes.isRequired,
+  classes: PROP_TYPES.classes.isRequired,
   columnId: PropTypes.number.isRequired,
   hinted: PropTypes.bool.isRequired,
-  piece: propTypes.piece,
+  piece: PROP_TYPES.piece,
   position: PropTypes.string,
   rowId: PropTypes.number.isRequired,
   selected: PropTypes.bool,

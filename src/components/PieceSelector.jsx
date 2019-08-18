@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { PIECE_TYPE } from '../enums';
-import propTypes from '../propTypes';
+import { PROP_TYPES } from '../propTypes';
 import { withThemeAndStyles } from '../utilities/generic';
 import DraggablePiece from './DraggablePiece';
 
@@ -31,9 +31,9 @@ const PieceSelector = ({ classes, color, theme }) => (
 );
 
 PieceSelector.propTypes = {
-  classes: propTypes.classes.isRequired,
+  classes: PROP_TYPES.classes.isRequired,
   color: PropTypes.string.isRequired,
-  theme: propTypes.theme.isRequired,
+  theme: PROP_TYPES.theme.isRequired,
 };
 
 export default withThemeAndStyles(PieceSelector, styles);

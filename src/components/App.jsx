@@ -4,7 +4,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 
 import { COLOR, DIALOG_NAME } from '../enums';
-import propTypes from '../propTypes';
+import { PROP_TYPES } from '../propTypes';
 import store from '../store';
 import { withDragDropContext, withThemeAndStyles } from '../utilities/generic';
 import ActionButton from './ActionButton';
@@ -105,7 +105,7 @@ const App = ({ classes }) => (
 );
 
 App.propTypes = {
-  classes: propTypes.classes.isRequired,
+  classes: PROP_TYPES.classes.isRequired,
 };
 
 export default withDragDropContext(withThemeAndStyles(App, styles));

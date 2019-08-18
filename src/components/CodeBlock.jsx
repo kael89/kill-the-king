@@ -3,7 +3,7 @@ import Highlight, { defaultProps } from 'prism-react-renderer';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import propTypes from '../propTypes';
+import { PROP_TYPES } from '../propTypes';
 import { withThemeAndStyles } from '../utilities/generic';
 
 const styles = theme => ({
@@ -29,7 +29,7 @@ const CodeBlock = ({ classes, code, language }) => (
 );
 
 CodeBlock.propTypes = {
-  classes: propTypes.classes.isRequired,
+  classes: PROP_TYPES.classes.isRequired,
   code: PropTypes.string,
   language: PropTypes.string,
 };

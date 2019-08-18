@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
 
-import propTypes from '../propTypes';
+import { PROP_TYPES } from '../propTypes';
 import { withThemeAndStyles } from '../utilities/generic';
 import ThemeSwitch from './ThemeSwitch';
 
@@ -28,7 +28,7 @@ const Header = ({ classes }) => (
 );
 
 Header.propTypes = {
-  classes: propTypes.classes.isRequired,
+  classes: PROP_TYPES.classes.isRequired,
 };
 
 export default withThemeAndStyles(Header, styles);

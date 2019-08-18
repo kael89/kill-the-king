@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { PIECE_CODES } from '../constants';
-import propTypes from '../propTypes';
+import { PROP_TYPES } from '../propTypes';
 import { withThemeAndStyles } from '../utilities/generic';
 
 const styles = theme => ({
@@ -82,12 +82,12 @@ class Piece extends React.Component {
 }
 
 Piece.propTypes = {
-  children: propTypes.children,
-  classes: propTypes.classes.isRequired,
+  children: PROP_TYPES.children,
+  classes: PROP_TYPES.classes.isRequired,
   hinted: PropTypes.bool,
   hoverColor: PropTypes.string,
-  piece: propTypes.piece.isRequired,
-  theme: propTypes.theme.isRequired,
+  piece: PROP_TYPES.piece.isRequired,
+  theme: PROP_TYPES.theme.isRequired,
 };
 
 Piece.defaultProps = {

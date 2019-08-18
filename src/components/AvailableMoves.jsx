@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import propTypes from '../propTypes';
+import { PROP_TYPES } from '../propTypes';
 import { playMove } from '../store/board/actions';
 import { isCheckmateFound } from '../store/results/selectors';
 import { getRenderMovesForCurrentBoard } from '../store/selectors';
@@ -34,7 +34,7 @@ const AvailableMoves = ({ checkmateFound, renderMoves, onMoveSelect }) => {
 
 AvailableMoves.propTypes = {
   checkmateFound: PropTypes.bool.isRequired,
-  renderMoves: propTypes.renderMoves,
+  renderMoves: PROP_TYPES.renderMoves,
   onMoveSelect: PropTypes.func.isRequired,
 };
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import propTypes from '../propTypes';
+import { PROP_TYPES } from '../propTypes';
 import { setHint } from '../store/board/actions';
 import { movePiece } from '../store/board/reducer';
 import { hideBoardHint, showBoardHint } from '../store/ui/actions';
@@ -30,7 +30,7 @@ const MoveButton = ({ classes, onClick, onMouseOver, onMouseOut, ...moveProps })
 );
 
 MoveButton.propTypes = {
-  classes: propTypes.classes.isRequired,
+  classes: PROP_TYPES.classes.isRequired,
   onClick: PropTypes.func.isRequired,
   onMouseOver: PropTypes.func,
   onMouseOut: PropTypes.func,
