@@ -39,20 +39,24 @@ export class NotationCalculator {
   }
 
   getMovingPiece() {
-    return this.getPieceAtPosition(this.source);
+    return this.getPieceAt(this.source);
   }
 
-  /**
-   * @param {string} position
-   * @returns {Piece}
-   */
-  getPieceAtPosition(position) {
+  getPieceAt(position) {
     return this.board[position];
   }
 
+  pieceExistsAt(position) {
+    return !!this.board[position];
+  }
+
   getText() {
+    const captureSymbol = this.pieceExistsAt(this.target) ? 'x' : '';
     const suffix = this.promotion ? '=' : '';
-    return `${this.getDisambiguatingText()}${this.target.toLowerCase()}${suffix}`;
+
+    return [this.getDisambiguatingText(), captureSymbol, this.target.toLowerCase(), suffix].join(
+      '',
+    );
   }
 
   getDisambiguatingText() {
@@ -78,7 +82,7 @@ export class NotationCalculator {
 
     return this.availableMoves.filter(move => {
       const { source } = parseMoveString(move);
-      const piece = this.getPieceAtPosition(source);
+      const piece = this.getPieceAt(source);
 
       const isIdenticalPiece = piece.type === type;
       const isDifferentPiece = source !== this.source;
