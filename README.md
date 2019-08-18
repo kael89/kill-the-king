@@ -45,8 +45,8 @@ chasemate-ui
 │   ├── themes
 │   └── utilities
 │   ├── api.js              Back-end API
+│   ├── index.d.ts
 │   ├── propTypes.js        Reusable propTypes for components
-│   ├── typedef.js          jsDoc type definitions
 ```
 
 ## Built with
