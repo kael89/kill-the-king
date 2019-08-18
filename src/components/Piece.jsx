@@ -68,10 +68,10 @@ class Piece extends React.Component {
         data-testid="piece"
         data-type={type}
         data-color={color}
-        onMouseOver={() => this.handleMouseOver()}
+        onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
-        onFocus={() => this.handleMouseOut()}
-        onBlur={this.resetHoveredPiece}
+        onFocus={this.handleMouseOut}
+        onBlur={this.handleMouseOut}
         className={classnames(classes.container, { [classes.hinted]: hinted })}
         style={hovered && hoverColor ? { backgroundColor: hoverColor } : {}}
       >

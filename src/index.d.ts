@@ -1,3 +1,5 @@
+declare module '*.svg';
+
 interface Board {
   [position: string]: Piece;
 }
