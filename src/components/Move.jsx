@@ -14,7 +14,7 @@ const Move = ({ classes, notation }) => (
   <Typography>
     <span className={classes.icon}>{notation.pieceCode}</span>
     {notation.text}
-    {notation.promotionCode ? <span className={classes.icon}>{notation.promotionCode}</span> : null}
+    {notation.promotionCode && <span className={classes.icon}>{notation.promotionCode}</span>}
   </Typography>
 );
 

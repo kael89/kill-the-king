@@ -4,6 +4,11 @@ import { parseMoveString, promotionToPieceType } from './move';
 
 const { PAWN } = PIECE_TYPE;
 
+const SYMBOLS = {
+  CAPTURE: 'x',
+  PROMOTION: '=',
+};
+
 export class NotationCalculator {
   /**
    * @public
@@ -56,8 +61,8 @@ export class NotationCalculator {
   }
 
   getText() {
-    const captureSymbol = this.isCaptureMove() ? 'x' : '';
-    const suffix = this.promotion ? '=' : '';
+    const captureSymbol = this.isCaptureMove() ? SYMBOLS.CAPTURE : '';
+    const suffix = this.promotion ? SYMBOLS.PROMOTION : '';
 
     return [this.getMoveOrigin(), captureSymbol, this.target, suffix].join('').toLowerCase();
   }
