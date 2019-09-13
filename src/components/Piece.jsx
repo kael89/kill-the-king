@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { PIECE_CODES } from '../constants';
-import propTypes from '../propTypes';
+import { PROP_TYPES } from '../propTypes';
 import { withThemeAndStyles } from '../utilities/generic';
 
 const styles = theme => ({
@@ -68,10 +68,10 @@ class Piece extends React.Component {
         data-testid="piece"
         data-type={type}
         data-color={color}
-        onMouseOver={() => this.handleMouseOver()}
+        onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
-        onFocus={() => this.handleMouseOut()}
-        onBlur={this.resetHoveredPiece}
+        onFocus={this.handleMouseOut}
+        onBlur={this.handleMouseOut}
         className={classnames(classes.container, { [classes.hinted]: hinted })}
         style={hovered && hoverColor ? { backgroundColor: hoverColor } : {}}
       >
@@ -82,12 +82,12 @@ class Piece extends React.Component {
 }
 
 Piece.propTypes = {
-  children: propTypes.children,
-  classes: propTypes.classes.isRequired,
+  children: PROP_TYPES.children,
+  classes: PROP_TYPES.classes.isRequired,
   hinted: PropTypes.bool,
   hoverColor: PropTypes.string,
-  piece: propTypes.piece.isRequired,
-  theme: propTypes.theme.isRequired,
+  piece: PROP_TYPES.piece.isRequired,
+  theme: PROP_TYPES.theme.isRequired,
 };
 
 Piece.defaultProps = {

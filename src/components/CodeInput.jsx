@@ -4,7 +4,7 @@ import Highlight, { defaultProps } from 'prism-react-renderer';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import propTypes from '../propTypes';
+import { PROP_TYPES } from '../propTypes';
 import { withThemeAndStyles } from '../utilities/generic';
 
 const styles = theme => ({
@@ -35,7 +35,7 @@ const CodeInput = ({ classes, code, error, fullWidth, id, label, language, onCha
 );
 
 CodeInput.propTypes = {
-  classes: propTypes.classes.isRequired,
+  classes: PROP_TYPES.classes.isRequired,
   code: PropTypes.string,
   error: PropTypes.bool,
   fullWidth: PropTypes.bool,

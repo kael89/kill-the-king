@@ -10,8 +10,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import propTypes from '../../propTypes';
-import { printJson, withThemeAndStyles } from '../../utilities/generic';
+import { PROP_TYPES } from '../../propTypes';
+import { prettifyJson, withThemeAndStyles } from '../../utilities/generic';
 import CodeBlock from '../CodeBlock';
 import CopyToClipboardButton from '../CopyToClipboardButton';
 import Dialog from './Dialog';
@@ -28,7 +28,7 @@ const styles = theme => ({
 });
 
 const ExportDialog = ({ board, classes, onClose, ...otherProps }) => {
-  const exportData = printJson(board);
+  const exportData = prettifyJson(board);
   const { dispatch, ...dialogProps } = otherProps;
 
   return (
@@ -52,8 +52,8 @@ const ExportDialog = ({ board, classes, onClose, ...otherProps }) => {
 };
 
 ExportDialog.propTypes = {
-  board: propTypes.board.isRequired,
-  classes: propTypes.classes.isRequired,
+  board: PROP_TYPES.board.isRequired,
+  classes: PROP_TYPES.classes.isRequired,
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool,
   PaperProps: PropTypes.objectOf(PropTypes.any),

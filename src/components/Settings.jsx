@@ -12,7 +12,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { COLOR } from '../enums';
-import propTypes from '../propTypes';
+import { PROP_TYPES } from '../propTypes';
 import { setSetting as setSettingAction } from '../store/settings/actions';
 import { withThemeAndStyles } from '../utilities/generic';
 
@@ -59,8 +59,8 @@ const Settings = ({ classes, settings, setSetting }) => (
 );
 
 Settings.propTypes = {
-  classes: propTypes.classes.isRequired,
-  settings: propTypes.settings.isRequired,
+  classes: PROP_TYPES.classes.isRequired,
+  settings: PROP_TYPES.settings.isRequired,
   setSetting: PropTypes.func.isRequired,
 };
 

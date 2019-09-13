@@ -1,17 +1,9 @@
-/**
- * @param {number} columnId
- * @returns {string}
- */
 export const columnIdToString = columnId => String.fromCharCode('A'.charCodeAt(0) + columnId);
 
-/**
- * @param {number} rowId
- * @returns {string}
- */
 export const rowIdToString = rowId => `${rowId + 1}`;
 
 /**
- * @param {Coordinates}
+ * @param {BoardCoordinates}
  * @returns {string}
  */
 export const coordinatesToPosition = ({ rowId, columnId }) =>
@@ -19,7 +11,7 @@ export const coordinatesToPosition = ({ rowId, columnId }) =>
 
 /**
  * @param {string} position
- * @returns {Coordinates}
+ * @returns {BoardCoordinates}
  */
 export const positionToCoordinates = position => ({
   rowId: parseInt(position.substr(-1)) - 1,

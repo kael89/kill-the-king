@@ -3,24 +3,28 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import propTypes from '../propTypes';
+import { PROP_TYPES } from '../propTypes';
 import { playMove } from '../store/board/actions';
 import { isCheckmateFound } from '../store/results/selectors';
-import { getMoveDataForCurrentBoard } from '../store/selectors';
+import { getRenderMovesForCurrentBoard } from '../store/selectors';
 import ExpansionPanel from './ExpansionPanel';
 import MoveButton from './MoveButton';
 
-const AvailableMoves = ({ checkmateFound, moveData, onMoveSelect }) => {
+const AvailableMoves = ({ checkmateFound, renderMoves, onMoveSelect }) => {
   let contents;
 
-  if (moveData === null) {
+  if (renderMoves === null) {
     contents = '';
-  } else if (checkmateFound && moveData.length === 0) {
+  } else if (checkmateFound && renderMoves.length === 0) {
     contents = <Typography>Checkmate!</Typography>;
   } else {
-    contents = moveData.map(moveDatum => {
+    contents = renderMoves.map(renderMove => {
       return (
-        <MoveButton key={moveDatum.move} onClick={() => onMoveSelect(moveDatum)} {...moveDatum} />
+        <MoveButton
+          key={renderMove.move}
+          onClick={() => onMoveSelect(renderMove)}
+          {...renderMove}
+        />
       );
     });
   }
@@ -30,28 +34,28 @@ const AvailableMoves = ({ checkmateFound, moveData, onMoveSelect }) => {
 
 AvailableMoves.propTypes = {
   checkmateFound: PropTypes.bool.isRequired,
-  moveData: propTypes.moveData,
+  renderMoves: PROP_TYPES.renderMoves,
   onMoveSelect: PropTypes.func.isRequired,
 };
 
 AvailableMoves.defaultProps = {
-  moveData: null,
+  renderMoves: null,
 };
 
 const mapStateToProps = state => ({
   checkmateFound: isCheckmateFound(state),
-  moveData: getMoveDataForCurrentBoard(state),
+  renderMoves: getRenderMovesForCurrentBoard(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  onMoveSelect: moveDatum => dispatch(playMove(moveDatum)),
+  onMoveSelect: renderMove => dispatch(playMove(renderMove)),
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
   ...stateProps,
   ...dispatchProps,
-  onMoveSelect: moveDatum => dispatchProps.onMoveSelect(moveDatum),
+  onMoveSelect: renderMove => dispatchProps.onMoveSelect(renderMove),
 });
 
 export default connect(

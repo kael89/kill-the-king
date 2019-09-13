@@ -1,37 +1,30 @@
-/**
- * Common Prop Types across components
- */
 import PropTypes from 'prop-types';
 
-const sharedPropTypes = {
-  piece: PropTypes.shape({
-    type: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
-    position: PropTypes.string.isRequired,
-  }),
-};
+const NOTATION_TYPE = PropTypes.shape({
+  pieceCode: PropTypes.string.isRequired,
+  promotionCode: PropTypes.string,
+  text: PropTypes.string.isRequired,
+});
 
-export default {
-  board: PropTypes.objectOf(sharedPropTypes.piece),
+const PIECE_TYPE = PropTypes.shape({
+  type: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  position: PropTypes.string.isRequired,
+});
+
+export const PROP_TYPES = {
+  board: PropTypes.objectOf(PIECE_TYPE),
   classes: PropTypes.objectOf(PropTypes.string),
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
-  moveData: PropTypes.arrayOf(
+  notation: NOTATION_TYPE,
+  piece: PIECE_TYPE,
+  renderMoves: PropTypes.arrayOf(
     PropTypes.shape({
       boardId: PropTypes.number.isRequired,
       move: PropTypes.string.isRequired,
-      notation: PropTypes.shape({
-        pieceCode: PropTypes.string.isRequired,
-        promotionCode: PropTypes.string,
-        text: PropTypes.string.isRequired,
-      }).isRequired,
+      notation: NOTATION_TYPE.isRequired,
     }),
   ),
-  notation: PropTypes.shape({
-    pieceCode: PropTypes.string.isRequired,
-    promotionCode: PropTypes.string,
-    text: PropTypes.string.isRequired,
-  }),
-  piece: sharedPropTypes.piece,
   settings: PropTypes.shape({
     startingColor: PropTypes.string.isRequired,
     maxMoves: PropTypes.number.isRequired,

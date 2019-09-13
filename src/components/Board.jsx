@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import propTypes from '../propTypes';
+import { PROP_TYPES } from '../propTypes';
 import { withThemeAndStyles } from '../utilities/generic';
 import { columnIdToString, coordinatesToPosition, rowIdToString } from '../utilities/position';
 import DroppableSquare from './DroppableSquare';
@@ -55,7 +55,7 @@ const BasicRowRuler = ({ classes }) => (
 );
 
 BasicRowRuler.propTypes = {
-  classes: propTypes.classes.isRequired,
+  classes: PROP_TYPES.classes.isRequired,
 };
 
 const RowRuler = withThemeAndStyles(BasicRowRuler, styles);
@@ -71,7 +71,7 @@ const BasicColumnRuler = ({ classes }) => (
 );
 
 BasicColumnRuler.propTypes = {
-  classes: propTypes.classes.isRequired,
+  classes: PROP_TYPES.classes.isRequired,
 };
 
 const ColumnRuler = withThemeAndStyles(BasicColumnRuler, styles);
@@ -105,9 +105,9 @@ const Board = ({ board, classes, hint, showHint }) => {
 };
 
 Board.propTypes = {
-  board: propTypes.board.isRequired,
-  classes: propTypes.classes.isRequired,
-  hint: propTypes.board.isRequired,
+  board: PROP_TYPES.board.isRequired,
+  classes: PROP_TYPES.classes.isRequired,
+  hint: PROP_TYPES.board.isRequired,
   showHint: PropTypes.bool.isRequired,
 };
 

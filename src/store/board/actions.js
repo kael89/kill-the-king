@@ -34,10 +34,10 @@ export const movePiece = move => ({
   type: MOVE_PIECE,
 });
 
-export const playMove = moveDatum => dispatch => {
-  dispatch(addMove(moveDatum));
+export const playMove = renderMove => dispatch => {
+  dispatch(addMove(renderMove));
   dispatch({
-    move: moveDatum.move,
+    move: renderMove.move,
     type: PLAY_MOVE,
   });
 };

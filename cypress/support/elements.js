@@ -1,7 +1,6 @@
 /**
  * Functions that select elements based on their attributes
  */
-import { camelToKebabCase } from '../../src/utilities/generic';
 
 export const actionButton = () => cy.getByData({ testid: 'action-button' });
 
@@ -25,7 +24,7 @@ export const selectInput = id => cy.get(`#select-${id}`);
 
 export const selectMenu = id => cy.get(`#menu-${id}`);
 
-export const setting = name => cy.getByData({ testid: `settings-${camelToKebabCase(name)}` });
+export const setting = name => cy.getByData({ testid: `settings-${Cypress._.kebabCase(name)}` });
 
 export const square = (position = '') =>
   cy.getByData(Object.assign({ testid: 'square' }, position ? { position } : {}));

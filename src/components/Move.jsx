@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
 
-import propTypes from '../propTypes';
+import { PROP_TYPES } from '../propTypes';
 import { withThemeAndStyles } from '../utilities/generic';
 
 const styles = {
@@ -19,8 +19,8 @@ const Move = ({ classes, notation }) => (
 );
 
 Move.propTypes = {
-  classes: propTypes.classes.isRequired,
-  notation: propTypes.notation.isRequired,
+  classes: PROP_TYPES.classes.isRequired,
+  notation: PROP_TYPES.notation.isRequired,
 };
 
 export default withThemeAndStyles(Move, styles);

@@ -5,7 +5,7 @@ import { getBoardById, getCurrentBoardId } from './board/selectors';
 
 export const getPlayedMovesByBoardId = (state, boardId) => {
   const playedMovesCount = boardId - state.board.resetBoardId;
-  return state.moveHistory.slice(0, playedMovesCount).map(moveDatum => moveDatum.move);
+  return state.moveHistory.slice(0, playedMovesCount).map(renderMove => renderMove.move);
 };
 
 const getChessTreeByBoardId = (state, boardId) => {
@@ -17,7 +17,7 @@ const getChessTreeByBoardId = (state, boardId) => {
   return get(data, playedMoves, data);
 };
 
-export const getMoveDataByBoardId = (state, boardId) => {
+export const getRenderMovesByBoardId = (state, boardId) => {
   const chessTree = getChessTreeByBoardId(state, boardId);
   if (chessTree === null) {
     return [];
@@ -33,8 +33,8 @@ export const getMoveDataByBoardId = (state, boardId) => {
   }));
 };
 
-export const getMoveDataForCurrentBoard = state =>
-  getMoveDataByBoardId(state, getCurrentBoardId(state));
+export const getRenderMovesForCurrentBoard = state =>
+  getRenderMovesByBoardId(state, getCurrentBoardId(state));
 
-export const getMoveDataForResetBoard = state =>
-  getMoveDataByBoardId(state, state.board.resetBoardId);
+export const getRenderMovesForResetBoard = state =>
+  getRenderMovesByBoardId(state, state.board.resetBoardId);
