@@ -1,5 +1,8 @@
 import { PIECE_CODES } from '../constants';
+import { PIECE_TYPE } from '../enums';
 import { parseMoveString, promotionToPieceType } from './move';
+
+const { PAWN } = PIECE_TYPE;
 
 export class NotationCalculator {
   /**
@@ -35,7 +38,9 @@ export class NotationCalculator {
 
   getPieceCode() {
     const { type, color } = this.getMovingPiece();
-    return PIECE_CODES[color][type];
+    const shouldUsePieceCode = type !== PAWN || this.isCaptureMove();
+
+    return shouldUsePieceCode ? PIECE_CODES[color][type] : '';
   }
 
   getMovingPiece() {
@@ -46,35 +51,27 @@ export class NotationCalculator {
     return this.board[position];
   }
 
-  pieceExistsAt(position) {
-    return !!this.board[position];
+  isCaptureMove() {
+    return !!this.getPieceAt([this.target]);
   }
 
   getText() {
-    const captureSymbol = this.pieceExistsAt(this.target) ? 'x' : '';
+    const captureSymbol = this.isCaptureMove() ? 'x' : '';
     const suffix = this.promotion ? '=' : '';
 
-    return [this.getDisambiguatingText(), captureSymbol, this.target.toLowerCase(), suffix].join(
-      '',
-    );
+    return [this.getMoveOrigin(), captureSymbol, this.target, suffix].join('').toLowerCase();
   }
 
-  getDisambiguatingText() {
+  getMoveOrigin() {
+    const { type, position } = this.getMovingPiece();
+
+    if (type === PAWN) {
+      const column = position[0];
+      return this.isCaptureMove() ? column : '';
+    }
+
     const ambiguousMoves = this.getIdenticalPieceMoves();
-    if (ambiguousMoves.length === 0) {
-      return '';
-    }
-
-    const { position } = this.getMovingPiece();
-    const [column, row] = position;
-    const { rows: ambiguousRows, columns: ambiguousColumns } = this.getRowsAndColumnsInMoves(
-      ambiguousMoves,
-    );
-
-    if (!ambiguousColumns.includes(column)) {
-      return column.toLowerCase();
-    }
-    return !ambiguousRows.includes(row) ? row : position.toLowerCase();
+    return ambiguousMoves.length > 0 ? this.getDisambiguatingText(ambiguousMoves) : '';
   }
 
   getIdenticalPieceMoves() {
@@ -90,6 +87,19 @@ export class NotationCalculator {
 
       return isIdenticalPiece && isDifferentPiece && hasSameTarget;
     });
+  }
+
+  getDisambiguatingText(ambiguousMoves) {
+    const { position } = this.getMovingPiece();
+    const [column, row] = position;
+    const { rows: ambiguousRows, columns: ambiguousColumns } = this.getRowsAndColumnsInMoves(
+      ambiguousMoves,
+    );
+
+    if (!ambiguousColumns.includes(column)) {
+      return column;
+    }
+    return !ambiguousRows.includes(row) ? row : position;
   }
 
   getRowsAndColumnsInMoves = moves =>

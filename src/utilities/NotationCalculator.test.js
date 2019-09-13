@@ -8,64 +8,100 @@ const { KNIGHT, PAWN, QUEEN, ROOK } = PIECE_TYPE;
 describe('NotationCalculator', () => {
   describe('calculate()', () => {
     it('should return the notation for a white piece move', () => {
-      const board = { B3: { type: PAWN, color: WHITE, position: 'B3' } };
-      const calculator = new NotationCalculator(board, ['B3-B4']);
+      const board = { B1: { type: ROOK, color: WHITE, position: 'B1' } };
+      const calculator = new NotationCalculator(board, ['B1-B2']);
 
-      expect(calculator.calculate('B3-B4')).toEqual({
-        pieceCode: PIECE_CODES[WHITE][PAWN],
-        text: 'b4',
+      expect(calculator.calculate('B1-B2')).toEqual({
+        pieceCode: PIECE_CODES[WHITE][ROOK],
+        text: 'b2',
         promotionCode: '',
       });
     });
 
     it('should return the notation for a black piece move', () => {
-      const board = { B3: { type: PAWN, color: BLACK, position: 'B3' } };
-      const calculator = new NotationCalculator(board, ['B3-B4']);
+      const board = { B1: { type: ROOK, color: BLACK, position: 'B1' } };
+      const calculator = new NotationCalculator(board, ['B1-B2']);
 
-      expect(calculator.calculate('B3-B4')).toEqual({
+      expect(calculator.calculate('B1-B2')).toEqual({
+        pieceCode: PIECE_CODES[BLACK][ROOK],
+        text: 'b2',
+        promotionCode: '',
+      });
+    });
+
+    it('should not use a piece symbol for a pawn move', () => {
+      const board = { E2: { type: PAWN, color: WHITE, position: 'E2' } };
+      const calculator = new NotationCalculator(board, ['E2-E4']);
+
+      expect(calculator.calculate('E2-E4')).toEqual({
+        pieceCode: '',
+        text: 'e4',
+        promotionCode: '',
+      });
+    });
+
+    it('should return the notation for a capture move', () => {
+      const board = {
+        B2: { type: ROOK, color: WHITE, position: 'B2' },
+        B7: { type: PAWN, color: BLACK, position: 'B7' },
+      };
+      const calculator = new NotationCalculator(board, ['B2-B7']);
+
+      expect(calculator.calculate('B2-B7')).toEqual({
+        pieceCode: PIECE_CODES[WHITE][ROOK],
+        text: 'xb7',
+        promotionCode: '',
+      });
+    });
+
+    it('should use the file of departure for capture moves executed by pawns', () => {
+      const board = {
+        A6: { type: ROOK, color: WHITE, position: 'A6' },
+        B7: { type: PAWN, color: BLACK, position: 'B7' },
+      };
+      const calculator = new NotationCalculator(board, ['B7-A6']);
+
+      expect(calculator.calculate('B7-A6')).toEqual({
         pieceCode: PIECE_CODES[BLACK][PAWN],
-        text: 'b4',
+        text: 'bxa6',
         promotionCode: '',
       });
     });
 
     it('should return the notation for a promotion move', () => {
       const board = { B7: { type: PAWN, color: WHITE, position: 'B7' } };
-      const calculator = new NotationCalculator(board, [
-        'B7-B8=B',
-        'B7-B8=N',
-        'B7-B8=Q',
-        'B7-B8=R',
-      ]);
+      const calculator = new NotationCalculator(board, ['B7-B8=Q']);
 
       expect(calculator.calculate('B7-B8=Q')).toEqual({
-        pieceCode: PIECE_CODES[WHITE][PAWN],
+        pieceCode: '',
         text: 'b8=',
         promotionCode: PIECE_CODES[WHITE][QUEEN],
       });
     });
 
-    it('should specify the column for an ambiguous move', () => {
-      const boardWithQueens = {
+    it('should specify the column for an ambiguous move between 2 pieces', () => {
+      const board = {
         A1: { type: ROOK, color: WHITE, position: 'A1' },
         H8: { type: ROOK, color: WHITE, position: 'H8' },
       };
-      const queensCalculator = new NotationCalculator(boardWithQueens, ['A1-A8', 'H8-A8']);
+      const calculator = new NotationCalculator(board, ['A1-A8', 'H8-A8']);
 
-      expect(queensCalculator.calculate('A1-A8')).toEqual({
+      expect(calculator.calculate('A1-A8')).toEqual({
         pieceCode: PIECE_CODES[WHITE][ROOK],
         text: 'aa8',
         promotionCode: '',
       });
+    });
 
-      const boardWithKnights = {
+    it('should specify the column for an ambiguous move between 3 pieces', () => {
+      const board = {
         C2: { type: KNIGHT, color: WHITE, position: 'C2' },
         E6: { type: KNIGHT, color: WHITE, position: 'E6' },
         F3: { type: KNIGHT, color: WHITE, position: 'F3' },
       };
-      const knightsCalculator = new NotationCalculator(boardWithKnights, ['E6-D4', 'F3-D4']);
+      const calculator = new NotationCalculator(board, ['E6-D4', 'F3-D4']);
 
-      expect(knightsCalculator.calculate('C2-D4')).toEqual({
+      expect(calculator.calculate('C2-D4')).toEqual({
         pieceCode: PIECE_CODES[WHITE][KNIGHT],
         text: 'cd4',
         promotionCode: '',
