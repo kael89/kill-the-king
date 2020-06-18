@@ -1,8 +1,10 @@
-# Chasemate UI
+# Kill the King
 
-Front-end of https://chasemate.app/
+A web app that calculates forced checkmates in a given chess position
 
-Back-end repository: [chasemate](https://github.com/kael89/chasemate)
+🌐 https://killtheking.codinglicks.com
+
+Uses the [checkmate-finder](https://github.com/kael89/checkmate-finder) API
 
 ## Features
 
@@ -28,7 +30,7 @@ The application should now be running at http://localhost:3000
 ## Project structure
 
 ```
-chasemate-ui
+kill-the-king
 ├── cypress                 https://www.cypress.io end-to-end tests
 │   ├── fixtures
 │   ├── integration         Test home folder
@@ -41,7 +43,6 @@ chasemate-ui
 │   ├── enums
 │   ├── images
 │   ├── store               Redux store
-│   ├── styles              Global stylesheets
 │   ├── themes
 │   └── utilities
 │   ├── api.js              Back-end API

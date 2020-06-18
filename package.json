@@ -1,11 +1,11 @@
 {
-  "name": "chasemate-ui",
-  "version": "0.1.0",
-  "description": "Front-end of Chasemate, a web app that calculates forced checkmates in a given chess position",
-  "homepage": "https://chasemate.app",
+  "name": "kill-the-king",
+  "version": "1.0.0",
+  "description": "A web app that calculates forced checkmates in a given chess position",
+  "homepage": "https://killtheking.codinglicks.com",
   "repository": {
     "type": "git",
-    "url": "https://https://github.com/kael89/chasemate-ui"
+    "url": "https://https://github.com/kael89/kill-the-king"
   },
   "author": "Kostas Karvounis",
   "license": "GPL-3.0-or-later",

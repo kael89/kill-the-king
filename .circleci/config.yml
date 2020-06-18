@@ -26,7 +26,7 @@ commands:
           aws-region: AWS_REGION
       - run:
           name: S3 Delete all contents in << parameters.target >>
-          command: "aws s3 rm << parameters.target >> --recursive"
+          command: 'aws s3 rm << parameters.target >> --recursive'
   npm_install:
     description: Install npm dependencies
     steps:
@@ -115,7 +115,7 @@ workflows:
             - lint
             - test
             - build
-          bucket: chasemate
+          bucket: kill-the-king
           filters:
             branches:
               only:
@@ -125,7 +125,7 @@ workflows:
             - lint
             - test
             - build
-          bucket: chasemate-dev
+          bucket: kill-the-king.dev
           filters:
             branches:
               only:

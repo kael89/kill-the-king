@@ -11,13 +11,13 @@ import ActionButton from './ActionButton';
 import AvailableMoves from './AvailableMoves';
 import Board from './Board';
 import { ConfirmationDialog, ExportDialog, ImportDialog } from './Dialog';
-import Header from './Header';
 import MoveHistory from './MoveHistory';
 import PieceSelector from './PieceSelector';
 import Results from './Results';
 import Settings from './Settings';
 import SocialLinks from './SocialLinks';
 import ThemeProvider from './ThemeProvider';
+import ThemeSwitch from './ThemeSwitch';
 import Toolbar from './Toolbar';
 
 const { BLACK, WHITE } = COLOR;
@@ -51,11 +51,14 @@ const App = ({ classes }) => (
       <CssBaseline />
 
       <Grid container className={classes.container}>
-        <Grid item xs={12}>
-          <Header />
-        </Grid>
-        <Grid item xs={12} align="center" className={classes.pieceSelectorContainer}>
-          <PieceSelector color={BLACK} />
+        <Grid item xs={12} container align="center">
+          <Grid item xs={3} />
+          <Grid item xs={6} className={classes.pieceSelectorContainer}>
+            <PieceSelector color={BLACK} />
+          </Grid>
+          <Grid item xs={3}>
+            <ThemeSwitch />
+          </Grid>
         </Grid>
         <Grid item xs={12} container>
           <Grid item xs={3}>
