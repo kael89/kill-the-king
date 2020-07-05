@@ -13,6 +13,8 @@ Uses the [checkmate-finder](https://github.com/kael89/checkmate-finder) API
 - Board import/export
 - Light/Dark themes
 
+![App screenshot](/public/screenshot.jpg)
+
 ## Installation
 
 ### Run the app locally
