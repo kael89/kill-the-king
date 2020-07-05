@@ -2,7 +2,7 @@
 
 A web app that calculates forced checkmates in a given chess position
 
-🌐 https://killtheking.codinglicks.com
+🌐 https://killtheking.netlify.app
 
 Uses the [checkmate-finder](https://github.com/kael89/checkmate-finder) API
 

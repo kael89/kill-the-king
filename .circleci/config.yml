@@ -94,14 +94,12 @@ workflows:
           filters:
             branches:
               only:
-                - feature
                 - master
                 - dev
       - test:
           filters:
             branches:
               only:
-                - feature
                 - master
                 - dev
       - build:

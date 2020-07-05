@@ -2,7 +2,7 @@
   "name": "kill-the-king",
   "version": "1.0.0",
   "description": "A web app that calculates forced checkmates in a given chess position",
-  "homepage": "https://killtheking.codinglicks.com",
+  "homepage": "https://killtheking.netlify.app",
   "repository": {
     "type": "git",
     "url": "https://https://github.com/kael89/kill-the-king"
