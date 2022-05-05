@@ -72,7 +72,4 @@ const mapDispatchToProps = dispatch => ({
   setSetting: (name, value) => dispatch(setSettingAction({ [name]: value })),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withThemeAndStyles(Settings, styles));
+export default connect(mapStateToProps, mapDispatchToProps)(withThemeAndStyles(Settings, styles));

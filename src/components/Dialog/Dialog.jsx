@@ -15,8 +15,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
-export default DialogComponent =>
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(DialogComponent);
+export default DialogComponent => connect(mapStateToProps, mapDispatchToProps)(DialogComponent);

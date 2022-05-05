@@ -10,14 +10,12 @@ import React from 'react';
 import { ClearButton, DefaultBoardButton, ExportButton, ImportButton } from './ToolbarButton';
 
 const Toolbar = () => (
-  <>
-    <List>
-      <ClearButton text="Clear" icon={<ClearIcon />} />
-      <DefaultBoardButton text="Default board" icon={<RefreshIcon />} />
-      <ImportButton text="Import" icon={<VerticalAlignTopIcon />} />
-      <ExportButton text="Export" icon={<VerticalAlignBottomIcon />} />
-    </List>
-  </>
+  <List>
+    <ClearButton text="Clear" icon={<ClearIcon />} />
+    <DefaultBoardButton text="Default board" icon={<RefreshIcon />} />
+    <ImportButton text="Import" icon={<VerticalAlignTopIcon />} />
+    <ExportButton text="Export" icon={<VerticalAlignBottomIcon />} />
+  </List>
 );
 
 export default Toolbar;

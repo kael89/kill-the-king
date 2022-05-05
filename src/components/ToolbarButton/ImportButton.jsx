@@ -10,7 +10,4 @@ const mapDispatchToProps = dispatch => ({
   onClick: () => dispatch(showDialog(IMPORT)),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(ToolbarButton);
+export default connect(null, mapDispatchToProps)(ToolbarButton);

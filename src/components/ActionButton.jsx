@@ -8,17 +8,15 @@ import { maxMovesToDepth } from '../api';
 import { fetchForcedMateTree } from '../store/results/actions';
 
 const ActionButton = ({ onClick }) => (
-  <>
-    <Button
-      data-testid="action-button"
-      color="primary"
-      onClick={onClick}
-      size="large"
-      variant="contained"
-    >
-      Go!
-    </Button>
-  </>
+  <Button
+    data-testid="action-button"
+    color="primary"
+    onClick={onClick}
+    size="large"
+    variant="contained"
+  >
+    Go!
+  </Button>
 );
 
 ActionButton.propTypes = {
@@ -44,8 +42,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     dispatchProps.onClick(stateProps.board, stateProps.startingColor, stateProps.depth),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  mergeProps,
-)(ActionButton);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(ActionButton);

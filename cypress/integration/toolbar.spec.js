@@ -25,9 +25,7 @@ context('Toolbar', () => {
     it('can clear the board', () => {
       addPiece({ type: 'pawn', color: 'black', position: 'B7' });
       cy.get('@clearButton').invoke('click');
-      square()
-        .invoke('text')
-        .should('be.empty');
+      square().invoke('text').should('be.empty');
     });
   });
 
@@ -53,12 +51,8 @@ context('Toolbar', () => {
       toolbarButton('Import').click();
 
       importDialog().as('importDialog');
-      cy.get('@importDialog')
-        .find('textarea')
-        .as('importInput');
-      cy.get('@importDialog')
-        .contains('button', 'Import')
-        .as('importButton');
+      cy.get('@importDialog').find('textarea').as('importInput');
+      cy.get('@importDialog').contains('button', 'Import').as('importButton');
     });
 
     it('cannot import empty/no data', () => {
@@ -68,14 +62,11 @@ context('Toolbar', () => {
       getBoardObject().should('be.empty');
     });
 
-    it.only('cannot import invalid data', () => {
+    it('cannot import invalid data', () => {
       cy.get('@importInput').type('Random data');
       cy.get('@importButton').should('be.disabled');
       getBoardObject().should('be.empty');
-      cy.get('@importDialog')
-        .find('label')
-        .invoke('text')
-        .should('not.be.empty');
+      cy.get('@importDialog').find('label').invoke('text').should('not.be.empty');
     });
 
     it('can import valid data', () => {
@@ -89,9 +80,7 @@ context('Toolbar', () => {
     it('can cancel import', () => {
       cy.get('@boardData').then(boardData => {
         cy.get('@importInput').typeJson(boardData);
-        cy.get('@importDialog')
-          .contains('button', 'Cancel')
-          .invoke('click');
+        cy.get('@importDialog').contains('button', 'Cancel').invoke('click');
 
         getBoardObject().should('be.empty');
       });
@@ -125,9 +114,7 @@ context('Toolbar', () => {
       // Export
       toolbarButton('Export').click();
       exportDialogCopyButton().click();
-      exportDialog()
-        .contains('button', 'OK')
-        .click();
+      exportDialog().contains('button', 'OK').click();
 
       // Clear board
       toolbarButton('Clear').click();
@@ -135,12 +122,8 @@ context('Toolbar', () => {
       // Import
       toolbarButton('Import').click();
       cy.get('@boardData').then(boardData => {
-        importDialog()
-          .find('textarea')
-          .typeJson(boardData);
-        importDialog()
-          .contains('button', 'Import')
-          .click();
+        importDialog().find('textarea').typeJson(boardData);
+        importDialog().contains('button', 'Import').click();
 
         getBoardObject().should('deep.equal', boardData);
       });

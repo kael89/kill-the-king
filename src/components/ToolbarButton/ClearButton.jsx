@@ -7,7 +7,4 @@ const mapDispatchToProps = dispatch => ({
   onClick: () => dispatch(clearBoard()),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(ToolbarButton);
+export default connect(null, mapDispatchToProps)(ToolbarButton);

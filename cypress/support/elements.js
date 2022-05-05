@@ -28,7 +28,7 @@ export const selectMenu = id => cy.get(`#menu-${id}`);
 export const setting = name => cy.getByData({ testid: `settings-${camelToKebabCase(name)}` });
 
 export const square = (position = '') =>
-  cy.getByData(Object.assign({ testid: 'square' }, position ? { position } : {}));
+  cy.getByData({ testid: 'square', ...(position ? { position } : {}) });
 
 export const themeSwitch = () => cy.getByData({ testid: 'theme-switch' });
 

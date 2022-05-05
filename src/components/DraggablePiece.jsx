@@ -60,7 +60,9 @@ export default connect(
   null,
   mapDispatchToProps,
 )(
-  DragSource(DRAGGABLE_TYPE.PIECE, pieceSource, collect)(
-    withThemeAndStyles(DraggablePiece, styles),
-  ),
+  DragSource(
+    DRAGGABLE_TYPE.PIECE,
+    pieceSource,
+    collect,
+  )(withThemeAndStyles(DraggablePiece, styles)),
 );

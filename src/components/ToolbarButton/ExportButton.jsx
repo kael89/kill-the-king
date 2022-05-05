@@ -15,7 +15,4 @@ const mapDispatchToProps = dispatch => ({
   onClick: () => dispatch(showDialog(EXPORT)),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ToolbarButton);
+export default connect(mapStateToProps, mapDispatchToProps)(ToolbarButton);

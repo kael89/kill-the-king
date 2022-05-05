@@ -16,11 +16,7 @@ const assertForcedMateTreeResults = (board = {}, response = defaultResponse, app
   actionButton().click();
   cy.wait('@forcedMateTree');
 
-  appResults.map(result =>
-    results()
-      .invoke('text')
-      .should('contain', result),
-  );
+  appResults.map(result => results().invoke('text').should('contain', result));
 };
 
 const assertResultsByFixture = fixture =>
@@ -59,8 +55,6 @@ context('Results', () => {
     actionButton().click();
     cy.wait('@forcedMateTree');
 
-    results()
-      .invoke('text')
-      .should('contain', 'Network error');
+    results().invoke('text').should('contain', 'Network error');
   });
 });

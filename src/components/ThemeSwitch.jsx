@@ -23,7 +23,4 @@ const mapDispatchToProps = dispatch => ({
   onChange: e => dispatch(changeTheme(e.target.checked ? themes.dark : themes.light)),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(ThemeSwitch);
+export default connect(null, mapDispatchToProps)(ThemeSwitch);

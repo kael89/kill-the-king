@@ -16,9 +16,7 @@ context('Settings', () => {
   describe('starting color', () => {
     beforeEach(() => {
       setting('startingColor').as('startingColorSetting');
-      cy.get('@startingColorSetting')
-        .find('input')
-        .as('startingColorInput');
+      cy.get('@startingColorSetting').find('input').as('startingColorInput');
     });
 
     specify('user can set the starting color to white', () => {
@@ -37,9 +35,7 @@ context('Settings', () => {
     });
 
     specify('the default starting color should be "white"', () => {
-      cy.get('@startingColorSetting')
-        .invoke('text')
-        .should('match', /white/i);
+      cy.get('@startingColorSetting').invoke('text').should('match', /white/i);
 
       actionButton().click();
       assertQueryParam('@forcedMateTree', 'startingColor', 'white');
@@ -57,18 +53,14 @@ context('Settings', () => {
     });
 
     specify('user can set the move depth', () => {
-      cy.openSelectMenu('moveDepth')
-        .contains('1')
-        .click();
+      cy.openSelectMenu('moveDepth').contains('1').click();
 
       actionButton().click();
       assertQueryParam('@forcedMateTree', 'depth', '2');
     });
 
     specify('the default move depth should be 2', () => {
-      selectInput('moveDepth')
-        .invoke('text')
-        .should('equal', '2');
+      selectInput('moveDepth').invoke('text').should('equal', '2');
 
       actionButton().click();
       assertQueryParam('@forcedMateTree', 'depth', '4');

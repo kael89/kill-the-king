@@ -89,27 +89,25 @@ const MoveHistory = ({ classes, moveData, startingColor, onMoveSelect }) => {
 
   return (
     <ExpansionPanel summary="Move History">
-      {
-        <Table>
-          <TableHead>
-            <TableRow className={classes.row}>
-              <TableCell className={classes.rowNumber}>No.</TableCell>
-              <TableCell className={classes.move}>White</TableCell>
-              <TableCell className={classes.move}>Black</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {chunk(sanitizedMoveData, 2).map((movePair, rowId) => (
-              <MoveRow
-                key={movePair[0].boardId}
-                id={rowId}
-                moveData={movePair}
-                onMoveSelect={onMoveSelect}
-              />
-            ))}
-          </TableBody>
-        </Table>
-      }
+      <Table>
+        <TableHead>
+          <TableRow className={classes.row}>
+            <TableCell className={classes.rowNumber}>No.</TableCell>
+            <TableCell className={classes.move}>White</TableCell>
+            <TableCell className={classes.move}>Black</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {chunk(sanitizedMoveData, 2).map((movePair, rowId) => (
+            <MoveRow
+              key={movePair[0].boardId}
+              id={rowId}
+              moveData={movePair}
+              onMoveSelect={onMoveSelect}
+            />
+          ))}
+        </TableBody>
+      </Table>
     </ExpansionPanel>
   );
 };

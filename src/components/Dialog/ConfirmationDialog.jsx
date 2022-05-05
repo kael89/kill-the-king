@@ -63,8 +63,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   onConfirm: () => dispatchProps.onConfirm(stateProps.onConfirm),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  mergeProps,
-)(Dialog(ConfirmationDialog));
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Dialog(ConfirmationDialog));

@@ -63,9 +63,8 @@ export class NotationCalculator {
 
     const { position } = this.getMovingPiece();
     const [column, row] = position;
-    const { rows: ambiguousRows, columns: ambiguousColumns } = this.getRowsAndColumnsInMoves(
-      ambiguousMoves,
-    );
+    const { rows: ambiguousRows, columns: ambiguousColumns } =
+      this.getRowsAndColumnsInMoves(ambiguousMoves);
 
     if (!ambiguousColumns.includes(column)) {
       return column.toLowerCase();
